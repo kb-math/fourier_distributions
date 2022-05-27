@@ -1,0 +1,247 @@
+\documentclass[twoside, a4paper, 10pt]{amsart}
+\title[ ]{Notes on Distributions and their Fourier Transforms}
+%\usepackage{amsaddr}
+%\email{Kamil.Bulinski@minetec.com.au}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{verbatim}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{matrix, arrows}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[all]{xy}
+\usepackage[pdftex,colorlinks,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[margin=3cm]{geometry}
+\usepackage{bigints}
+\usepackage{dsfont}
+\setlength{\textwidth}{6.5in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\linespread{1.3}
+
+\begin{document}
+\maketitle
+\raggedbottom
+
+
+%% Mathcal large
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+%% Mathbb large
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bB}{\mathbb{B}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bG}{\mathbb{G}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\bI}{\mathbb{I}}
+\newcommand{\bJ}{\mathbb{J}}
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bL}{\mathbb{L}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bO}{\mathbb{O}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bU}{\mathbb{U}}
+\newcommand{\bV}{\mathbb{V}}
+\newcommand{\bW}{\mathbb{W}}
+\newcommand{\bX}{\mathbb{X}}
+\newcommand{\bY}{\mathbb{Y}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+
+\newcounter{dummy} \numberwithin{dummy}{section}
+
+\theoremstyle{definition}
+\newtheorem{mydef}[dummy]{Definition}
+\newtheorem{prop}[dummy]{Proposition}
+\newtheorem{corol}[dummy]{Corollary}
+\newtheorem{thm}[dummy]{Theorem}
+\newtheorem{lemma}[dummy]{Lemma}
+\newtheorem{eg}[dummy]{Example}
+\newtheorem{notation}[dummy]{Notation}
+\newtheorem{remark}[dummy]{Remark}
+\newtheorem{claim}[dummy]{Claim}
+\newtheorem{Exercise}[dummy]{Exercise}
+\newtheorem{question}[dummy]{Question}
+
+\section{Distributions}
+
+\begin{mydef} Let $U \subset \bR^n$ be an open set. We define $$D(U) = \{ \varphi :\bR^n \to \bC ~|~ \varphi \text{ is smooth, compactly supported and } \operatorname{supp}(\varphi) \subset U  \}$$ to be the set of \textit{test functions} on $U$. Given $\varphi_1,\varphi_2, \ldots \in D(U)$ and $\varphi \in D(U)$, then we say that $\varphi = \lim_{n \to \infty} \varphi_n$ if there exists a compact set $K \subset U$ such that $\varphi$ and all $\varphi_n$ have support inside $K$ and for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \varphi_n \to \partial^{\alpha} \varphi \text{ uniformly on K.}$$ 
+
+\end{mydef}
+
+\begin{eg} Let $h:\bR \to \bC$ be the map $h(x) = \mathds{1}_{(0,\infty)} \exp(-\frac{1}{x})$. This is a smooth map with support $[0, \infty)$. Thus $\varphi:\bR \to \bC$ given by $\varphi(x) = h(x)h(1-x)$ is a smooth map with support $[0,1]$. Thus $\varphi \in D((-\epsilon, 1 + \epsilon))$ for all $\epsilon >0$ (but not for $\epsilon = 0$). Now let $\phi_t \in D(\bR)$ be given by $\phi_t(x) = \phi(x+t)$, then clearly $\lim_{n \to \infty} \phi_{1/n} \phi$ in $D(\bR)$ but the sequence $\phi_n$, $n \in \bZ$, does not converge (because the union of the supports is unbounded, hence not compact).
+\end{eg}
+
+Note that $D(U)$ is closed under partial differentiation, and partial differentiation is continuous (preserves limits).
+
+\begin{mydef} A \textit{distribution} on $U \subset \bR^n$ is a linear functional $f:D(U) \to \bC$ that is \textit{continuous} in the sense that if $\phi_1, \phi_2,\ldots \in D(U)$ converge to $\phi \in D(U)$ then $f(\phi_1), f(\phi_1), \ldots$ converges to $f(\phi)$. We let $D'(U)$ denote the space of distributions on $U$. 
+
+\end{mydef}
+
+\begin{eg} Any measure $\mu$ on $\bR^n$ that is finite on compact sets is a distribution in $D(\bR^n)$, e.g., $\phi \mapsto \int \phi d\mu$. Consider the distribution $\delta' \in D'(\bR)$ given by $\delta'(\phi) = -\phi'(0)$. This distribution cannot arise from a measure as can be seen as follows. Choose $\phi_j \in D(\bR)$ supported on $[-1,1]$ such that $\| \phi_j \|_{\infty} \to 0$ but $\phi_j'(0) = 1$, then if $\delta'$ coincides with a measure $\mu$, then we have $-1 = \delta'(\phi_j) = \int \phi_j d\mu \to 0 $, a contradiction.
+
+\end{eg}
+
+The following definition describes why we called the example above $\delta'$.
+
+\begin{mydef} Let $f \in D'(U)$ where $U \subset \bR^n$. Let $\partial_j \phi$ denote the $j$-th partial derivative of a smooth map $\phi$. We can define $\partial_j f \in D'(U)$ by $$\partial_j f (\phi) = - f(\partial_j \phi) \quad \text{ for all } \phi \in D(U).$$ 
+
+\end{mydef}
+
+We now explain the minus sign in the definition.
+
+\begin{prop} Let $f$ be a continuously differentiable function on $\bR^n$ (not necessarily compactly supported). This defines a distribution $\mu_f$ on $\bR^n$ via $\mu_f (\phi) = \int \phi(x) f(x) d^n x$ where $d^n x$ is the lebesgue measure on $\bR^n$. Then $$\partial_j \mu_f = \mu_{\partial_j f}.$$
+
+\end{prop}
+
+\begin{proof} For convenience, suppose $j = n$. Then for any $\phi \in D(U)$ we have 
+
+$$ \mu_{\partial_n f} (\phi) = \int \partial_n f(x) \phi (x) d^n x $$
+
+Now by Fubini's theorem (the integrand has compact support) we can write this integral as $$ \int \left(\int_{-R}^{R} \partial_n f(x_1, \ldots, x_{n-1}, t) \phi (x_1, \ldots, x_{n-1}, t)  dt \right) d^{n-1}(x_1, \ldots, x_{n-1})$$ where $R > 0$ is chosen large enough so that $\phi = 0$ outside of $[-R,R]^n$. Finally, we apply integration by parts to the inner integral and use $\phi(x_1, \ldots, x_{n-1}, \pm R) = 0$ to get that this integral is $$\int \left(\int_{-R}^{R} - f(x_1, \ldots, x_{n-1}, t) \partial_n \phi (x_1, \ldots, x_{n-1}, t)  dt \right) d^{n-1}(x_1, \ldots, x_{n-1})$$ which equals $- \int f(x) \partial_n \phi(x) d^n x$ since $\partial_n \phi = 0$ outside of $[-R,R]^n$.  But this is precisely $-\mu_f(\partial_n) = \partial_n \mu_f$. \end{proof}
+
+Thus we have extended the notion of differentiation to distributions, which include also non-differentiable but locally integrable functions via the embedding $f \mapsto \mu_f$ in the proposition above. We now identify $\mu_f$ and $f$ as is standard practice. 
+
+\begin{eg} Let $H(x) = \mathds{1}_{[0, \infty)} (x)$. Then $H:\bR \to \bR$ is discontinuous at $0$ thus not differentiable in the classical. Yet it has a distribution derivative as follows $H' = \delta$ where $\delta(\phi) = \phi(0)$ is the Dirac delta distribution (which is the probability measure supported at a single point $0$). To see this note that for any smooth $\phi \in D(\bR)$ supported on $[-R,R]$ we have that $$-\int H(x) \phi'(x) = -\int_0^R \phi'(x) dx = -\phi(R) + \phi(0) = \phi(0) = \delta(\phi).  $$
+
+\end{eg}
+
+\begin{eg} Consider a ball that bounces off a wall. Its position can be modelled as $x(t) = t$ for $t<0$ and $x(t) = -t$ for $t \geq 0$ (the wall is located at $x=0$ and it hits it at $t = 0$). Its velocity is $x'(t) = 1$ for $t<0$ and $x'(t) = -1$ for $t>0$ and $x'(0)$ is undefined. What is its acceleration? It is $0$ for all $t \neq 0$, but what is it at $t = 0$? As a distribution the acceleration $x''(t)$ is $2\delta$, which makes sense as all the impact happens at $t=0$. Of course, in real life maybe $x''(t)$ is continuous and the impact happens on some very small time scale $[-\epsilon, \epsilon]$ as the ball is squashed and unsquashed, but nonetheless $\int_{-\epsilon}^{\epsilon} x''(t) dt = 2$ still holds. 
+
+\end{eg}
+
+\begin{mydef}(Convergence of Distributions) We say that a sequence of distributions $f_1,f_2, \ldots \in D'(U)$ converges to $f \in D'(U)$ (in $D'(U)$) if $f_i(\varphi) \to f(\varphi)$ for all $\varphi \in D(U)$
+
+\end{mydef}
+
+\begin{eg} Let $f:\bR \to \bC$ be an integrable function with $\int_{-\infty}^{\infty} f(x) dx = 1$. Let $f_n(x) = n f(nx)$. Thus if $\varphi \in D(\bR)$ then by making the substibution $u = nx$ we get $$\int_{\bR} f_n(x) \varphi(x) dx = \int_{\bR} \frac{du}{dx} f(nx) \varphi(x) dx = \int_{\bR} f(u) \varphi(\frac{u}{n}) du \to \varphi(0) \quad \text{as } n \to \infty$$ where we used the dominated convergence theorem (the integrand is bounded by the integrable function $\| \varphi \|_{\infty} f$ and converges to $f(u)\varphi(0)$ pointwise).Thus $f_n \to \delta$ in $D'(\bR)$.
+
+\end{eg}
+
+\section{Test functions as a Frechet space}
+
+\begin{mydef} A Frechet space is a topological vector space (addition and scalar multiplcation is continuous, the field is either $\bR$ or $\bC$ which has the usual topology) whose topology comes from an invariant metric $d$ (i.e., $d(v_1+v, v_2+v) = d(v_1, v_2)$ for all $v_1,v2,v \in V$) that is complete.
+
+\end{mydef}
+
+For $K \subset \bR^n$ compact we define the norm $$\| \phi \|_{C^k} = \sup_{x \in K, |\alpha| \leq k} |\partial^{\alpha} \phi| (x).$$ Note that $C_0^k(K)$ is a Banach space and hence a Frechet space with respect to this norm. We define $C_0^{\infty}(K)$ to be the smooth functions with support inside $K$ and for $\phi \in C_0^{\infty}(K)$ we define $$\|\phi\|_{C_0^{\infty}(K)} = \sum_{k=0}^{\infty} 2^{-k} \min\{1, \| \phi \|_{C^k} \} $$ and we note that $d(\phi_1, \phi_2) = \| \phi_1 - \phi_2 \|_{C_0^{\infty}(K)}$ is an invariant metric that is complete. Moreover, a sequence of test functions $\phi_1, \phi_2, \ldots \in C_0^{\infty}(K)$ converge to $\phi \in C_0^{\infty}(K)$ if and only if for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \phi_i \to \phi$$ uniformly on $K$. In other words, a sequence of test functions in $D(U)$ converges if they all have support inside the same compact subset $K \subset U$ and they converge in $C_0^{\infty}(K)$ with respect to this metric. This in particular verifies that $C_0^{\infty}(K)$ is a topological vector space with respect to this metric (the continuity of addition and scalar multiplcation inherits from the same properties of the norms $\|\cdot \|_{C_k}$).
+
+\begin{thm}[Theorem 3.8 of \cite{DK}] Let $U \subset \bR^d$ be open. A linear functional $f:D(U) \to \bC$ is a distribution (in $D'(U)$) if and only if for all compact subsets $K \subset U$ there exists $c>0$ and $k \in \bZ_{\geq 0}$ such that
+
+$$ |f(\phi)| \leq c \|\phi\|_{C^k} \quad \text{for all } \phi \in C_0^{\infty}(K).$$
+
+\end{thm}
+
+\begin{proof} Easy to see that any functional satisfying this property is a distribution. To see the converse, suppose that this conditional fails for some compact set $K \subset U$. Then for each positive integer $c = k$ we have $$|f(\phi_k)| > k \|\phi_k\|_{C^k}$$ for some $\phi_k \in C_0^{\infty}(K)$. Let $\psi_k = \frac{1}{|f(\phi_k)|} \phi_k$. Thus $|f(\psi_n)| = 1$ but we have $$|\psi_n|_{C^k} \leq |\psi_n|_{C^n} < \frac{1}{n}$$ for all $n \geq k$ so $\psi_n \to 0$ on $C_0^{\infty}(K)$, which shows that $f$ is not continuous, i.e., not a distribution. \end{proof}
+
+\begin{thm}[Uniform boundedness] Let $V$ be a Frechet space and suppose that $\mathcal{F}$ is a set of continuous linear functions $f:V \to \bC$ such that $\{ f(x) ~|~ f \in \mathcal{F} \}$ is bounded in $\bC$ for all $x \in V$. Then there is an open set $U \subset V$ with $0 \in V$ such that $|f(u)| \leq 1$ for all $f \in \mathcal{F}$ and $u \in U$. \end{thm}
+
+
+\begin{proof} Let $$U_n = \{ x \in V ~|~ |f(x)| > n \text{ for some } f \in \mathcal{F} \}$$. Now $U_n$ is an open set. For each $x \in V$, we have that there exists $n$ such that $|f(x)| \leq n$ for all $f \in \mathcal{F}$, which means that $x \notin U_n$. Consequently $$\emptyset = \bigcap_{n=1}^{\infty} U_n.$$ Thus not all $U_n$ can be dense by Baire's theorem. As some $U_n$ is dense, we have a non-empty open set $V$ such that $V \cap U_n = \emptyset$. Choosing $v_0 \in V$, we have that if $u \in V-v_0$ then $u = v-v_0$ for some $v \in V$ and so $$|f(u)| = |f(v) - f(v_0)| \leq |f(v)| + |f(v_0)| \leq 2n.$$ Thus we may set $U = \frac{1}{2n}(V-v_0)$, which is open by definition of topological vector space. \end{proof}
+
+\begin{thm}[Lemma 5.4 in \cite{DK}, no proof given there] Let $f_j$ be a sequence of distributions in $D'(U)$, where $U \subset \bR^d$ is open such that $f_j(\phi)$ is bounded for all $\phi \in D(U)$. Then for all compact $K \subset U$ there exists a constant $c>0$ and $k \in \bZ_{\geq 0}$ such that $$\|f_j(\phi)\| \leq c \| \phi \|_{C_0^k(K)} \quad \text{ for all } j \in \bN \text{ and } \phi \in C_0^{\infty}(K).$$
+
+\end{thm}
+
+\begin{proof} We apply the uniform boundedness principle above. This implies that there is an open neighbhourhood $\mathcal{U} \subset C_0^{\infty}(K)$ such that $f_j(u) \leq 1$ for all $u \in \mathcal{U}$ and $j \in \bN$. So there exists an $R$ such that if $\| \phi \|_{C_0^{\infty}(K)} < R$ then $f_j(\phi) \leq 1$. Now take $k$ large enough so that $$\sum_{i=k}^{\infty} 2^{-i} < \frac{R}{2}.$$ This means that if $\|\phi \|_{C_0^{k}(K)} < \frac{R}{2}$ then $\| \phi \|_{C_0^k(K)} < R$ and so $f_j(\phi) < 1$. As $\|\cdot \|_{C_0^k(K)}$ is a norm on $C_0^{\infty}(K)$, we have completed the proof with $c= \frac{2}{R}$.  \end{proof}
+
+\begin{thm} Let $U \subset \bR^d$ be an open set and suppose that $f_1,f_2, \ldots \in D(U)$ is a sequence of distributions such that $\lim_{j\to \infty} f_j(\varphi)$ exists in $\bC$ for all $\varphi \in D(U)$. 
+\begin{enumerate}
+	\item Then there exists a a distribution $f \in D(U)$ such that $$f = \lim_{j \to \infty} f_j.$$
+	\item If $\varphi, \varphi_j \in D(U)$ are such that $\lim_{j \to \infty} \varphi_j = \varphi$ then $f_j(\varphi_j)$ converges to $f(\varphi)$.
+\end{enumerate}
+
+\end{thm}
+
+\begin{proof} Define $f(\varphi) = \lim_{j \to \infty} f_j(\varphi)$. It remains to show that this defines a distribution (is continuous). Let $K$ be a compact set. Applying the uniform boundedness principle we have a constant $c>0$ and $k \in \bZ_{\geq 0}$ such that $$|f_j(\varphi)| \leq c \| \varphi \|_{C_0^k(K)} \quad \text{ for all } j \in \bN, \varphi \in C_0^{\infty}(K).$$ Thus as $f_j(\varphi) \to f(\varphi)$ we have that $$|f(\varphi)| \leq c \| \varphi \|_{C_0^k(K)} \quad \text{ for all } \varphi \in C_0^{\infty}(K).$$ This implies the continuity of $f$, thus $f \in D(U)$. Now suppose that $\varphi_j \in C_0^{\infty}(K)$ converge to $\varphi \in C_0^{\infty}(K)$. Thus $$|f_j(\varphi_j) - f(\varphi)| \leq |f_j(\varphi_j - \varphi)| + |f_j(\varphi) - f(\varphi)| \leq c\|\varphi_j - \varphi\|_{C^k} +  |f_j(\varphi) - f(\varphi)|$$ and the first term converges to $0$ as $\varphi_j \to \varphi$ while the second converges to $0$ as $f_j \to f$.\end{proof}
+
+\section{Support of a distribution}
+
+If $U \subset V \subset \bR^d$ are open sets, then there is a continuous (preserves limits) inclusion $D(U) \to D(V)$. This induces a restriction map $p_{U,V}:D'(V) \to D'(U)$ where $(p_{U,V}f)(\phi) = f(\phi)$ for $\phi \in D(U) \subset D(V)$ and $f \in D'(U)$. Note that this is continuous (preserves limits of distributions).
+
+\begin{lemma} Suppose that $U$ is an open set, $f \in D'(U)$ and suppose that for each $x \in U$ there exists an open neighbhourhood $U_x \subset U$ of $x$ such that $p_{U_x, U} f = 0$. Then $f=0$.
+
+\end{lemma}
+
+\begin{proof} We take $\phi \in D(U)$, thus there is a compact set $K$ such that $K \subset u$ and $\phi$ is supported on $K$. Now by compactness, we can find a finite cover of $U_1, \ldots U_n$ of $K$ such that $f$ restricts to $0$ on each $U_i \subset U$. Choose $U_i$ such that the closure of $U_i$ is in $U$. By partition of unity theorem, we may choose $\psi_1, \ldots, \psi_n \in D(U)$ such that $\sum_{i=1}^n \psi_i (x) = 1$ for all $x \in K$ and $\operatorname{supp} \psi_i \subset U_i$. Thus $\phi = \phi \sum_{i} \psi_i$ and so $f(\phi) = \sum_i f(\phi \psi_i) = 0.$ \end{proof}
+
+We justify the partition of unity used above.
+
+\begin{prop} Let $B(a,r) \subset B(a,r') \subset \bR^d$ are open balls. There is a smooth function $\phi:\bR^d \to [0,1]$ that is $1$ on $B(a,r)$ and $0$ outside $B(a,r')$. 
+
+\end{prop}
+
+\begin{proof}[Proof sketch] We just need to prove this for $d=1$ and then build such a radial function. We already saw that we have a compactly supported $\psi:\bR \to [0,1]$ supported on $[0,\epsilon]$ where $0<\epsilon<\frac{1}{2}$. Now let $\psi_2(x) = \int_{-\infty}^x \psi(t) dt$. We see that $\psi_2(x)$ is constant for $x>\epsilon$ and is zero on $x<0$. Consequently $\psi_3(x) = \psi_2(x) \psi_2(1-x)$ has values in $[0,1]$, is compactly supported and is constant on the interval $(\epsilon, 1 - \epsilon)$. We can now translate and scale $\psi_3$ appropriately. \end{proof}
+
+\begin{prop}[Partition of unity] Let $K \subset \bR^d$ be a compact set and suppose that $U \supset K$ is open. Suppose that $\mathcal{U}$ is a collection of open subsets of $U$ that covers $K$. Then there exist smooth functions $\psi_1, \ldots, \psi_n:\bR^d \to [0,1]$ such that $$\psi := \sum_{i=1}^n \psi_i$$ satisfies that $\psi(x)=0$ for $x \in K$ and $\psi_i$ has support inside some element of $\mathcal{U}$.
+
+\end{prop}
+
+\begin{proof} By compactness, we may find finitely many balls $B(a_1,r_1), \ldots , B(a_n,r_n)$ that cover $K$ such that $B(a_i,2r_i)$ is a subset of some element of $\mathcal{U}$ (and thus $B(a_i, 2r_i)$ are subsets of $U$). Now apply the previous construction to find some smooth $\phi_i:\bR^d \to [0,1]$ that equals $1$ on $B(a_i,r_i)$ and vanishes outside of $B(a_i,2r_i)$. Now let $\psi_1 = \phi_1$ and for $1<j\leq n$ define $\psi_i = \phi_i \prod_{j<i} (1 - \phi_j)$. Observe that $\psi_i$ has support inside the support of $\phi_i$, thus inside some element of $\mathcal{U}$, as required. Moreover, by induction we have that $$\sum_{i=1}^j \psi_i = 1 - \prod_{i=1}^j (1-\phi_i).$$ In particular for $j=n$ this means that by setting $\psi = \sum_{i=1}^n \psi_i$ we have that $\psi(x) = 1$ for $x \in B(a_ i, r_i)$, and thus for all $x \in K$. Moreover, $x \notin B(a_i, 2r_i)$ means that $(1 - \phi_i(x)) = 1$ for all $i$, meaning that $\psi_i(x) = 0$ and thus $\psi_i$ has support inside some element of $\mathcal{U}$, as required. \end{proof}
+
+\begin{thm}[Gluding distributions] Suppose that $X \subset \bR^d$ is an open set and suppose that $\mathcal{U}$ is a collection of open subsets of $X$ that cover $X$. Suppose that for each $U \in \mathcal{U}$ there is a distribution $f_U \in D'(U)$ such that these $f_U$ are compatible in the sense that $f_U|_{U \cap V} = f_V|_{U \cap V}$ are the same distributions on $D'(U \cap V)$. Then there is a unique distribution $f \in D'(X)$ such that $f|U = f_U$ for all $U \in \mathcal{U}$.
+
+\end{thm}
+
+\begin{proof} We construct $f$ as follows (show that it is well defined later): For each $\phi \in D(X)$, choose a compact set $K \subset X$ containing the support of $\phi$. Now we may apply Parition of Unity to find open sets $U_1, \ldots, U_n \in \mathcal{U}$ that cover $K$ and $\psi_i:\bR^d \to [0,1]$ with support inside $U_i$ such that $\psi := \sum_{i=1}^n \psi_i$ satisfies that $\psi(x) = 1$ for all $x \in K$. We now define $$f(\phi) = \sum_{i=1}^n f_{U_i}(\phi \psi_i).$$ Note that this shows uniqueness since $\phi = \sum_{i=1}^n \phi \psi_i$ on $\bR^d$.
+
+We now show that $f$ is well defined (does not depend on the choice of $K$ or the choice of the $U_i$ or the choice of $\psi_i$). To see this, suppose that $K'$, $U'_j$ and $\psi'_j$ are such other choices. Then we make a common refinement and show it assigns the same value to our $f(\phi)$ as follows. Let $K'' = K \cap K'$, it clearly contains the support of $\phi$ and is compact. Now the sets $U_i$ and $U_j$ cover $K''$. Thus the sets $V_{i,j} = U_i \cap U_j$ cover $K''$. Moreover, $\psi_{i,j}:=\psi_i \psi'_j:\bR^d \to [0,1]$ has support inside $V_{i,j}$ and $$\sum_{i,j} \psi_{i,j} = \left(\sum_i \psi_i \right) \left( \sum_j \psi'_j \right)$$ and thus equals $1$ on $K''$. So this common refinement is a new partition of unity. But now 
+
+$$\sum_{i,j} f_{U_i}|_{V_{i,j}}(\psi_{i,j}\phi) = \sum_{i,j} f_{U_i}(\psi_{i,j}\phi)  = \sum_i f_{U_i}(\phi\psi_{i}\sum_j \psi'_j) = \sum_i f_{U_i}(\phi \psi_i) $$ 
+
+where we used that $\phi \psi_i \sum_j \psi'_j = \phi_i\psi_i$ since $\sum_j \psi'_j(x) = 1$ for all $x \in K'$ and thus all $x$ in the support of $\phi$. This completes the proof of well definedness since by assumption, $$f_{U_i}|_{V_{i,j}}(\psi_{i,j}\phi) = f_{U_j'}|_{V_{i,j}}(\psi_{i,j}\phi)$$ and so  $$\sum_i f_{U_i}(\phi \psi_i) = \sum_j f_{U'_j}(\phi \psi'_j)$$ by the same calculation as above. Suppose that $\phi, \phi' \in D(X)$. Thus to compute $f(\phi + \phi')$ we may choose a compact set $K \subset U$ that contains the support of $\phi$ and $\phi'$. Now choose $U_1, \ldots, U_n \in \mathcal{U}$ that cover $K$, thus by definition $$f(\phi_1 + \phi_2) = \sum_{i} f_{U_i} (\psi_i (\phi_1 + \phi_2)) = \sum_i f_{U_i}(\psi_i \phi_1) + \sum_i f_{U_i}(\psi_i \phi_2) = f(\phi_1) + f(\phi_2)$$ where the $\psi_i$ are chosen as in the construction. Linearity of $f$ now easily follows. We now show the continuity of $f$. If $\phi_k \to \phi \in D(X)$ then there is a compact set $K \subset X$ containing all their supports. Thus $\psi_i \phi_k \to \psi \phi$ and the continuity of each $f_{U_i}$ gives continuity of $f$. Finally, it remains to show that $f|_{U} = f_{U}$ for all $U \in \mathcal{U}$. Thus suppose that $\phi \in D(U)$ and choose a compact set $K \subset U$ such that $\phi$ has support inside $K$. As $U$ already covers $K$, by definition we have that $$f|_U(\phi) = f(\phi) =  f_U(\psi \phi) = f_U(\phi)$$ for some $\psi:\bR^d \to [0,1]$ smooth that equals $1$ on $K$ and has suppose inside $U$ (so $\phi\psi = \psi$ everywhere). \end{proof}
+
+\section{Tempered Distributions}
+
+
+
+\section{Fourier Transform}
+
+
+\begin{thebibliography}{99}
+
+\bibitem{DK} Duistermaat, J. J.; Kolk, J. A. C. \emph{Distributions. Theory and applications.} Translated from the Dutch by J. P. van Braam Houckgeest. Cornerstones. Birkhäuser Boston, Inc., Boston, MA, 2010. xvi+445 pp. ISBN: 978-0-8176-4672-1 
+
+\end{thebibliography} 
+
+
+
+\end{document}
