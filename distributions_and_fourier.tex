@@ -156,6 +156,15 @@ Thus we have extended the notion of differentiation to distributions, which incl
 
 \end{eg}
 
+\begin{lemma} Suppose that $\phi_n, \psi_n, \phi, \psi:U \to \bR$ are smooth functions, where $U \subset \bR^d$ is open, such that for some compact $K \subset U$ and for all $\alpha \in \bZ^d_{\geq 0}$ we have that $\partial^{\alpha} \phi_n \to \partial^{\alpha}\phi$ and $\partial^{\alpha} \psi_n \to \partial^{\alpha}\psi$ uniformly on $K$. Then for all $\alpha$, we have that $\partial^{\alpha} (\phi_n \psi_n) \to \partial^{\alpha} (\phi_n \psi_n)$ uniformly on $K$.
+
+\end{lemma}
+
+\begin{proof} First we note that $$|\phi_n \psi_n - \phi \psi| = |\phi_n (\psi_n - \psi) + \psi (\phi_n - \phi)| \leq |\phi_n||\psi_n - \phi_n| + |\psi||\phi_n - \phi|$$ converges to $0$ uniformly on $K$. We now prove by induction on $k$ that all order $n$ derivatives of $\phi_n \psi_n$ converge to the corresponding derivatives of $\phi \psi$ (the induction hypothesis is on any such $\phi$, $\psi$ and not just for this specific ones). The base case $k=0$ has now been establishes. Now choose any $1\leq j \leq n$ and use the product rule to see that $$\partial_j (\phi_n \psi_n) = \partial_j(\phi_n) \psi_n + \phi_n (\partial_j \phi_n) \to \partial_j(\phi) \psi + \phi (\partial_j \phi) = \partial_j(\phi \psi)$$ uniformly on $K$ where we applied this $k=0$ case. Now by induction hypothesis for $|\alpha| = k$ we have $\partial_{\alpha} \partial_j(\phi_n) \psi_n \to \partial_{\alpha} \partial_j(\phi) \psi $ uniformly on $K$ and likewise for the second term. Thus $\partial_{\alpha} \partial_j (\phi_n \psi_n) \to \partial_{\alpha} (\phi \psi)$, and this completes the induction step. \end{proof}
+
+\begin{mydef}[Multiplying a distribution by a smooth function] If $f \in D(U)$ is a distributiona and $\psi \in C^{\infty}(U)$ is any smooth function (not necessarily of compact support in $U$) then we can define $\psi f \in D(U)$ by $$\psi f (\phi) = f(\psi \phi).$$ Note that $\psi f$ is indeed a distribution as the above lemma shows that if $\phi_n \to \phi$ in $D(U)$ then $\psi \phi_n \to \psi \phi$ in $D(U)$ as well, and so $\psi f (\phi_n) \to \psi f(\phi)$ by the continuity of $f$.
+
+\end{mydef}
 \section{Test functions as a Frechet space}
 
 \begin{mydef} A Frechet space is a topological vector space (addition and scalar multiplcation is continuous, the field is either $\bR$ or $\bC$ which has the usual topology) whose topology comes from an invariant metric $d$ (i.e., $d(v_1+v, v_2+v) = d(v_1, v_2)$ for all $v_1,v2,v \in V$) that is complete.
@@ -281,7 +290,7 @@ The next example shows that this embedding is not surjective.
 
 \end{lemma}
 
-\begin{proof} Let $\psi \in \mathcal{E}(X)$. Let $\phi \in D(X)$ be an element such that $\phi = 1$ on some open set $U \supset K$ such that $\overline{U} \subset X$ and $\overline{U}$ is compact (exists as $K \subset X$ and we use partition of unity). Now define $g(\psi \phi) = f(\psi \phi)$. We claim that this defines $g \in \mathcal{E}'(X)$. To show that it is well defined, we see that $\psi \phi \in D(X)$ thus $f(\psi \phi)$ makes sense (no need to show independence on $\phi$, just consider it fixed throughout). Continuity of $g$ is clear since if $\psi_n \to \psi$ in $\mathcal{E}(X)$ then their partial derivatives convege uniformly on the support of $\phi$, thus $\psi_n\phi \to \psi_n \phi$ in $D(X)$. Now it remains to show that $g$ agrees with $f$ on $D(X)$. Thus assume $\psi \in D(X)$ already. Now observe that $\psi - \psi\phi = 0$ on $\overline{U}$ and thus $X \in D(U \setminus K)$  and by definition of support, we have that $f|_{X \setminus K} = 0$ and so $f(\psi - \psi \phi) = 0$, thus $g(\psi) = f(\psi)$ as desired.\end{proof}
+\begin{proof} Let $\psi \in \mathcal{E}(X)$. Let $\phi \in D(X)$ be an element such that $\phi = 1$ on some open set $U \supset K$ such that $\overline{U} \subset X$ and $\overline{U}$ is compact (exists as $K \subset X$ and we use partition of unity). Now define $g(\psi) = f(\psi \phi)$. We claim that this defines $g \in \mathcal{E}'(X)$. To show that it is well defined, we see that $\psi \phi \in D(X)$ thus $f(\psi \phi)$ makes sense (no need to show independence on $\phi$, just consider it fixed throughout). Continuity of $g$ is clear since if $\psi_n \to \psi$ in $\mathcal{E}(X)$ then their partial derivatives convege uniformly on the support of $\phi$, thus $\psi_n\phi \to \psi_n \phi$ in $D(X)$. Now it remains to show that $g$ agrees with $f$ on $D(X)$. Thus assume $\psi \in D(X)$ already. Now observe that $\psi - \psi\phi = 0$ on $\overline{U}$ and thus $X \in D(U \setminus K)$  and by definition of support, we have that $f|_{X \setminus K} = 0$ and so $f(\psi - \psi \phi) = 0$, thus $g(\psi) = f(\psi)$ as desired.\end{proof}
 
 We now show that the converse is true, i.e., that $\mathcal{E}'(X)$ coincides with those distributions in $\mathcal{D}'(X)$ whose support is a compact subset of $K$.
 
@@ -295,9 +304,17 @@ We now show that the converse is true, i.e., that $\mathcal{E}'(X)$ coincides wi
 
 \end{eg}
 
-\begin{eg} Consider the distribution on $(0,1)$ given by $$f(\phi) = \int_{0}^1 e^{1/x^2} \phi(x) dx.$$ It is continuous and well defined since $e^{1/x^}$ is integrable on each compact subset $K$ in $(0,1)$. However, $f \notin \mathcal{E}'((0,1))$ (not the restriction of any element in $\mathcal{E}'((0,1))$). Indeed, it is not supported on any compact subset $K$ of $(0,1)$. This is despite the support being the bounded subset $(0,1)$ that is closed in $(0,1)$ but not in $\bR$. One can directly see that there is not continuous extension of $f$ to $\mathcal{E}((0,1))$ by considering a sequence of elements $\phi_n \in D((0,1))$ that converge monotonically in $\mathcal{E}(X)$ to the constant function $1$ on $(0,1)$ and seeing a lack of convergence ($f(\phi_n)$ diverges to $\infty$).
+\begin{eg} Consider the distribution on $(0,1)$ given by $$f(\phi) = \int_{0}^1 e^{1/x^2} \phi(x) dx.$$ It is continuous and well defined since $e^{1/x^2}$ is integrable on each compact subset $K$ in $(0,1)$. However, $f \notin \mathcal{E}'((0,1))$ (not the restriction of any element in $\mathcal{E}'((0,1))$). Indeed, it is not supported on any compact subset $K$ of $(0,1)$. This is despite the support being the bounded subset $(0,1)$ that is closed in $(0,1)$ but not in $\bR$. One can directly see that there is not continuous extension of $f$ to $\mathcal{E}((0,1))$ by considering a sequence of elements $\phi_n \in D((0,1))$ that converge monotonically in $\mathcal{E}(X)$ to the constant function $1$ on $(0,1)$ and seeing a lack of convergence ($f(\phi_n)$ diverges to $\infty$).
 
 \end{eg}
+
+\begin{thm} For any open $X \subset \bR^d$, we have that $\mathcal{E}'(X)$ is a dense subset of $D'(X)$.
+
+\end{thm}
+
+\begin{proof} Let $K_1 \subset K_2 \subset \ldots $ be an exhuastion of $X$ be compact subsets. Choose a $\psi_n \in D(X)$ such that $\psi_n = 1$ on $K_n$. Now let $f \in D(X)$ be any distribution and define $f_n \in D(X)$ by $$f_n(\phi) = f_n(\phi \psi_n).$$ We claim that $f_n \in \mathcal{E}'(X)$ and $f_n \to f$ in $D'(X)$. To justify the first claim, note that for $\phi \in D(U \setminus \operatorname{supp} \psi_n)$ we have that $$f_n(\phi) = f(\psi_n \phi) = f(0) = 0$$ which shows that $f_n$ has support a subset of $\operatorname{supp} f$, thus has compact support. Now for any $\phi \in D(X)$, there is a compact set $K \subset X$ such that $\phi(x) = 0$ for $x \notin K$. Also, for $n$ large enough we have $K \subset K_n$, thus 
+
+\end{proof}
 
 \section{Fourier Transform}
 
