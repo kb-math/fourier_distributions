@@ -195,13 +195,23 @@ $$ |f(\phi)| \leq c \|\phi\|_{C^k} \quad \text{for all } \phi \in C_0^{\infty}(K
 
 \section{Support of a distribution}
 
-If $U \subset V \subset \bR^d$ are open sets, then there is a continuous (preserves limits) inclusion $D(U) \to D(V)$. This induces a restriction map $p_{U,V}:D'(V) \to D'(U)$ where $(p_{U,V}f)(\phi) = f(\phi)$ for $\phi \in D(U) \subset D(V)$ and $f \in D'(U)$. Note that this is continuous (preserves limits of distributions).
+If $U \subset V \subset \bR^d$ are open sets, then there is a continuous (preserves limits) inclusion $D(U) \to D(V)$. This induces a restriction map $p_{U,V}:D'(V) \to D'(U)$ where $(p_{U,V}f)(\phi) = f(\phi)$ for $\phi \in D(U) \subset D(V)$ and $f \in D'(U)$. Note that this is continuous (preserves limits of distributions). We also use the notation $f|_U = p_{U,V}f$.
 
 \begin{lemma} Suppose that $U$ is an open set, $f \in D'(U)$ and suppose that for each $x \in U$ there exists an open neighbhourhood $U_x \subset U$ of $x$ such that $p_{U_x, U} f = 0$. Then $f=0$.
 
 \end{lemma}
 
 \begin{proof} We take $\phi \in D(U)$, thus there is a compact set $K$ such that $K \subset u$ and $\phi$ is supported on $K$. Now by compactness, we can find a finite cover of $U_1, \ldots U_n$ of $K$ such that $f$ restricts to $0$ on each $U_i \subset U$. Choose $U_i$ such that the closure of $U_i$ is in $U$. By partition of unity theorem, we may choose $\psi_1, \ldots, \psi_n \in D(U)$ such that $\sum_{i=1}^n \psi_i (x) = 1$ for all $x \in K$ and $\operatorname{supp} \psi_i \subset U_i$. Thus $\phi = \phi \sum_{i} \psi_i$ and so $f(\phi) = \sum_i f(\phi \psi_i) = 0.$ \end{proof}
+
+This lemma shows that if $f|_V = 0$ for all $V \in \mathcal{V}$, where $\mathcal{V}$ is a collection of open sets, then setting $V_{\max} = \cup_{V \in \mathcal{V}} V$ we have that $f|_{V_{\max}} = 0$. Thus the following definition is well defined.
+
+\begin{mydef} If $U \subset \bR^d$ is open and $f \in D'(X)$ we define the support of $f$, denoted by $\operatorname{supp} f$, to the smallest closed set such that $f|V = 0$ where $V = X \setminus \operatorname{supp} f$.
+
+\end{mydef}
+
+\begin{eg} Consider the distribution $f \in D'(\bR_{>0})$ given by $$f(\phi) = \int_0^{\infty} e^{1/x^2} \phi(x) dt.$$ It is indeed a distribution since $e^{-1/x^2}$ is integrable on each compact subset of $\bR_{>0}$, but on any other compact subset containing $0$. This distribution is not the restriction of any distribution $g \in D(\bR)$. To see this, suppose that it was. Now let $\phi_n = \phi(x+\frac{1}{n})$ where $\phi:\bR \to [0,1]$ is smooth and has support in $[0,1]$ and $\phi(x) > e^{-1/x}$ on $(0,\frac{1}{2})$. Thus $$g(\phi) = \lim_{n \to \infty} g(\phi_n) = \lim_{n \to \infty} f(\phi_n) = \infty,$$ a contradiction (distributions have finite values in $\bC$).
+
+\end{eg}
 
 We justify the partition of unity used above.
 
@@ -211,11 +221,11 @@ We justify the partition of unity used above.
 
 \begin{proof}[Proof sketch] We just need to prove this for $d=1$ and then build such a radial function. We already saw that we have a compactly supported $\psi:\bR \to [0,1]$ supported on $[0,\epsilon]$ where $0<\epsilon<\frac{1}{2}$. Now let $\psi_2(x) = \int_{-\infty}^x \psi(t) dt$. We see that $\psi_2(x)$ is constant for $x>\epsilon$ and is zero on $x<0$. Consequently $\psi_3(x) = \psi_2(x) \psi_2(1-x)$ has values in $[0,1]$, is compactly supported and is constant on the interval $(\epsilon, 1 - \epsilon)$. We can now translate and scale $\psi_3$ appropriately. \end{proof}
 
-\begin{prop}[Partition of unity] Let $K \subset \bR^d$ be a compact set and suppose that $U \supset K$ is open. Suppose that $\mathcal{U}$ is a collection of open subsets of $U$ that covers $K$. Then there exist smooth functions $\psi_1, \ldots, \psi_n:\bR^d \to [0,1]$ such that $$\psi := \sum_{i=1}^n \psi_i$$ satisfies that $\psi(x)=0$ for $x \in K$ and $\psi_i$ has support inside some element of $\mathcal{U}$.
+\begin{prop}[Partition of unity] Let $K \subset \bR^d$ be a compact set and suppose that $U \supset K$ is open. Suppose that $\mathcal{U}$ is a collection of open subsets of $U$ that covers $K$. Then there exist smooth functions $\psi_1, \ldots, \psi_n:\bR^d \to [0,1]$ such that $$\psi := \sum_{i=1}^n \psi_i$$ satisfies that $\psi(x)=1$ for $x \in K$ and $\psi_i$ has support inside some element of $\mathcal{U}$.
 
 \end{prop}
 
-\begin{proof} By compactness, we may find finitely many balls $B(a_1,r_1), \ldots , B(a_n,r_n)$ that cover $K$ such that $B(a_i,2r_i)$ is a subset of some element of $\mathcal{U}$ (and thus $B(a_i, 2r_i)$ are subsets of $U$). Now apply the previous construction to find some smooth $\phi_i:\bR^d \to [0,1]$ that equals $1$ on $B(a_i,r_i)$ and vanishes outside of $B(a_i,2r_i)$. Now let $\psi_1 = \phi_1$ and for $1<j\leq n$ define $\psi_i = \phi_i \prod_{j<i} (1 - \phi_j)$. Observe that $\psi_i$ has support inside the support of $\phi_i$, thus inside some element of $\mathcal{U}$, as required. Moreover, by induction we have that $$\sum_{i=1}^j \psi_i = 1 - \prod_{i=1}^j (1-\phi_i).$$ In particular for $j=n$ this means that by setting $\psi = \sum_{i=1}^n \psi_i$ we have that $\psi(x) = 1$ for $x \in B(a_ i, r_i)$, and thus for all $x \in K$. Moreover, $x \notin B(a_i, 2r_i)$ means that $(1 - \phi_i(x)) = 1$ for all $i$, meaning that $\psi_i(x) = 0$ and thus $\psi_i$ has support inside some element of $\mathcal{U}$, as required. \end{proof}
+\begin{proof} By compactness, we may find finitely many balls $B(a_1,r_1), \ldots , B(a_n,r_n)$ that cover $K$ such that $B(a_i,2r_i)$ is a subset of some element of $\mathcal{U}$ (and thus $B(a_i, 2r_i)$ are subsets of $U$). Now apply the previous construction to find some smooth $\phi_i:\bR^d \to [0,1]$ that equals $1$ on $B(a_i,r_i)$ and has support inside $B(a_i,2r_i)$. Now let $\psi_1 = \phi_1$ and for $1<i\leq n$ define $\psi_i = \phi_i \prod_{j<i} (1 - \phi_j)$. Observe that $\psi_i$ has support inside the support of $\phi_i$, thus inside some element of $\mathcal{U}$, as required. Moreover, by induction we have that $$\sum_{i=1}^j \psi_i = 1 - \prod_{i=1}^j (1-\phi_i).$$ In particular for $j=n$ this means that by setting $\psi = \sum_{i=1}^n \psi_i$ we have that $\psi(x) = 1$ for $x \in B(a_ i, r_i)$, and thus for all $x \in K$. Moreover, if $\phi(x)=0$ then $\psi_i(x) = 0$ and thus $\psi_i$ has support inside some element of $\mathcal{U}$, as required. \end{proof}
 
 \begin{thm}[Gluding distributions] Suppose that $X \subset \bR^d$ is an open set and suppose that $\mathcal{U}$ is a collection of open subsets of $X$ that cover $X$. Suppose that for each $U \in \mathcal{U}$ there is a distribution $f_U \in D'(U)$ such that these $f_U$ are compatible in the sense that $f_U|_{U \cap V} = f_V|_{U \cap V}$ are the same distributions on $D'(U \cap V)$. Then there is a unique distribution $f \in D'(X)$ such that $f|U = f_U$ for all $U \in \mathcal{U}$.
 
@@ -229,9 +239,65 @@ $$\sum_{i,j} f_{U_i}|_{V_{i,j}}(\psi_{i,j}\phi) = \sum_{i,j} f_{U_i}(\psi_{i,j}\
 
 where we used that $\phi \psi_i \sum_j \psi'_j = \phi_i\psi_i$ since $\sum_j \psi'_j(x) = 1$ for all $x \in K'$ and thus all $x$ in the support of $\phi$. This completes the proof of well definedness since by assumption, $$f_{U_i}|_{V_{i,j}}(\psi_{i,j}\phi) = f_{U_j'}|_{V_{i,j}}(\psi_{i,j}\phi)$$ and so  $$\sum_i f_{U_i}(\phi \psi_i) = \sum_j f_{U'_j}(\phi \psi'_j)$$ by the same calculation as above. Suppose that $\phi, \phi' \in D(X)$. Thus to compute $f(\phi + \phi')$ we may choose a compact set $K \subset U$ that contains the support of $\phi$ and $\phi'$. Now choose $U_1, \ldots, U_n \in \mathcal{U}$ that cover $K$, thus by definition $$f(\phi_1 + \phi_2) = \sum_{i} f_{U_i} (\psi_i (\phi_1 + \phi_2)) = \sum_i f_{U_i}(\psi_i \phi_1) + \sum_i f_{U_i}(\psi_i \phi_2) = f(\phi_1) + f(\phi_2)$$ where the $\psi_i$ are chosen as in the construction. Linearity of $f$ now easily follows. We now show the continuity of $f$. If $\phi_k \to \phi \in D(X)$ then there is a compact set $K \subset X$ containing all their supports. Thus $\psi_i \phi_k \to \psi \phi$ and the continuity of each $f_{U_i}$ gives continuity of $f$. Finally, it remains to show that $f|_{U} = f_{U}$ for all $U \in \mathcal{U}$. Thus suppose that $\phi \in D(U)$ and choose a compact set $K \subset U$ such that $\phi$ has support inside $K$. As $U$ already covers $K$, by definition we have that $$f|_U(\phi) = f(\phi) =  f_U(\psi \phi) = f_U(\phi)$$ for some $\psi:\bR^d \to [0,1]$ smooth that equals $1$ on $K$ and has suppose inside $U$ (so $\phi\psi = \psi$ everywhere). \end{proof}
 
-\section{Tempered Distributions}
+\section{Distributions with compact supports}
 
+If $X \subset \bR^d$ is an open set, we let $\mathcal{E}(X) = C^{\infty}(X)$ denote the set of all smooth functions on $X$. We have $D(X) \subset \mathcal{E}(X)$ and the inclusion may be strict, for example constant non-zero functions are not in $D(\bR)$ but are in $C(\bR)$.
 
+\begin{mydef} We say that $\phi_j \in \mathcal{E}(X)$ converges to $\phi \in \mathcal{E}(X)$ if for all compact sets $K \subset X$ and $\alpha \in \bZ_{\geq 0}^d$ we have that $$\partial^{\alpha}\phi_j \to \partial^{\alpha}\phi \quad \text{uniformly on } K. $$
+
+\end{mydef}
+
+\begin{eg} In $\mathcal{E}(\bR)$, we have that $f_n(x) = \frac{1}{n}x$ converge to the $0$ function. However the convergence is not uniform on the whole of $\bR$ itself, but is on every bounded (hence every compact) set. If $\phi:\bR \to \bR$ is a smooth compactly supported non-zero function then $\phi \in D(X) \subset \mathcal{E}(X)$ and $\phi_n(x) = \phi(x-n)$ are also in $\mathcal{E}(X)$. Note that $\phi_n \to 0$ in $\mathcal{E}(X)$ but not in $D(X)$ (as there is no compact subset containing all supports of the $\phi_n$). \end{eg}
+
+\begin{mydef} If $X \subset \bR^d$ is open, we let $\mathcal{E}'(X)$ denote the space of linear maps $f:\mathcal{E}(X) \to \bC$ that satisfy the property that if $\phi_j \in \mathcal{E}(X)$ converges to $\phi \in \mathcal{E}(X)$. We say $f_j \in \mathcal{E}'(X)$ converges to $f \in \mathcal{E}'(X)$ if $f_j(\phi) \to f(\phi)$ for all $\phi \in \mathcal{E}(X)$.
+
+\end{mydef}
+
+We now aim to classify $\mathcal{E}'(X)$ and find a natural embedding into $D'(X)$. First observe that given $f \in \mathcal{E}'(X)$, if we restrict this function to $D(X)$, then we get an element of $\mathcal{D}'(X)$. Thus we have a map $$\iota:\mathcal{E}'(X) \to D(X).$$
+
+\begin{lemma} If $X \subset \bR^d$ is open, then it has an \textit{exhuastion by compact sets}, which we define to be a sequence $K_1 \subset K_2 \subset \ldots$ of compact sets such that $$X = \bigcup_{n=1}^{\infty} K_n$$ and such that any compact sets $K \subset X$ satisfies that $K \subset K_n$ for some $n$.
+
+\end{lemma}
+
+\begin{proof} If $X = \bR^d$, just take a compact ball of radius $n$. Otherwise, let $C = \bR^d \setminus X$. Note that $C$ is closed. Now let $K_n \subset X$ be those points in ball of radius $n$ around $0$ with distance at most $\frac{1}{n}$ to $C$. Clearly $X = \bigcup_{n=1}^{\infty} K_n$ since any point not in $C$ must have positive distance to $C$ as $C$ is closed. Now let $K \subset X$ be any open set. Then $K \cap C = \emptyset$ and it follows that $K$ has positive distance to $C$, as otherwise there is $k_n \in K$ and $c_n \in C$ such that $d(k_n, c_n) \to 0$ and by taking a subsequence we assume $k_n \to k \in K$, thus $d(k, C) = 0$, contradicting the disjointness of $K$ and $C$. It follows that $K \subset K_n$ for large enough $n$ as $K$ is bounded and has positive distance to $C$.
+
+\end{proof}
+
+\begin{lemma} The map $\iota:\mathcal{E}'(X) \to D(X)$ is well defined, continuous (preserves limits) and injective.
+
+\end{lemma}
+
+\begin{proof} To see well defined, observe that $D(X) \subset \mathcal{E}(X)$ this embedding is continuous, i.e., if $\phi_j \to \phi$ in $D(X)$ then their partial derivatives converge uniformly on all compact sets $K$ by definition. Thus if $f \in \mathcal{E}'(X)$ then indeed $f|_{D(X)} \in \mathcal{E}(X)$. Continuity is obvious as the definition is the same. 
+
+Now we show injectivity, thus we wish to show that this linear map $\iota$ has a trivial kernel. Thus suppose that $f \in \mathcal{E}'(X)$ satisfies that $f(\phi) = 0$ for all $\phi \in D(X)$. We must now show that $f(\psi) = 0$ for all $\psi \in \mathcal{E}(X)$. To see this, first write $$X = \bigcup_{n=1}^{\infty} K_n$$ where $K_1 \subset K_2 \subset \ldots$ is an exhuastion by compact subsets of $X$ (as defined in the lemma above). Now by partition of unity theorem, we can find a map $\phi_n:\bR^d \to [0,1]$ with compact support inside $X$ that is equal to $1$ on $K_n$.  Thus $\phi_n \psi \in D(X)$ as it has compact support in $X$. Hence $f(\phi_n \psi) = 0$ by assumption. Now $\phi_n\psi \to \psi$ in $\mathcal{E}(X)$ since for any compact set $K$, we have that $K \subset K_n$ for large enough $n$ and so $\phi_n\psi = \psi$ on $K$. Thus by continuity of $f$, we have that $$f(\phi) = \lim_{n \to \infty} f(\phi_n \psi) = 0,$$ as desired. \end{proof}
+
+The next example shows that this embedding is not surjective.
+
+\begin{eg} Consider the distribution $f \in D'(\bR)$ given by $f(\phi) = \int_{\bR} \phi(x) dx $. We claim that $f \neq \iota g$ for some $g \in \mathcal{E}'(X)$. Again let $\phi_n:\bR \to [0,1]$ be a compactly supported function equal to $1$ on $[-n,n]$. Then $g(\phi_n) = f(\phi_n) > 2n$ does not converge to any value. But $\phi_n$ converges in $\mathcal{E}(X)$ to the constant function $1$ thus $g(\phi_n)$ should converge, a contradiction. 
+
+\end{eg}
+
+\begin{lemma} Let $f \in D'(X)$ be a distribution with support $K$ such that $K \subset X$. Then $f$ extends to an element of $\mathcal{E}'(X)$ (is in the image of the map $\iota$).
+
+\end{lemma}
+
+\begin{proof} Let $\psi \in \mathcal{E}(X)$. Let $\phi \in D(X)$ be an element such that $\phi = 1$ on some open set $U \supset K$ such that $\overline{U} \subset X$ and $\overline{U}$ is compact (exists as $K \subset X$ and we use partition of unity). Now define $g(\psi \phi) = f(\psi \phi)$. We claim that this defines $g \in \mathcal{E}'(X)$. To show that it is well defined, we see that $\psi \phi \in D(X)$ thus $f(\psi \phi)$ makes sense (no need to show independence on $\phi$, just consider it fixed throughout). Continuity of $g$ is clear since if $\psi_n \to \psi$ in $\mathcal{E}(X)$ then their partial derivatives convege uniformly on the support of $\phi$, thus $\psi_n\phi \to \psi_n \phi$ in $D(X)$. Now it remains to show that $g$ agrees with $f$ on $D(X)$. Thus assume $\psi \in D(X)$ already. Now observe that $\psi - \psi\phi = 0$ on $\overline{U}$ and thus $X \in D(U \setminus K)$  and by definition of support, we have that $f|_{X \setminus K} = 0$ and so $f(\psi - \psi \phi) = 0$, thus $g(\psi) = f(\psi)$ as desired.\end{proof}
+
+We now show that the converse is true, i.e., that $\mathcal{E}'(X)$ coincides with those distributions in $\mathcal{D}'(X)$ whose support is a compact subset of $K$.
+
+\begin{thm} A distribution $f \in D'(X)$ is the restriction of some $g \in \mathcal{E}'(X)$ if and only if the support of $f$ is some compact subset $K \subset X$. 
+
+\end{thm}
+
+\begin{proof} Suppose that $g \in \mathcal{E}'(X)$, we wish to show that it has compact support $K$ for some $K \subset X$ as an element $g \in D'(X)$. Suppose that it does not, thus for any compact set $K \subset X$ we have that $g|_{X \setminus K}$ is not the zero distribution on $X \setminus K$. Thus there exists $\phi_K \in D(X \setminus K)$ such that $g(\phi_K) = 1$. Now let $K_1 \subset K_2 \subset \ldots $ be an exhaustion of $X$ by compact sets. Set $\phi_{n} = \phi_{K_n}$.We claim that $\phi_n \to 0$ in $\mathcal{E}(X)$ (not necessarily in $D(X)$ though). To see this, let $K \subset X$ be any compact set. Then $K \subset K_n$ for large enough $n$, but then $\phi_n = 0$ on such $K_n$ as $\phi_n \in D(X \setminus K_n)$. Thus indeed $\phi_n \to 0$ uniformly on each compact set of $K$, thus $1 = g(\phi_n) = f(\phi_n) \to 0$ by continuity of $f$ on $\mathcal{E}(X)$. A contradiction. \end{proof}
+
+\begin{eg} The distribution $f(\phi) = \int_{0}^1 \phi(x) dx $ is a compactly supported distribution on $\bR$, thus it is defined and continuous on all of $C^{\infty}(\bR)$. Note that if $\phi_n(x) = \phi(x+n)$ where $\phi:\bR \to \bR$ is a non-zero compactly supported smooth function, then $\phi_n \to 0$ in $\mathcal{E}(X)$ and indeed $f(\phi_n) \to 0$. However $\phi_n$ does not converge to $0$ in $D(X)$.
+
+\end{eg}
+
+\begin{eg} Consider the distribution on $(0,1)$ given by $$f(\phi) = \int_{0}^1 e^{1/x^2} \phi(x) dx.$$ It is continuous and well defined since $e^{1/x^}$ is integrable on each compact subset $K$ in $(0,1)$. However, $f \notin \mathcal{E}'((0,1))$ (not the restriction of any element in $\mathcal{E}'((0,1))$). Indeed, it is not supported on any compact subset $K$ of $(0,1)$. This is despite the support being the bounded subset $(0,1)$ that is closed in $(0,1)$ but not in $\bR$. One can directly see that there is not continuous extension of $f$ to $\mathcal{E}((0,1))$ by considering a sequence of elements $\phi_n \in D((0,1))$ that converge monotonically in $\mathcal{E}(X)$ to the constant function $1$ on $(0,1)$ and seeing a lack of convergence ($f(\phi_n)$ diverges to $\infty$).
+
+\end{eg}
 
 \section{Fourier Transform}
 
