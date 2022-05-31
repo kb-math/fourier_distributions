@@ -312,9 +312,89 @@ We now show that the converse is true, i.e., that $\mathcal{E}'(X)$ coincides wi
 
 \end{thm}
 
-\begin{proof} Let $K_1 \subset K_2 \subset \ldots $ be an exhuastion of $X$ be compact subsets. Choose a $\psi_n \in D(X)$ such that $\psi_n = 1$ on $K_n$. Now let $f \in D(X)$ be any distribution and define $f_n \in D(X)$ by $$f_n(\phi) = f_n(\phi \psi_n).$$ We claim that $f_n \in \mathcal{E}'(X)$ and $f_n \to f$ in $D'(X)$. To justify the first claim, note that for $\phi \in D(U \setminus \operatorname{supp} \psi_n)$ we have that $$f_n(\phi) = f(\psi_n \phi) = f(0) = 0$$ which shows that $f_n$ has support a subset of $\operatorname{supp} f$, thus has compact support. Now for any $\phi \in D(X)$, there is a compact set $K \subset X$ such that $\phi(x) = 0$ for $x \notin K$. Also, for $n$ large enough we have $K \subset K_n$, thus 
+\begin{proof} Let $K_1 \subset K_2 \subset \ldots $ be an exhuastion of $X$ be compact subsets. Choose a $\psi_n \in D(X)$ such that $\psi_n = 1$ on $K_n$. Now let $f \in D(X)$ be any distribution and define $f_n = \psi_n f \in D(X)$ by $$f_n(\phi) = f_n(\phi \psi_n).$$ We claim that $f_n \in \mathcal{E}'(X)$ and $f_n \to f$ in $D'(X)$. To justify the first claim, note that for $\phi \in D(U \setminus \operatorname{supp} \psi_n)$ we have that $$f_n(\phi) = f(\psi_n \phi) = f(0) = 0$$ which shows that $f_n$ has support a subset of $\operatorname{supp} f$, thus has compact support. Now for any $\phi \in D(X)$, there is a compact set $K \subset X$ such that $\phi(x) = 0$ for $x \notin K$. Also, for $n$ large enough we have $K \subset K_n$, thus $\phi = \phi \psi_n$ and so $f_n(\phi) = f(\phi)$ for large enough $n$. \end{proof}
+
+\section{Convolution of Functions}
+
+\begin{prop} Let $f,g:\bR^d \to \bC$ be $L^1$ functions. Then the function $$(f * g) (x) := \int_{\bR^d} f(x-y)g(y) dy$$ is almost an everywhere well defined function $\bR^d \to \bR$ that is $L^1$.
+
+\end{prop}
+
+\begin{proof} By Tonelli's theorem (Fubini's theorem for positive functions that are not necessarily $L^1$) we have that $$\int_{\bR^d \times \bR^d} |f(x-y)||g(y)|dx dy = \left(\int_{\bR^d} |f(x-y)| dx \right) \left( \int_{\bR^d} |g(y)| dy \right) < \infty$$ thus we have that $$\int_{\bR^d} |f(x-y)||g(y)| dy < \infty$$ for almost all $x$. Thus $(f*g)(x)$ is well defined for almost all $x$. It also follows from Fubini's theorem that $(f*g)$ is Lebesgue measurable (almost Borel). Finally, the inequality above also shows it is in $L^1(\bR^d)$ and in fact the $L^1$ norm bounded by the product of the $L^1$ norms. \end{proof}
+
+Convolution is commutative (use translation invariance) and bilinear. It also preserves properties like continuity and differentiability as follows.
+
+\begin{prop} Suppose that $\phi \in C_0(\bR^d)$ and $ g \in L^1(\bR^d)$ and $\phi$ is $n$ times continuously differentiable (where $n \in \bZ_{\geq 0}$). Then $\phi*g$ is $n$ times continuously differentiable, everywhere defined and $$\partial^{\alpha} (\phi * g) = (\partial^{\alpha} \phi) * g$$ whenever $|\alpha|\leq n$.
+
+\end{prop}
+
+\begin{proof} We just focus on the $n=1$ and $n=0$ cases and the rest follows from induction. For the $n=0$ case we just have to show that $\phi * g$ is continuous if $\phi$ is continuous and $g \in L^1(\bR^d)$. As $\phi$ is compactly supported, it is uniformly continuous and so we have that $$\phi(x+h) - \phi(x) \to 0 \text{ uniformly on } \bR^d \text{ as } h \to 0.$$ It now follows that, for each fixed $x \in \bR^d$, we have that $$(\phi * g)(x+h) - \phi*g(x) = \int_{\bR^d} (\phi*(x+h-y) - \phi*(x-y)) g(y) \to 0$$ as $h \to 0$ by the dominated convergence theorem. Now assuming that $\phi$ is once continuously differentiable and letting $\partial_1 = \frac{\partial}{\partial x_1}$ we must show that $$
+\lim_{t \to 0} \frac{(\phi * g)(x+ te_1) - (\phi *g)(x)}{t} = ((\partial_1 \phi) * g)(x).$$
+
+By the mean value theorem, we have that $\frac{1}{t}((\phi)(x+ te_1) - (\phi)(x) )= \partial_1 \phi (x + s_{t,x}e_1)$ for some $0 \leq s_{t,x} \leq t$. Thus by uniform continuity of $\partial_1 \phi$ we have that $$\frac{1}{t} ((\phi)(x+ te_1) - (\phi)(x)) \to \partial_1(\phi)(x) $$ uniformly for $x \in \bR^d$ as $t \to 0$. We now by the dominated convergence theorem that
+
+\begin{align*} \frac{(\phi * g)(x+ te_1) - (\phi *g)(x)}{t} &= \int_{\bR^d} \frac{\phi(x-y+ te_1) - \phi(x-y)}{t} g(y) dy \\ &\to \int_{\bR^d} (\partial_1\phi(x-y)) g(y) dy \\ &= ((\partial_1 \phi) * g)(x) \end{align*} as $t \to 0$. \end{proof}
+
+\begin{prop} Suppose that $f_n,f,g \in L^1(\bR^d)$ are such that $\| f_n -f\|_{\infty} \to 0$. Then $|(f_n *g) - (f*g)|_{\infty} \to 0$.
+
+\end{prop}
+
+\begin{proof}
+
+For each $x \in \bR^d$ we have $$|(f_n * g) (x) - (f*g)(x)| = |\int_{\bR^d} (f_n(x-y) - f(x-y)) g(y)| \leq |f - f_n|_{\infty} \int_{\bR^d} |g(y)| dy$$ and thus we have uniform convergence. \end{proof}
+
+\begin{corol} The space $D(\bR^d)$ is closed under convolution. Moreover, if $\phi_n \to \phi$ in $D(\bR^d)$ then $\phi_n * \psi \to \phi * \psi$ in $D(\bR^d)$ for all $\psi \in D(\bR)$.
+
+\end{corol}
+
+\begin{proof} If $$0 \neq (\phi * \psi) (x) = \int \phi(x-y) \psi(y) dy$$ then there exists $y$ such that $x-y \in \operatorname{supp} \phi $ and $y \in \operatorname{supp} \psi$. Thus $x \in \operatorname{supp}(\phi) + \operatorname{supp}(\psi)$, which is a compact set. Thus $\phi * \psi$ is compactly supported. By the proposition above is smooth, thus $D(\bR^d)$ is indeed closed under convolution.  Now if $\phi_n \to \phi$, then there is some compact set $K$ containing the supports of all $\phi_n, \phi$ and $\psi$ and we have uniform convergence of all partial derivatives $\partial^{\alpha} \phi_n \to \partial^{\alpha} \phi$ thus we have uniform convergence $(\partial^{\alpha} \phi_n) * \psi \to (\partial^{\alpha} \phi) * \psi$ and all these functions are supported on a single compact set $K + K$. Finally, using the identity $\partial^{\alpha} (\phi * \psi) = (\partial^{\alpha} \phi) * \psi$ the proof is complete.  \end{proof}
+
+We now show that a convolution can be approximated by an average of translations. This is useful for establishing certain density results.
+
+\begin{prop} Let $f,g:\bR^d \to \bR$ be uniformly continuous bounded $L^1$ functions and suppose $g$ has compact support. Then $$(f * g)(x) = \lim_{N \to \infty} \frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} f(x-y) g(y)$$ where the limit is uniform on $x \in \bR^d$. In particular, $(f*g)$ is a uniform limit of finite linear combinations of transates of $f$.
+
+\end{prop}
+
+\begin{proof} Let for $y \in \frac{1}{N}\bZ^d$, let $$Q_{y,N} = \left[y_1, y_1 + \frac{1}{N}\right) \times \cdots \times \left[y_d, y_d + \frac{1}{N}\right) $$ be the cube of side-length $\frac{1}{N}$ whose leftmost bottom corner is $y$. Fix $\epsilon>0$. By uniform continuity and boundedness of $f$ and $g$, we may find a large enough $N_0$ such that if for $N>N_0$ we have that $$|f(x-y)g(y) - f(x-u)g(u)| < \epsilon \quad\text{for all } u \in Q_{y,N}, y \in \frac{1}{N}\bZ^d.$$ Now it follows that 
+
+\begin{align*} (f * g)(x) &= \sum_{y \in \frac{1}{N}\bZ^d} \int_{Q_{y,N}} f(x-u)g(u) du \\ &= \sum_{y \in \frac{1}{N}\bZ^d} \frac{1}{N^d}(f(x-y)g(y) + E_{y,N})\end{align*} where $|E_{y,N}|<\epsilon$. However, notice that $E_{y,N} = 0$ if $Q_{y,N} \cap \operatorname{supp}(g) = \emptyset$. But there are $O(N^d)$ such $y$ since the support of $g$ is compact (if the support is inside $[-B,B)^d$ for some positive integer $B$, then there are $(2BN)^d$ such $y$). Thus the total error is $O(\epsilon) \to 0$ as $N_0 \to 0$. This demonstrates the uniform convergence. \end{proof}
+
+\begin{prop}[Approximate identity] Let $f:\bR^d \to [0,\infty)$ be an $L_1$ function such that $$\int_{\bR^d} f(x) dx = 1$$ and suppose that $g:\bR^d \to \bR$ is a compactly supported continuous function. Let $$f_{\epsilon}(x) = \frac{1}{\epsilon^d}f(\epsilon x).$$ Then $$f_{\epsilon} * g \to g \quad \text{ uniformly on } \bR^d.$$
+
+\end{prop}
+
+\begin{proof} For each $r>0$, we let $$\Delta(r) = \sup_{x \in \bR^d} \{ |g(x+h) - g(x)| ~|~ \|h\| \leq r \}$$ and we observe that $\Delta(r) \to 0$ as $r \to 0$ by uniform continuity ($g$ is compactly supported).
+
+\begin{align*} (f_{\epsilon} *g)(x) = \int_{\bR^d} f_{\epsilon} (y) g(x-y) dy &= \int_{|x| < r} f_{\epsilon}(y) g(x-y) dy + O(\| g \|_{\infty} \int_{|x|>r} f_{\epsilon}(y) dy) \\ &= \int_{|x| < r} f_{\epsilon}(y) g(x) dy + O(\Delta(r) \int_{|x| < r} f_{\epsilon}(y) dy )  + O(\| g \|_{\infty} \int_{|x|>r} f_{\epsilon}(y) dy) \end{align*} 
+
+Now observe that since $$\int_{\bR^d} f_{\epsilon}(x) = 1$$ we have that for each $r>0$ fixed this quantity converges, as $\epsilon>0$, to $$g(x) + O(\Delta(r)).$$ But by uniform continuity, we can choose $r$ small enough so that this error term is arbitrarily small and thus get the desired uniform continuity as the the implicit $O()$ constant does not depend on $x$. \end{proof}
+
+The previous two propositions have same nice applications to approximating a function by a nice class of functions. For instance, we now recover the Weierstrass approximation theorem for polynomials.
+
+\begin{thm}[Weierstrass approximation] Let $g:\bR \to \bR$ be a compactly supported continuous function. Then for any compact set $K$ and $\epsilon >0$, there exists a polynomial $P(x) \in \bR[x]$ such that $\sup_{x \in K} |P(x) - g(x)| < \epsilon$.
+
+\end{thm}
+
+\begin{proof} We let $f:\bR \to [0,\infty)$ be an entire function (a function given by a power series with an infinite radius of convergence) that is bounded, uniformly continuous and such that $$\int f(x) dx = 1.$$ For example, we can take $$f(x) = C e^{-x^2} = C \sum_{n=0}^{\infty} \frac{(-1)^n}{n!} x^{2n}$$ for some approximately chosen constant $C$. Thus, for $\epsilon>0$, we obtain that for sufficiently small $\delta>0$ we have $$|g(x) - (f_{\delta}*g)(x)| < \frac{\epsilon}{2} \quad \text{for all } x \in \bR.$$ But now we use Proposition??? to show that $$f_{\delta}*g - h(x)| < \frac{\epsilon}{2} \quad \text{ for all } x \in \bR$$ where $$h(x) = \lim_{N \to \infty} \frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} f_{\epsilon}(x-y) g(y). $$
+
+Thus as the sum defining $h(x)$ is finite, we see that $h(x)$ is a finite linear combination of entire functions $x \mapsto f_{\epsilon}(x-y)$. Thus $\|g - h \|_{\infty} < \epsilon$. Finally, we finish the proof by using the uniform convergence of the power series for $f_{\epsilon}(x)$ for $x \in K$. \end{proof}
+
+\section{Tensor Products of Distributions}
+
+Given functions $\phi:X \to \bC$ and $\psi:Y \to \bC$, we define their tensor product $$\phi \oplus \psi:X \times Y \to \bC$$ to be $$(\phi \oplus \psi)(x,y) = \phi(x) \psi(y).$$ If $X,Y \subset \bR^d$ are open sets, then we let $$D(X) \oplus D(Y) \subset D(X \times Y)$$ denote the set of linear combinations of tensor product $$\{\phi \oplus \psi ~|~ \phi \in D(X), \psi \in D(Y) \}.$$
+
+\begin{prop} Let $X,Y \subset \bR^d$ be open sets. Then space $D(X) \oplus D(Y)$ is dense in $D(X \times Y)$, that is, for any $\theta \in D(X \times Y)$ we can find a sequence $\theta_n \in D(X) \oplus D(Y)$ such that $$\theta_n \to \theta,$$ that is for each $\alpha \in \bZ^d_{\geq )$ we have that $$\partial^{\alpha} \theta_n \to \partial^{\alpha} \theta$$ uniformly on some compact set $K$ that contains the support of all the $\theta_n$ and $\theta$.
+
+\end{prop}
+
+\begin{proof} The proof is similair to that of Weierstrass theorem given above. First, we let $\phi_1 \in D(\bR^d)$ and $\phi_2 \in D(\bR^d)$ be functions whose integral equals $1$. Now let $\phi = \phi_1 \oplus \phi_2$. Now define $$\phi_{\epsilon}(z) = \frac{1}{\epsilon} \phi(\epsilon z).$$ Observe that for small enough $\epison>0$ we have that $$\phi_{\epsilon} * \theta \in D(X \times Y)$ since the support of $\phi_{\epsilon} * \theta$ is an arbitrarily small neighbhourhood of the support of $\theta \in D(X \times Y)$. It now follows from Proposition?? that $\phi_{\epsilon} * \psi \to \psi$ uniformly for all $\psi \in D(X \times Y)$ and thus in particular  $$\partial^{\alpha} (\phi_{\epsilon}  * \psi) = \phi_{\epsilon} * (\partial^{\alpha} \psi) \to \partial^{\alpha} \psi$$ uniformly for all $\alpha \in \bZ^d_{\geq 0}$. In particular, this means that indeed $\phi_{\epsilon} * \psi \to \psi$ in $D(X \times Y)$. But now we see that 
 
 \end{proof}
+\section{Convolution of Distributions}
+
+\begin{mydef} Let 
+
+\end{mydef}
 
 \section{Fourier Transform}
 
