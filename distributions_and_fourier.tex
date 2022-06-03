@@ -316,7 +316,7 @@ We now show that the converse is true, i.e., that $\mathcal{E}'(X)$ coincides wi
 
 \section{Convolution of Functions}
 
-\begin{prop} Let $f,g:\bR^d \to \bC$ be $L^1$ functions. Then the function $$(f * g) (x) := \int_{\bR^d} f(x-y)g(y) dy$$ is almost an everywhere well defined function $\bR^d \to \bR$ that is $L^1$.
+\begin{prop}\label{prop: convolution of L1 is L1} Let $f,g:\bR^d \to \bC$ be $L^1$ functions. Then the function $$(f * g) (x) := \int_{\bR^d} f(x-y)g(y) dy$$ is almost an everywhere well defined function $\bR^d \to \bR$ that is $L^1$.
 
 \end{prop}
 
@@ -403,14 +403,94 @@ Next, we must show that the map $V\theta:Y \to \bC$ defined by $y \mapsto v(x \m
 
 But now the claim implies that $$\frac{V\theta (y+te_i) - V\theta(y)}{t} = v(\theta_{y,t}) \to v((\partial_i\theta)_{y,t}) = V(\partial_i \theta)$$ thus $V\theta$ is differentiable and hence smooth by applying inductively the argument to $V(\partial_i \theta)$. To show that $V\theta \in D(Y)$ it now remains to show that the support of $V\theta$ is a compact subset of $X$. Thus suppose that $V(\theta)(y) \neq 0$. Then clearly $x \mapsto \theta(x,y)$ cannot be the zero function and thus $(x,y) \in \operatorname{supp}(\theta)$ for some $x \in X$. It now follows by projection onto $Y$ that $y$ is contained in the projection onto $Y$ of the support of $\theta$, which must be a comapct set. Thus $V\theta$ is indeed in $D(Y)$. This now completes the proof that the expression $$(u \otimes v)(\theta) = u(y \mapsto (v(x \mapsto \theta(x,y))))$$ is well defined (gives a well defined number on the right hand side). 
 
-Now we must show that $(u \otimes v)$ is a distribution (continuous linear functional). Linearity is clear. For continuity, suppose now that  $\theta_1, \theta_2, \ldots \to \theta$ in $D(X \times Y)$. Then the map $$x \mapsto \theta_i(x,y)$$ converge in $D(X)$ to $$x \mapsto \theta(x,y)$$ and thus continuity of $v$ implies that the maps $$V(\theta_i): y \mapsto (v(x \mapsto \theta_i(x,y)))$$ converge to the map $V\theta$ pointwisely. We must do better: we must show that this convergence is uniform for $\theta$ and also for all it partial derivatives. As $\partial^{\alpha}V(\theta) = V(\partial^{\alpha}\theta)$ as shown above, it is enough to show the uniform convergence of $\theta$ and it will follow for partial derivatives. By linearity, let us assume that $\theta = 0$ is the zero function. Now let $K \subset X$ be a compact set that contains all the supports of the $(\theta_i)_y$ (there is a single compact subset of $X \times Y$ containing all the supports of the $\theta_i$, so we just take $K$ to be the projection of that). Now by Theorem~\ref{thm: distributions are lipschitz on compact sets} we have a constant $c>0$ and integer $k>0$ such that for all $i=1,2,\ldots$ and $y \in Y$ we have that $$ |v((\theta_i)_y)| \leq c\| (\theta_i)_y \|_{C_k} .$$ Thus since the $\theta_i \to \theta = 0$ in $D(X \times Y)$ we have for each $\alpha \in \bZ_{\geq 0}^d$ that $\partial^{\alpha} (\theta_i)_y \to \partial^{\alpha} \theta_y $ uniformly accross all $y$. Thus $v((\theta_i)_y)$ converges to $0$ uniformly in $y$. \end{proof}
+Now we must show that $(u \otimes v)$ is a distribution (continuous linear functional). Linearity is clear. For continuity, suppose now that  $\theta_1, \theta_2, \ldots \to \theta$ in $D(X \times Y)$. Then the map $$x \mapsto \theta_i(x,y)$$ converge in $D(X)$ to $$x \mapsto \theta(x,y)$$ and thus continuity of $v$ implies that the maps $$V(\theta_i): y \mapsto (v(x \mapsto \theta_i(x,y)))$$ converge to the map $V\theta$ pointwisely. We must do better: we must show that this convergence is uniform for $\theta$ and also for all it partial derivatives. As $\partial^{\alpha}V(\theta) = V(\partial^{\alpha}\theta)$ as shown above, it is enough to show the uniform convergence of $\theta$ and it will follow for partial derivatives. By linearity, let us assume that $\theta = 0$ is the zero function. Now let $K \subset X$ be a compact set that contains all the supports of the $(\theta_i)_y$ (there is a single compact subset of $X \times Y$ containing all the supports of the $\theta_i$, so we just take $K$ to be the projection of that). Now by Theorem~\ref{thm: distributions are lipschitz on compact sets} we have a constant $c>0$ and integer $k>0$ such that for all $i=1,2,\ldots$ and $y \in Y$ we have that $$ |v((\theta_i)_y)| \leq c\| (\theta_i)_y \|_{C_k} .$$ Thus since the $\theta_i \to \theta = 0$ in $D(X \times Y)$ we have for each $\alpha \in \bZ_{\geq 0}^d$ that $\partial^{\alpha} (\theta_i)_y \to \partial^{\alpha} \theta_y $ uniformly accross all $y$. Thus $v((\theta_i)_y)$ converges to $0$ uniformly in $y$.
+
+Finally, if $\phi_1 \in D(X)$ and $\phi_2 \in D(Y)$ then $$(u \otimes v)(\phi_1 \otimes \phi_2) = v(y \mapsto u(x \mapsto \phi_1(x)\phi_2(y))) = v(y \mapsto \phi_2(y) u(\phi_1)) = u(\phi_1)v(\phi_2)$$ and so this construction does indeed satisfy the definition of a tensor product. \end{proof}
 
 
 \section{Convolution of Distributions}
 
-\begin{mydef} Let 
+\begin{lemma}\label{lemma: translated distribution} Let $v \in D'(\bR^d)$ be a distribution, then for $x \in \bR^d$ the map define the distribution $T_x v \in D'(\bR^d)$ given by $$T_x v (\phi) = v(y \mapsto \phi(x+y)).$$ Then for each $\phi \in D(\bR^d)$ the mapping $$F_{\phi} : x \mapsto T_x v(\phi)$$ is smooth. In particular $(\partial^{\alpha}F_{\phi})(x) = v(y \mapsto \partial^{\alpha}\phi(x+y)) = F_{\partial^{\alpha} \phi}(x).$
+
+\end{lemma}
+
+\begin{proof} Letting $e_i$ be a standard basis vector, we see that $$\frac{1}{t} (T_{x+t e_i}v (\phi) - T_{x}v(\phi)) = v\left( y \mapsto \frac{\phi(x+te_i + y) - \phi(x+y)}{t} \right).$$ Now by the mean value theorem we see that  $$\frac{\phi(x+te_i + y) - \phi(x+y)}{t} = (\partial_i\phi)(x+ s e_i+y)$$ for some $0 \leq s \leq t$. By uniform continuity of partial derivatives of $\phi$, we see that $$\frac{\phi(x+te_i + y) - \phi(x+y)}{t} \to (\partial_i \phi)(x+y) \text{ uniformly over } x,y \in \bR^d \text{ as } t \to 0.$$ We can replace $\phi$ by any of its partial derivatives and obtain the same uniform convergence for its partial derivatives. Thus the convergence to $(\partial_i \phi)(x+y)$ occurs in $D(\bR^d)$. Thus by the continuity of $v$ we get that $$\frac{1}{t} (T_{x+t e_i}v (\phi) - T_{x}v(\phi)) \to v(y \mapsto (\partial_i \phi)(x+y)) \quad \text{ as } t \to \infty.$$ Thus we obtain the relation that $$(\partial_i F_{\theta})(x) = v(y \mapsto (\partial_i\phi)(x+y)).$$ But the right hand side is clearly equal to $$T_x v(\partial_i\phi) = F_{\partial_i \phi}(x)$$ and so we obtain the smoothness of $F$ and the stated formula for its partial derivatives by repeatedly applying this relation. \end{proof}
+
+\begin{eg} We have $$T_x \delta_a = \delta_{a+x}$$ where $\delta_a(\phi) = \phi(a)$ is the point mass at $a \in \bR^d$.
+
+\end{eg}
+
+We define $T_{-x}\phi(y) = \phi(x+y)$ for functions $\phi$ on $\bR^d$ and $x \in \bR^d$.
+
+\begin{lemma}\label{lemma: T_x v continuous} If $v \in D(\bR^d)$ and $\phi_1, \phi_2 \ldots \in D(\bR^d)$ converge to $\phi \in D(\bR^d)$ in $D(\bR^d)$ then for each compact $K \subset \bR^d$ we have that $$T_x v (\phi_i) \to T_xv (\phi) \quad \text{uniformly for } x \in K.$$
+
+\end{lemma}
+
+\begin{proof} Fix a compact set $K \subset \bR^d$. By linearity, we only need to show the case $\phi=0$. Now since $\phi_i$ converge in $D(\bR^d)$ we may find compact set $K' \supset K$ such that each of the compactly supported functions $T_{-x} \phi_i(y)$ for $x \in K$ and $i \in \{1,2,\ldots \}$ have support inside $K'$. It follows that we may now apply Theorem~\ref{thm: distributions are lipschitz on compact sets} to the compact set $K'$ and find a constant $c>0$ and integer $k>0$ such that for all $x \in K$ and $i \in \bN$ we have that $$v(T_{-x}\phi_i) \leq c \| T_{-x}(\phi_i) \|_{C_k}.$$ Now since the $\phi_i$ and all its partial derivatives converge uniformly to $0$, we see that $T_{-x}\phi_i$ must also converge uniformly to $0$ at the same rate for $x \in K$ (translation preserves maximum of absolute values of functions). Thus $v(T_{-x}\phi_i) \to 0$ uniformly for $x \in K$. \end{proof}
+
+The previous two lemmata now show that the convolution of a compactly supported distribution and another distribution is well defined.
+
+\begin{mydef} If $u \in \mathcal{E}'(\bR^d)$ and $v \in D'(\bR^d)$ are distributions with $v$ compactly supported then we can define their convolution $u * v \in D'(\bR^d)$ by the formula $$(u * v)(\phi) = u(x \mapsto v(y \mapsto \phi(x+y))).$$ If instead we assume $u \in D'(\bR^d)$ and $v \in \mathcal{E}'(\bR^d)$ then the conolution is also a well defined distribution.
 
 \end{mydef}
+
+\begin{proof}[Proof of well definedness] More precisely, this is well defined in the case $u \in \mathcal{E}'(\bR^d)$ and $v \in D'(\bR^d)$ since by Lemma~\ref{lemma: translated distribution} we have that the inner term $x \mapsto v(y \mapsto \phi(x+y))$ is a smooth function and since $u \in \mathcal{E}'(\bR^d)$ it is defined on the space $C^{\infty}(\bR^d)$ of smooth functions (that are not necessarily compactly supported). Thus the expression $(u * v)(\phi)$ is well defined. Now, it defines a distribution (continuous) since if $\phi_i \to \phi$ in $D(\bR^d)$ then by Lemma~\ref{lemma: T_x v continuous} we have that $$x \mapsto v(y \mapsto \phi_i(x+y))$$ converge uniformly to $$x \mapsto v(y \mapsto \phi(x+y))$$ on compact sets $K$ and thus by the definition of convergence in $\mathcal{E}'(\bR^d)$ we have that $(u * v)(\phi_i) \to (u*v)(\phi)$, thus $u * v$ is a distribution (continuous linear functional).
+
+Now consider the other case $u \in D'(\bR^d)$ and $v \in \mathcal{E}'(\bR^d)$. Then the inner map $$x \mapsto v(y \mapsto \phi(x+y))$$ has compact support since for large enough $y$, we have that $v$ and $x \mapsto \phi(y+x)$ will have disjoint supports, hence the expression $(u * v)(\phi)$ is well defined in this case. Now we show continuity. Suppose $\phi_i \to 0$ in $D(\bR^d)$. Then there is a compact set $K$ containing the supports of all the $\phi_i$. Thus each map $y \mapsto \phi_i(x+y)$ is supported on the compact set $K-x$. But for all large enough $x$, the support of $v$ is disjoint from $K-x$. Thus for large enough $x$ we have that $$v(y \mapsto (\phi_i (x+y))) = 0 \text{ for all } i \in \bN.$$ Therefore indeed the map $$x \mapsto v(y \mapsto (\phi_i (x+y)))$$ are supported on a single compact set and converge in $D(\bR^d)$ (by Lemma~\ref{lemma: T_x v continuous}) to $0$. Thus by continuity of $u$, we have that $(u*v)(\phi) \to 0$ and thus $u*v$ is continuous. \end{proof}
+
+\begin{eg} If $\delta_a$ is the point mass at $a \in \bR^d$ and $u \in D'(\bR^d)$. Then $$(\delta_a * u) = \delta_a(x \mapsto u(y \mapsto \phi(y+a))) = u(y \mapsto \phi(y+a)).$$ In particular $\delta_0 * u = u$. Now if $u(\phi) = \int f(x) \phi(x) dx$ for some locally integrable function $f$. Then $$(\delta_a * u) = \int f(y)\phi(y+a) dy = \int f(y-a)\phi(y) dy.$$ Thus $\delta_a * u$ has a density function $f(y-a)$, so convolution with $\delta_a$ translates the density by $a$. Moreover, we have that $$\delta_a * \delta_b (\phi) = \delta_a(x \mapsto \delta_b(y \mapsto \phi(x+y))) = \delta_b (y \mapsto \phi(a+y)) = \phi(a+b) = \delta_{a+b}(\phi).$$ Thus $$\delta_a * \delta_b = \delta_{a+b}.$$
+
+\end{eg}
+
+
+\begin{eg} If $u$ is not compactly supported then this formula may not be well defined. For example if $u,v$ are both the uniform measure on $\bR$ then $u*v(\phi) = \infty$ for any positive function $\phi$, thus not a distribution. An even more pathalogical example arises if $$u = \sum_{n \in \bZ} (-1)^n Lebesgue_{[n,n+1)}$$ is a signed measure which is still a well defined distribution.
+
+\end{eg}
+
+Now observe that if $f,g:\bR^d \to \bC$ are locally integrable functions then they may be defined naturally as distributions. We now show that their convolution as distributions is the same as their convolution as functions. To see this, let $\phi \in D(\bR^d)$, then 
+
+\begin{align*} (f * g)(\phi) &= \int_{\bR^d} (f*g)(x) \phi(x) dx \\ &= \int_{\bR^d} \left( \int_{\bR^d} f(y)g(x-y) \phi(x) dy \right) dx \\ &= \int_{\bR^d} f(y)  \left( \int_{\bR^d} g(x-y)\phi(x) dx \right)  dy \\ &=  \int_{\bR^d} f(y)  \left( \int_{\bR^d} g(x)\phi(x+y) dx \right)  dy \\ &= f(y \mapsto g(x \mapsto \phi(x+y))) \end{align*} where our use of Fubini's theorem is justified by the fact that $f(y)g(x-y)$ is an $L^1$ map on $\bR^d \times \bR^d$ as justified in the proof of Proposition~\ref{prop: convolution of L1 is L1} and thus so is $f(y)g(x-y)\phi(x)$ as $\phi$ is bounded. Thus we see that the the convolution as functions gives rise to the distribution obtained by taking the convolution as distributions, where we assume either $f$ or $g$ has compact support for the definition of convolution of distributions to be valid.
+
+Next, we attempt to compute $\psi * u$ where $\psi \in C_0^{\infty}(\bR)$ is a compactly supported smooth function. The idea behind the next lemma is that convolution of distributions is bilinear and so must preserve linear combinations, yet convolutions of functions are approximate linear combinations. We let $(S\psi)(x) = \psi(-x)$.
+
+\begin{lemma} Let $\psi \in C_0^{\infty}(\bR^d)$ and let $u \in D'(\bR^d)$. The for all $\phi \in  D(\bR^d)$ we have that $$(\psi * u)(\phi) = u((S\psi) * \phi).$$
+
+\end{lemma}
+
+\begin{proof} We have by Proposition~\ref{prop: convolution is approximate average} that \begin{align}\label{eq: psi*phi convolution approx} (\psi * \phi)(x) = \lim_{N \to \infty} \frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} \psi(y) \phi(x-y) \end{align} where the limit is uniform for $x \in \bR^d$. Observe also that for all $N$, the right hand side is support on the compact set $K = \operatorname{supp}(\phi) + \operatorname{supp}(\psi)$. Note that by compactness of the support, this sum is finite for each $N$. Applying Proposition~\ref{prop: convolution is approximate average} to any partial derivative of $\phi$ we also get 
+
+\begin{align*} \partial^{\alpha}(\psi * \phi)(x) &= \psi * (\partial^{\alpha} \phi)(x) \\ &= \lim_{N \to \infty} \frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} \psi(y) (\partial^{\alpha}\phi)(x-y) \\&= \lim_{N \to \infty} \partial^{\alpha}\left(\frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} \psi(y) \phi(x-y) \right)  \quad\text{uniformly for } x \in K \end{align*} where of course in the final expression the partial derivative is with respect to $x$ and $\psi(y)$ is just a constant. Thus we have shown that the convergence $(\ref{eq: psi*phi convolution approx})$ is actually in $D(\bR^d)$. Thus we may use the continuity of $u$ to conclude that $$u(\psi * \phi) = \lim_{N \to \infty} \frac{1}{N^d}  \sum_{y \in \frac{1}{N^d}\bZ^d} \psi(y) u(x \mapsto \phi(x-y)).$$ Now we can interpret the right hand side as a Riemann sum approximation for the functions $F(y) = \psi(y)u(x \mapsto \phi(x-y))$ which we know is smooth hence Riemann integrable. Note that the sum is finite for each $N$ as $\psi$ is compactly supported. We thus obtain that $$u(\psi * \phi) = \int_{\bR^d} \psi(y)u(x \mapsto \phi(x-y)) dy = \int_{\bR^d} (S\psi)(y) u(x \mapsto \phi(x+y)) dy$$ where we applied the Lebesgue measure preserving map $y \mapsto -y$. But this right hand side is precisely the convolution product $$(S\psi)( y \mapsto u(x \mapsto\phi(x+y))) = (S\psi) * u.$$ This is clearly equivalent to what we wanted to show since $SS\psi = \psi.$ \end{proof}
+
+Next, we show that the convolution of a compactly supported smooth function and a distribution is a smooth function (more precisely, the distribution corresponding to a smooth function).
+
+\begin{thm}  Let $\psi \in C_0^{\infty}(\bR^d)$ and let $u \in D'(\bR^d)$. Then $\psi * u \in C^{\infty}(\bR^d)$, where we embed $C^{\infty}(\bR^d)$ into $D'(\bR)$ as usual. In particular, $$(\psi * u) (x) =  .$$
+
+\end{thm}
+
+\begin{proof} If $\phi \in D(\bR)$ then we have 
+
+\begin{align*} (\psi * u)(\phi) &= u(S\psi * \phi) \\ &= u(SS\phi * S\psi) \\ &= (S\phi * u)(S\psi) \\ &= \int_{\bR^d} (S\phi) (x) u(y \mapsto S\psi(x+y)) dx = \int_{\bR^d} \phi(-x) u(y \mapsto \psi(-x-y) dx \\ &= \int_{\bR^d} \phi(x) u(y \mapsto \psi(x-y)) dx. \end{align*}
+
+Thus the distribution $\psi * u$ has a density function $x \mapsto u(y \mapsto \psi(y-x))$ which we know is smooth.
+
+\end{proof}
+
+\begin{lemma} If $u_n \to u$ in $\mathcal{E}'(\bR)$ then $u_n * v \to u_n * v$ in $D'(\bR)$ for $v \in D'(\bR)$. 
+
+\end{lemma}
+
+\begin{proof} For any $\phi \in D(\bR)$ we have that $$(u_n * v)(\phi) = u_n(x \mapsto v(y \mapsto \phi(x+y))) \to u(x \mapsto v(y \mapsto \phi(x+y))) = (u*v)(\phi).$$
+
+\end{proof}
+
+We can now show that any distribution is a limit of compactly supported smooth functions.
+
+\begin{thm} The space $C_0^{\infty}(\bR^d)$ is a dense subspace of $D'(\bR^d)$.
+
+\end{thm}
+
+\begin{proof} Let $u \in D'(\bR^d)$ be a distribution. We can find a sequence of functions $\psi_n \in C_0^{\infty}(\bR^d)$ such that $\psi_n \to \delta$ in $\mathcal{E}'(\bR^d)$. It now follows that $$\psi_n * u \to \delta * u = u$$ in $D'(\bR^d)$. However we know that $\psi_n * u \in C^{\infty}(\bR^d)$ corresponds to the smooth function $$\theta_n(x) = u(y \mapsto \psi_n(y-x)).$$ Now $\theta_n$ does not necessarily have compact support. Let $\chi_n:\bR^d \to [0,1]$ be a sequence of smooth functions with compact support such that $\chi_n(x)=1$ for $\|x \| \leq n$. Thus $\chi_n \theta_n \in C_0^{\infty}(\bR^d)$. Now suppose $\phi \in D'(\bR^d)$, thus the support of $\phi$ is contained in a ball of radius $n_0$ for some positive integer $n_0$. For $n\geq n_0$ we thus have that $$(\chi_n\theta_n) (\phi) = \int_{\bR^d} \chi_n(x) dx \theta_n(x) \phi(x) dx = \int_{\bR^d} \theta_n(x)\phi(x) dx = \theta_n(\phi) \to u(\phi). $$ Thus $\chi_n \theta_n \to u$ in $D(\bR^d)$.  \end{proof}
+
 
 \section{Fourier Transform}
 
