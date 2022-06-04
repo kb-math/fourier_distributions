@@ -410,6 +410,8 @@ Finally, if $\phi_1 \in D(X)$ and $\phi_2 \in D(Y)$ then $$(u \otimes v)(\phi_1 
 
 \section{Convolution of Distributions}
 
+\subsection{Well defined convolutions of distributions}
+
 \begin{lemma}\label{lemma: translated distribution} Let $v \in D'(\bR^d)$ be a distribution, then for $x \in \bR^d$ the map define the distribution $T_x v \in D'(\bR^d)$ given by $$T_x v (\phi) = v(y \mapsto \phi(x+y)).$$ Then for each $\phi \in D(\bR^d)$ the mapping $$F_{\phi} : x \mapsto T_x v(\phi)$$ is smooth. In particular $(\partial^{\alpha}F_{\phi})(x) = v(y \mapsto \partial^{\alpha}\phi(x+y)) = F_{\partial^{\alpha} \phi}(x).$
 
 \end{lemma}
@@ -451,6 +453,8 @@ Now observe that if $f,g:\bR^d \to \bC$ are locally integrable functions then th
 
 \begin{align*} (f * g)(\phi) &= \int_{\bR^d} (f*g)(x) \phi(x) dx \\ &= \int_{\bR^d} \left( \int_{\bR^d} f(y)g(x-y) \phi(x) dy \right) dx \\ &= \int_{\bR^d} f(y)  \left( \int_{\bR^d} g(x-y)\phi(x) dx \right)  dy \\ &=  \int_{\bR^d} f(y)  \left( \int_{\bR^d} g(x)\phi(x+y) dx \right)  dy \\ &= f(y \mapsto g(x \mapsto \phi(x+y))) \end{align*} where our use of Fubini's theorem is justified by the fact that $f(y)g(x-y)$ is an $L^1$ map on $\bR^d \times \bR^d$ as justified in the proof of Proposition~\ref{prop: convolution of L1 is L1} and thus so is $f(y)g(x-y)\phi(x)$ as $\phi$ is bounded. Thus we see that the the convolution as functions gives rise to the distribution obtained by taking the convolution as distributions, where we assume either $f$ or $g$ has compact support for the definition of convolution of distributions to be valid.
 
+\subsection{Convolution of a compactly supported smooth function and a distribution}
+
 Next, we attempt to compute $\psi * u$ where $\psi \in C_0^{\infty}(\bR)$ is a compactly supported smooth function. The idea behind the next lemma is that convolution of distributions is bilinear and so must preserve linear combinations, yet convolutions of functions are approximate linear combinations. We let $(S\psi)(x) = \psi(-x)$.
 
 \begin{lemma} Let $\psi \in C_0^{\infty}(\bR^d)$ and let $u \in D'(\bR^d)$. The for all $\phi \in  D(\bR^d)$ we have that $$(\psi * u)(\phi) = u((S\psi) * \phi).$$
@@ -463,7 +467,7 @@ Next, we attempt to compute $\psi * u$ where $\psi \in C_0^{\infty}(\bR)$ is a c
 
 Next, we show that the convolution of a compactly supported smooth function and a distribution is a smooth function (more precisely, the distribution corresponding to a smooth function).
 
-\begin{thm}  Let $\psi \in C_0^{\infty}(\bR^d)$ and let $u \in D'(\bR^d)$. Then $\psi * u \in C^{\infty}(\bR^d)$, where we embed $C^{\infty}(\bR^d)$ into $D'(\bR)$ as usual. In particular, $$(\psi * u) (x) =  .$$
+\begin{thm}  Let $\psi \in C_0^{\infty}(\bR^d)$ and let $u \in D'(\bR^d)$. Then $\psi * u \in C^{\infty}(\bR^d)$, where we embed $C^{\infty}(\bR^d)$ into $D'(\bR)$ as usual. In particular, $$(\psi * u) (x) = u(y \mapsto \psi(y-x)) .$$
 
 \end{thm}
 
@@ -475,6 +479,8 @@ Thus the distribution $\psi * u$ has a density function $x \mapsto u(y \mapsto \
 
 \end{proof}
 
+\subsection{Applications: approximating a distribution with a smooth function}
+
 \begin{lemma} If $u_n \to u$ in $\mathcal{E}'(\bR)$ then $u_n * v \to u_n * v$ in $D'(\bR)$ for $v \in D'(\bR)$. 
 
 \end{lemma}
@@ -485,14 +491,55 @@ Thus the distribution $\psi * u$ has a density function $x \mapsto u(y \mapsto \
 
 We can now show that any distribution is a limit of compactly supported smooth functions.
 
-\begin{thm} The space $C_0^{\infty}(\bR^d)$ is a dense subspace of $D'(\bR^d)$.
+\begin{thm} The space $C_0^{\infty}(\bR^d)$ is a dense subspace of $D'(\bR^d)$. Moreover, if $u \in D'(\bR^d)$ has compact support, then there exists a compact set $K \supset \operatorname{supp} u$ and $\theta_n \in C_0^{\infty}(\bR^d)$  such that all $\theta_n$ have support inside $K$ and $\theta_n \to u$ in $\mathcal{E}'(\bR^d)$.
 
 \end{thm}
 
-\begin{proof} Let $u \in D'(\bR^d)$ be a distribution. We can find a sequence of functions $\psi_n \in C_0^{\infty}(\bR^d)$ such that $\psi_n \to \delta$ in $\mathcal{E}'(\bR^d)$. It now follows that $$\psi_n * u \to \delta * u = u$$ in $D'(\bR^d)$. However we know that $\psi_n * u \in C^{\infty}(\bR^d)$ corresponds to the smooth function $$\theta_n(x) = u(y \mapsto \psi_n(y-x)).$$ Now $\theta_n$ does not necessarily have compact support. Let $\chi_n:\bR^d \to [0,1]$ be a sequence of smooth functions with compact support such that $\chi_n(x)=1$ for $\|x \| \leq n$. Thus $\chi_n \theta_n \in C_0^{\infty}(\bR^d)$. Now suppose $\phi \in D'(\bR^d)$, thus the support of $\phi$ is contained in a ball of radius $n_0$ for some positive integer $n_0$. For $n\geq n_0$ we thus have that $$(\chi_n\theta_n) (\phi) = \int_{\bR^d} \chi_n(x) dx \theta_n(x) \phi(x) dx = \int_{\bR^d} \theta_n(x)\phi(x) dx = \theta_n(\phi) \to u(\phi). $$ Thus $\chi_n \theta_n \to u$ in $D(\bR^d)$.  \end{proof}
+\begin{proof} Let $u \in D'(\bR^d)$ be a distribution. We can find a sequence of functions $\psi_n \in C_0^{\infty}(\bR^d)$ such that $\psi_n \to \delta$ in $\mathcal{E}'(\bR^d)$ and $\psi_n$ all have support inside $[-1,1]^d$. It now follows that $$\psi_n * u \to \delta * u = u$$ in $D'(\bR^d)$. However we know that $\psi_n * u \in C^{\infty}(\bR^d)$ corresponds to the smooth function $$\theta_n(x) = u(y \mapsto \psi_n(y-x)).$$ Now $\theta_n$ does not necessarily have compact support. Let $\chi_n:\bR^d \to [0,1]$ be a sequence of smooth functions with compact support such that $\chi_n(x)=1$ for $\|x \| \leq n$. Thus $\chi_n \theta_n \in C_0^{\infty}(\bR^d)$. Now suppose $\phi \in D'(\bR^d)$, thus the support of $\phi$ is contained in a ball of radius $n_0$ for some positive integer $n_0$. For $n\geq n_0$ we thus have that $$(\chi_n\theta_n) (\phi) = \int_{\bR^d} \chi_n(x) dx \theta_n(x) \phi(x) dx = \int_{\bR^d} \theta_n(x)\phi(x) dx = \theta_n(\phi) \to u(\phi). $$ Thus $\chi_n \theta_n \to u$ in $D(\bR^d)$.
 
+Now suppose that $u$ has compact support. Then if $\theta_n(x) \neq 0$ then we must have $\psi_n(y-x) \neq 0$ for some $y \in \operatorname{supp}\phi$ and thus $y-x \in [-1,1]^d$ and so $x \in K = [-1,1]^d + \operatorname{supp} u$. Hence all these maps $\theta_n$ have support inside the compact set $K \supset \operatorname{supp} u$. We know that $\theta_n \to u$ in $D'(\bR^d)$ but now let us show that the convergence occurs in $\mathcal{E}'(\bR^d)$ as well. Thus suppose that $\varphi \in C^{\infty}(\bR^d)$ is a smooth function (not necessarily of compact support). Then there exists a large enough integer $R$ such that $K$ is inside the ball of radius $R$ around $0$. Now it follows that $$\theta_n(\varphi) = \int_{\bR^d} \theta_n(x)\varphi(x) dx = \int_{\bR^d} \theta_n(x)\varphi(x)\chi_R(x) dx = \theta_n(\chi_R \varphi) \to u(\chi_R\varphi) = u(\varphi) $$ where in the last equality we used that the support of $u$ is inside $K$. Thus indeed the convergence occurs in $\mathcal{E}'(\bR^d)$. \end{proof}
+
+\subsection{Commutativity}
+
+We now that the convolution of two $L^1$ functions is commutative. We now address the question for distributions.
+
+\begin{lemma} Let $\psi \in C_0^{\infty}(\bR^d)$ and $u \in D'(\bR^d)$. Then $u * \psi = \psi * u$.
+
+\end{lemma}
+
+\begin{proof} Let $\phi \in D(\bR^d)$. We know that $$(\psi * u)(\phi) = u(S\psi * \phi) = u\left(x \mapsto \int (S\psi)(y) \phi(x-y) dy \right).$$ But 
+
+\begin{align*} (u*\psi)(\phi) &= u(x \mapsto \psi(y \mapsto (\phi(x+y)))) \\ &= u\left( x \mapsto \int_{\bR^d} \psi(y)\phi(x+y) dy \right) \\ &= u\left( x \mapsto \int_{\bR^d} (S\psi)(y)\phi(x-y) dy \right)  \end{align*} 
+
+where in the last line we made the substituion $y \mapsto -y$. Thus we have the desired equality. \end{proof}
 
 \section{Fourier Transform}
+
+\begin{mydef} If $u \in L^1(\bR)$ is integrable, then we define the Fourier transform $\mathcal{F}u:\bR^d \to \bC$ by $$\mathcal{F}u(\omega) = \int_{\bR^d} u(x) e^{-2\pi i \langle x, \omega \rangle } d\omega.$$
+
+\end{mydef}
+
+Note that this is well defined since $|e^{-2\pi it}| = 1$ for $t \in \bR$, thus $$|\mathcal{F}u(x)| \leq \int_{\bR^d} |u(\omega)| dx = \| u \|_1. $$ Thus $\mathcal{F}u$ is a bounded function on $\bR^d$.
+
+\begin{prop} If $u \in L^1(\bR^d)$ then the Fourier transform $\mathcal{F}u:\bR^d \to \bC$ is  uniformly continuous bounded function on $\bR^d$.
+
+\end{prop}
+
+\begin{proof} We see that $$|\mathcal{F}u(\omega + \eta) - \mathcal{F}u(\omega)| = |\int_{\bR^d} u(x) e^{-2\pi i \langle \omega, x \rangle }(e^{-2\pi i \langle \eta, x \rangle}  - 1)dx| \leq \int_{\bR^d} |u(x) (e^{-2\pi i \langle \eta, x \rangle}  - 1) |dx.$$ As this upper bound is independent of $\omega$, uniform continuity of $\mathcal{F}u$ will follow once we show this upper bound converges to zero as $\eta \to 0$. But this follows from the dominated convergence theorem as the integrand converges pointwise to $0$ as $\eta \to 0$ and the integrand is bounded for all $\eta$ by the integrable function $2|u| $. \end{proof}
+
+\begin{eg} Let $\mathds{1}_{[a,b]} \in L^1(\bR)$ be the indicator function of an interval where $a<b \in \bR$. Then $$\mathcal{F}\mathds{1}_{[a,b]}(\omega) = \int_a^b e^{-2\pi i \omega x} dx = \frac{e^{-2\pi i \omega a} - e^{-2\pi i \omega b}}{2\pi i \omega}.    $$ More generally, if $B = [a_1, b_1] \times \cdots \times [a_d, b_d]$ is a  box in $\bR^d$ then the Fourier transform of its indicator function is $$\mathcal{F}\mathds{1}_B ((\omega_1, \ldots, \omega_d)) = \prod_{j=1}^d  \frac{e^{-2\pi i \omega_j a} - e^{-2\pi i \omega_j b}}{2\pi i \omega_j}.$$
+
+We now show that $$\lim_{\omega \to \infty} \mathcal{F}\mathds{1}_B(\omega)  \to 0.$$ This is clear in one dimension ($d=1$) as it is $O(\frac{1}{|\omega|})$. In higher dimensions, we have the upper bound $$O(\frac{1}{\max_{j} |\omega_j|})$$ which also converges to $0$ as $\omega \to \infty$. 
+
+\end{eg}
+
+The decay at infinity for the Fourier transform given above actually holds more generally as follows.
+
+\begin{thm}[Riemann-Lebesgue Lemma] Let $u \in L^1(\bR^d)$. Then $$\lim_{\omega \to \infty} \mathcal{F}u(\omega) = 0.$$ More precisely, for all $\epsilon>0$ there exists an $R>0$ such that if $\|\omega \|>R$ then $|\mathcal{F}u(\omega)| < \epsilon$.
+
+\end{thm}
+
+\begin{proof} We know this is true if $u$ is the indicator function of a box, as seen in the example above. Thus, it is also true if $u$ is a linear combination of such functions. Thus the theorem is true on a dense subset of $L^1(\bR^d)$. Now suppose that $u_1, u_2 \in L^1(\bR^d)$ are such functions that converge to $u \in L^1(\bR^d)$. Then $$\|\mathcal{F}u - \mathcal{F}u_j \|_{\infty} \leq \|u - u_j\|_1 \to 0.$$ Thus $\mathcal{F}u_j \to \mathcal{F}u$ uniformly. But it follows that if $g_j:\bR^d \to \bC$ are continuous functions that vanish at $\infty$, then any uniform limit $g:\bR^d \to \bC$ of such functions also vanishes at infinity. To see this, suppose that $\epsilon>0$, then there exists $j_0$ such that for $j\geq j_0$ we have that $|g_j(x)-g(x)| < \frac{\epsilon}{2}$ for all $x \in \bR^d$. For any such fixed $j$, there exists $R$ such that $|g_j(x)|< \frac{\epsilon}{2}$ for $|x|>R$. Thus $$|g(x) - 0| \leq |g(x) - g_j(x)| + |g_j(x) - 0| < \epsilon $$ for all $|x|>R$. \end{proof}
 
 
 \begin{thebibliography}{99}
