@@ -515,6 +515,8 @@ where in the last line we made the substituion $y \mapsto -y$. Thus we have the 
 
 \section{Fourier Transform}
 
+\subsection{Definition and Riemann-Lebesgue Lemma}
+
 \begin{mydef} If $u \in L^1(\bR)$ is integrable, then we define the Fourier transform $\mathcal{F}u:\bR^d \to \bC$ by $$\mathcal{F}u(\omega) = \int_{\bR^d} u(x) e^{-2\pi i \langle x, \omega \rangle } d\omega.$$
 
 \end{mydef}
@@ -541,6 +543,37 @@ The decay at infinity for the Fourier transform given above actually holds more 
 
 \begin{proof} We know this is true if $u$ is the indicator function of a box, as seen in the example above. Thus, it is also true if $u$ is a linear combination of such functions. Thus the theorem is true on a dense subset of $L^1(\bR^d)$. Now suppose that $u_1, u_2 \in L^1(\bR^d)$ are such functions that converge to $u \in L^1(\bR^d)$. Then $$\|\mathcal{F}u - \mathcal{F}u_j \|_{\infty} \leq \|u - u_j\|_1 \to 0.$$ Thus $\mathcal{F}u_j \to \mathcal{F}u$ uniformly. But it follows that if $g_j:\bR^d \to \bC$ are continuous functions that vanish at $\infty$, then any uniform limit $g:\bR^d \to \bC$ of such functions also vanishes at infinity. To see this, suppose that $\epsilon>0$, then there exists $j_0$ such that for $j\geq j_0$ we have that $|g_j(x)-g(x)| < \frac{\epsilon}{2}$ for all $x \in \bR^d$. For any such fixed $j$, there exists $R$ such that $|g_j(x)|< \frac{\epsilon}{2}$ for $|x|>R$. Thus $$|g(x) - 0| \leq |g(x) - g_j(x)| + |g_j(x) - 0| < \epsilon $$ for all $|x|>R$. \end{proof}
 
+\subsection{Fourier-Laplace transform}
+
+We defined the Fourier transform has a function on $\bR^d$. We now consider whether, with $d=1$, we can naturally extend the Fourier transform to $\bC$.
+
+Thus we define $$\mathcal{F}u(z) = \int_{\bR} u(x) e^{-2\pi i x z} dx$$ for $z \in \bC$ \textit{if the integral absolutely converges}. This need not be the case, for example if $z=i$ and $$u(x) = \frac{1}{1+x^2}$$ which is $L^1$ then the integral is $$\int_{\bR^d} \frac{e^{2\pi x}}{1+x^2} dx = \infty.$$
+
+\begin{eg} If $u(x) = e^{-\alpha x^2}$ for some $\alpha >0$, then we have absolute convergence for any $z \in \bC$ since the integrand is bounded by $e^{-\frac{1}{2}\alpha x^2}$ for sufficiently large $x$.
+
+\end{eg}
+
+In fact, let us be a bit more general. Let $\mu$ be a signed Borel measure that is the difference of two finite positive Borel measures (for example, and probability measure or a measure with a density in $L^1(\bR$)). Then define the Fourier-Laplace transform as $$\mathcal{F}\mu (z) = \int_{\bR} e^{-2\pi i x z} d\mu(x)$$ for $z \in \bC$ where this integral absolutely converges.
+
+\begin{prop}[Fourier-Laplace is holomorphic] Suppose that $\mu$ is a difference of finite positive measures on $\bR$. Let $U \subset \bC$ be an open set such that for all $z \in U$ we have $$\int_{\bR}| e^{-2\pi i x z} |d\mu(x) < \infty.$$ Then $$\mathcal{F}\mu(z) =  \int_{\bR} e^{-2\pi i x z} d\mu(x)$$ defines a holomorphic function of $z$ on $U$, where the integral absolutely converges, with derivative $$(\mathcal{F}\mu)'(z) = \int_{\bR} -2\pi i x z e^{-2\pi i x z} d\mu(x) $$ where again the integral absolutely converges.
+
+\end{prop}
+
+\begin{proof} We wish to compute the limit as $w \in \bC$ tends to $0$ of $$\frac{\mathcal{F}u(z+w) - \mathcal{F}u(z)}{w} = \int_{\bR} e^{-2\pi i xz} \left( \frac{e^{-2\pi xw i} - 1}{w} \right) dx.$$
+
+Now clearly as $w \to 0$ then the integrand converges to the correct value. Thus, by the Lebesgue dominated convergence theorem, it remains to establish that for sufficiently small $w$ the integrand can be bounded by a single integrable function. From the mean value inequality, it follows that $$\left| \frac{e^{-2\pi xw i} - 1}{w} \right| = \sup_{t \in [0,1]} \left | \frac{\partial}{\partial z}|_{z = tw} e^{-2\pi i x z} \right | \leq 2\pi |x| e^{2\pi xw}.$$ Now as $z \in U$, we can find small enough $\epsilon>0$ such that the ball of radius $2\epsilon$ around $z$ is a subset of $U$. Now there exists a constant $C_{\epsilon}>0$ such that $$|x| < C_{\epsilon} (e^{2\pi \epsilon x} + e^{-2\pi \epsilon x}) \text{ for all } x \in \bR.$$ We can thus bound the integrand 
+
+\begin{align*} \left | e^{-2\pi i xz} \left( \frac{e^{-2\pi xw i} - 1}{w} \right) \right | &\leq |e^{-2\pi i x z}| \cdot  2\pi |x|e^{2\pi x w} \\ &\leq 2\pi C_{\epsilon} (|e^{-2\pi i x z + 2\pi x w - 2\pi \epsilon x }| + |e^{-2\pi i x z + 2\pi x w + 2\pi \epsilon x}| ). \end{align*}
+
+Now if we assume $|w| \leq \epsilon$, we get that these terms in the upper bound are of the form $2\pi C_{\epsilon} |e^{-2\pi i x (z + \delta)}|$ where $|\delta| \leq \epsilon + \epsilon \leq 2\epsilon$. Thus they are of the form $|e^{-2\pi i x u}|$ where $u \in U$. Thus by assumption that this integral absolutely converges for $z \in U$, so we have the desired upper bound for $|w| \leq \epsilon$ so the uniform convergence theorem applies. \end{proof}
+
+\begin{eg} The Fourier-Laplace transform of a Gaussian $u(x) = C e^{- \alpha x^2}$, where $C,\alpha>0$, must be an entire function (holomorphic everywhere) on $\bC$. Let us compute it. Assume for convenience that $u(x) = C e^{-x^2}$ where $C>0$ is chosen so that $$\int_{\bR} u(x) dx = 1.$$ Now 
+
+\begin{align*} \mathcal{F}u (z) &=  \int_{\bR} C \exp ( -(x^2 + 2\pi i x z)) \\ &=  \int_{\bR} C\exp (- ((x+\pi i z)^2 + \pi^2 z^2)) \\ &=  e^{-\pi^2z^2} \int_{\bR} C \exp(-(x+\pi i z)^2) dx. \end{align*}
+
+Since $\mathcal{F}u(z)$ is analytic on $\bC$ and the first factor never vanishes, we must have that the second factor is also analytic on $\bC$. That is, $$\int_{\bR} C \exp(-(x+\pi i z)^2) dx$$ is an analytic function on $\bC$. But we know that this function is constant for $z \in i \bR$ by translation invariant of the integral in the real domain. Thus this integral is constant everywhere by analyticity. Thus this integral is equal to $1$. Thus we get that $$\mathcal{F}u(z) = e^{-\pi^2 z^2}$$ which is another Gaussian.
+
+\end{eg}
 
 \begin{thebibliography}{99}
 
