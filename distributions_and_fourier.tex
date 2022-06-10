@@ -331,7 +331,7 @@ Convolution is commutative (use translation invariance) and bilinear. It also pr
 \begin{proof} We just focus on the $n=1$ and $n=0$ cases and the rest follows from induction. For the $n=0$ case we just have to show that $\phi * g$ is continuous if $\phi$ is continuous and $g \in L^1(\bR^d)$. As $\phi$ is compactly supported, it is uniformly continuous and so we have that $$\phi(x+h) - \phi(x) \to 0 \text{ uniformly on } \bR^d \text{ as } h \to 0.$$ It now follows that, for each fixed $x \in \bR^d$, we have that $$(\phi * g)(x+h) - \phi*g(x) = \int_{\bR^d} (\phi*(x+h-y) - \phi*(x-y)) g(y) \to 0$$ as $h \to 0$ by the dominated convergence theorem. Now assuming that $\phi$ is once continuously differentiable and letting $\partial_1 = \frac{\partial}{\partial x_1}$ we must show that $$
 \lim_{t \to 0} \frac{(\phi * g)(x+ te_1) - (\phi *g)(x)}{t} = ((\partial_1 \phi) * g)(x).$$
 
-By the mean value theorem, we have that $\frac{1}{t}((\phi)(x+ te_1) - (\phi)(x) )= \partial_1 \phi (x + s_{t,x}e_1)$ for some $0 \leq s_{t,x} \leq t$. Thus by uniform continuity of $\partial_1 \phi$ we have that $$\frac{1}{t} ((\phi)(x+ te_1) - (\phi)(x)) \to \partial_1(\phi)(x) $$ uniformly for $x \in \bR^d$ as $t \to 0$. We now by the dominated convergence theorem that
+By the mean value theorem\footnote{To apply it we have to assume $\phi$ is real valued, but it is easy to see that it is enough to consider this case.}, we have that $\frac{1}{t}(\phi(x+ te_1) - \phi(x) )= \partial_1 \phi (x + s_{t,x}e_1)$ for some $0 \leq s_{t,x} \leq t$. Thus by uniform continuity of $\partial_1 \phi$ we have that $$\frac{1}{t} (\phi(x+ te_1) - \phi(x)) \to \partial_1(\phi)(x) $$ uniformly for $x \in \bR^d$ as $t \to 0$. We now by the dominated convergence theorem that
 
 \begin{align*} \frac{(\phi * g)(x+ te_1) - (\phi *g)(x)}{t} &= \int_{\bR^d} \frac{\phi(x-y+ te_1) - \phi(x-y)}{t} g(y) dy \\ &\to \int_{\bR^d} (\partial_1\phi(x-y)) g(y) dy \\ &= ((\partial_1 \phi) * g)(x) \end{align*} as $t \to 0$. \end{proof}
 
@@ -571,9 +571,40 @@ Now if we assume $|w| \leq \epsilon$, we get that these terms in the upper bound
 
 \begin{align*} \mathcal{F}u (z) &=  \int_{\bR} C \exp ( -(x^2 + 2\pi i x z)) \\ &=  \int_{\bR} C\exp (- ((x+\pi i z)^2 + \pi^2 z^2)) \\ &=  e^{-\pi^2z^2} \int_{\bR} C \exp(-(x+\pi i z)^2) dx. \end{align*}
 
-Since $\mathcal{F}u(z)$ is analytic on $\bC$ and the first factor never vanishes, we must have that the second factor is also analytic on $\bC$. That is, $$\int_{\bR} C \exp(-(x+\pi i z)^2) dx$$ is an analytic function on $\bC$. But we know that this function is constant for $z \in i \bR$ by translation invariant of the integral in the real domain. Thus this integral is constant everywhere by analyticity. Thus this integral is equal to $1$. Thus we get that $$\mathcal{F}u(z) = e^{-\pi^2 z^2}$$ which is another Gaussian.
+Since $\mathcal{F}u(z)$ is analytic on $\bC$ and the first factor never vanishes, we must have that the second factor is also analytic on $\bC$. That is, $$\int_{\bR} C \exp(-(x+\pi i z)^2) dx$$ is an analytic function on $\bC$. But we know that this function is constant for $z \in i \bR$ by translation invariance of the integral in the real domain. Thus by holomorphicity on $\bC$, this integral is constant over all $z \in \bC$ and so this integral is equal to $1$ (as we assumed it is at $z=0$). Thus we get that $$\mathcal{F}u(z) = e^{-\pi^2 z^2}$$ which is another Gaussian. Of course, it is well known $C = \frac{1}{\sqrt{\pi}}$.
 
 \end{eg}
+
+\subsection{Schwarz space of functions}
+
+\begin{mydef} A function $f:\bR^d \to \bC$ is said to be \textit{rapidly decreasing} if for all polynomials $P(x_1, \dots, x_d) \in \bR[x_1, \ldots, x_d]$ we have that $$\lim_{x \to \infty} f(x)P(x) = 0.$$ We say that $f$ is a Schwarz function if $f$ and all partial derivatives of $\partial^{\alpha}f$, for $\alpha \in \bZ_{\geq 0}^d$ are rapidly decreasing. We let $\cS(\bR^d)$ denote the space of all Schwarz functions on $\bR^d$.
+
+\end{mydef}
+
+Note that to check rapidly decreasing it is enough to consider $P$ being a monomial.
+
+\begin{lemma} Let $f:\bR^d \to \bC$ be a function that is bounded on every bounded set. Then the following are equivalent:
+
+\begin{enumerate}
+	\item $f$ is rapidly decreasing.
+	\item For all integers $N>0$ exists a constant $C>0$ such that $$|f(x)| \leq C\| x \|^{-N} \quad\text{for all } \|x\| > 1.$$
+	\item For all integers $N>0$ there exists a constant $C>0$ such that $$|f(x)| \leq C(\| x \| + 1)^{-N} \quad\text{for all } x \in \bR^d.$$
+\end{enumerate}
+
+\end{lemma}
+
+\begin{proof} (i) $\implies$ (ii): If $f$ is rapidly then in particular $\|x\|^{2N}|f(x)| \to 0$ thus there exists large enough $R>1$ so that $$\|x\|^{N} \leq \|x\|^{2N}|f(x)| \leq 1$$ for all $|x| \geq R$. By assumption on the boundedness of $f$ on bounded sets, $|f(x)|/\|x\|^{N}|$ is bounded on the annulus $1\leq \|x\| \leq R$, so we just take $C>1$ to be larger than this maximum. (ii) $\implies$ (iii): Note that there is $R>0$ such that for $\|x \| \geq R$ we have $$(\|x \|+1)^{-N} \geq \| x \|^{-(N+1)} \geq \frac{1}{C}|f(x)|$$ for some $C>0$. One can choose a constant $C'>C$ so that we have the desired inequality $|f(x)| \leq C'(\| x \| + 1)^{-N}$ for $\|x \| \leq R$ by boundedness of $f$ on this ball. (iii) $\implies$ (i): Any monomial $x_{i_1} \ldots x_{i_N}$ for degree $N$ can be bounded by $(\|x\| + 1)^{-N}$. \end{proof}
+
+
+\begin{prop} If $f,g \in \cS(\bR^d)$ then $f*g \in \cS(\bR^d)$. In particular, the convolution is everywhere defined. Moreover, for all $\alpha \in \bZ_{\geq 0}^d$ we have that $$\partial^{\alpha} (f * g) = (\partial^{\alpha}f * g).$$
+
+\end{prop}
+
+\begin{proof} Fix any polynomial $P:\bR^d \to \bR$ of degree $N$. Now observe that $$|P(x)(f*g)(x)| \leq |P(x)| \int_{\bR^d} |f(y)||g(x-y)|dy \leq C |P(x)| \int_{\bR^d} (1+\|y\|)^{-M} (1+\|x-y\|)^{-M}dy $$ for some constant $C>0$ where $M = \max\{N+1, d+2\}$. It is thus enough to show that as $x \to 0$ this integral behaves like $O(\|X\|^{-N-1})$. Observe that for each fixed $x \in \bR^d$ we have $\bR^d = A_1 \cup A_2$ where $$A_1 = \{y \in \bR^d ~|~ \|y - x\| \geq \frac{\|x\|}{2} \}$$ and $$A_2 = \{ y \in \bR^d ~|~ \|y \| \geq \frac{\|x\|}{2}\}.$$  Now observe that for $i=1$ we have that \begin{align*} \int_{A_i}(1+\|y\|)^{-M} (1+\|x-y\|)^{-M} &\leq \int_{A_i} (1+\|y\|)^{-M}\left(1+\frac{\|x\|}{2}\right)^{-M} \\ &=\left(1+\frac{\|x\|}{2}\right)^{-M} \int_{A_i} (1+\|y\|)^{-M} \\&= O(\|x\|^{-M}),\end{align*} which holds since $M\geq d+2$ and so the integral in the last line converges. The same inequality holds for $i=2$ as well by translation symmetry. Now since $M \geq N+1$ we have shown that $$|P(x)(f*g)(x)| = O(\|x\|^{-1}) \to 0.$$ Thus this completes the proof that $f*g$ is rapidly decreasing.
+
+Now let $e_j$ be the $j$-th basis vector in $\bR^d$ and fix $x \in \bR^d$. For $t \in \bR \setminus \{0\}$ we consider $$\frac{(f*g)(x+te_j) - (f*g)(x)}{t} = \int_{\bR^d}f(y)\left(\frac{g(x-y+te_j) - g(x-y)}{t} \right) dy.$$ By the mean value theorem (only applies to $f,g$ real valued, but from bilinearity of convolution we can assume this) we know that $$\frac{g(x-y+te_j) - g(x-y)}{t} = (\partial_j g)(x-y + s_{y,t}e)$$ for some $s_{y,t} \in [0,t]$. But $\partial_j g$ is a rapidly decreasing continuous function, thus we obtain that it is uniformly continuous. This means that $$\frac{g(x-y+te_j) - g(x-y)}{t} \to (\partial_jg)(x-y) \quad \text{ uniformly for as } t \to 0.$$ As $f$ is integrable, this means that $$\int_{\bR^d}f(y)\left(\frac{g(x-y+te_j) - g(x-y)}{t} \right) dy \to \int_{\bR^d} f(y)(\partial_jg)(x-y) dy = (f*(\partial_jg))(x) \quad \text{as } t\to 0.$$
+
+Thus we have shown that $$\partial_j (f*g)(x) = (f*\partial_g(x)).$$ Since $\partial_j g$ is also a Schwarz function, we can proceed inductively to show that $$\partial^{\alpha} (f * g) = (f *(\partial^{\alpha} g).$$ and this proves the stated inequality (convolution is commutative). Finally, this equality shows that all partial derivatives of $f*g$ are convolutions of Schwarz functions, and hence rapidly decreasing. This means that indeed $f*g \in \cS(\bR^d)$. \end{proof}
 
 \begin{thebibliography}{99}
 
