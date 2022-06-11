@@ -600,11 +600,59 @@ Note that to check rapidly decreasing it is enough to consider $P$ being a monom
 
 \end{prop}
 
-\begin{proof} Fix any polynomial $P:\bR^d \to \bR$ of degree $N$. Now observe that $$|P(x)(f*g)(x)| \leq |P(x)| \int_{\bR^d} |f(y)||g(x-y)|dy \leq C |P(x)| \int_{\bR^d} (1+\|y\|)^{-M} (1+\|x-y\|)^{-M}dy $$ for some constant $C>0$ where $M = \max\{N+1, d+2\}$. It is thus enough to show that as $x \to 0$ this integral behaves like $O(\|X\|^{-N-1})$. Observe that for each fixed $x \in \bR^d$ we have $\bR^d = A_1 \cup A_2$ where $$A_1 = \{y \in \bR^d ~|~ \|y - x\| \geq \frac{\|x\|}{2} \}$$ and $$A_2 = \{ y \in \bR^d ~|~ \|y \| \geq \frac{\|x\|}{2}\}.$$  Now observe that for $i=1$ we have that \begin{align*} \int_{A_i}(1+\|y\|)^{-M} (1+\|x-y\|)^{-M} &\leq \int_{A_i} (1+\|y\|)^{-M}\left(1+\frac{\|x\|}{2}\right)^{-M} \\ &=\left(1+\frac{\|x\|}{2}\right)^{-M} \int_{A_i} (1+\|y\|)^{-M} \\&= O(\|x\|^{-M}),\end{align*} which holds since $M\geq d+2$ and so the integral in the last line converges. The same inequality holds for $i=2$ as well by translation symmetry. Now since $M \geq N+1$ we have shown that $$|P(x)(f*g)(x)| = O(\|x\|^{-1}) \to 0.$$ Thus this completes the proof that $f*g$ is rapidly decreasing.
+\begin{proof} Fix any polynomial $P:\bR^d \to \bR$ of degree $N$. Now observe that $$|P(x)(f*g)(x)| \leq |P(x)| \int_{\bR^d} |f(y)||g(x-y)|dy \leq C |P(x)| \int_{\bR^d} (1+\|y\|)^{-M} (1+\|x-y\|)^{-M}dy $$ for some constant $C>0$ where $M = \max\{N+1, d+2\}$. It is thus enough to show that as $x \to 0$ this integral behaves like $O(\|x\|^{-N-1})$. Observe that for each fixed $x \in \bR^d$ we have $\bR^d = A_1 \cup A_2$ where $$A_1 = \{y \in \bR^d ~|~ \|y - x\| \geq \frac{\|x\|}{2} \}$$ and $$A_2 = \{ y \in \bR^d ~|~ \|y \| \geq \frac{\|x\|}{2}\}.$$  Now observe that for $i=1$ we have that \begin{align*} \int_{A_i}(1+\|y\|)^{-M} (1+\|x-y\|)^{-M} &\leq \int_{A_i} (1+\|y\|)^{-M}\left(1+\frac{\|x\|}{2}\right)^{-M} \\ &=\left(1+\frac{\|x\|}{2}\right)^{-M} \int_{A_i} (1+\|y\|)^{-M} \\&= O(\|x\|^{-M}),\end{align*} which holds since $M\geq d+2$ and so the integral in the last line converges. The same inequality holds for $i=2$ as well by translation symmetry. Now since $M \geq N+1$ we have shown that $$|P(x)(f*g)(x)| = O(\|x\|^{-1}) \to 0.$$ Thus this completes the proof that $f*g$ is rapidly decreasing.
 
 Now let $e_j$ be the $j$-th basis vector in $\bR^d$ and fix $x \in \bR^d$. For $t \in \bR \setminus \{0\}$ we consider $$\frac{(f*g)(x+te_j) - (f*g)(x)}{t} = \int_{\bR^d}f(y)\left(\frac{g(x-y+te_j) - g(x-y)}{t} \right) dy.$$ By the mean value theorem (only applies to $f,g$ real valued, but from bilinearity of convolution we can assume this) we know that $$\frac{g(x-y+te_j) - g(x-y)}{t} = (\partial_j g)(x-y + s_{y,t}e)$$ for some $s_{y,t} \in [0,t]$. But $\partial_j g$ is a rapidly decreasing continuous function, thus we obtain that it is uniformly continuous. This means that $$\frac{g(x-y+te_j) - g(x-y)}{t} \to (\partial_jg)(x-y) \quad \text{ uniformly for as } t \to 0.$$ As $f$ is integrable, this means that $$\int_{\bR^d}f(y)\left(\frac{g(x-y+te_j) - g(x-y)}{t} \right) dy \to \int_{\bR^d} f(y)(\partial_jg)(x-y) dy = (f*(\partial_jg))(x) \quad \text{as } t\to 0.$$
 
 Thus we have shown that $$\partial_j (f*g)(x) = (f*\partial_g(x)).$$ Since $\partial_j g$ is also a Schwarz function, we can proceed inductively to show that $$\partial^{\alpha} (f * g) = (f *(\partial^{\alpha} g).$$ and this proves the stated inequality (convolution is commutative). Finally, this equality shows that all partial derivatives of $f*g$ are convolutions of Schwarz functions, and hence rapidly decreasing. This means that indeed $f*g \in \cS(\bR^d)$. \end{proof}
+
+We define the operator $M_j$ on the set of functions $\bR^d \to \bC$ given by $$M_jf (x) = x_j f(x) \quad\text{for } x=(x_1, \ldots, x_d) \in \bR^d.$$ Clearly the $M_j$ preserve Schwarz space.
+
+\begin{thm} If $\phi:\bR^d \to \bC$ is Schwarz, then so is its Fourier transform $\mathcal{F}\phi:\bR^d \to \bC$. Moreover, for $\phi \in \cS(\bR^d)$ we have that $$ \cF(\partial_j \phi) = 2\pi i M_j (\mathcal{F} \phi) $$ and $$\partial_j (\cF \phi) = -2\pi i \cF(M_j \phi).$$
+
+\end{thm}
+
+\begin{proof} First note that these equations will show that the Fourier transform is a Schwarz function as follows. If $\alpha = (\alpha_1, \ldots, \alpha_d) \in \bZ_{\geq 0}^d$ is an index then by induction and the first equation we get that $$\mathcal{F}(\partial^{\alpha}\phi)(\omega) = (2\pi i)^{\|\alpha\|_1} \omega^{\alpha} (\mathcal{F}\phi)(\omega).$$ But by the Riemann-Lebesgue lemma, we have that the right hand side converges to $0$ and $\omega \to \infty$. Thus we have shown that $$\lim_{\omega \to \infty} |P(\omega)| (\mathcal{F}(\omega)) = 0$$ for all polynomials $P$. Thus the Fourier transform will be shown to be Schwarz by the first identity.
+
+The first identity is an easy application of inegration by parts as follows:
+
+\begin{align*} \cF(\partial_j \phi) (\omega) &= \int_{\bR^d} \partial_j\phi(x) e^{-2\pi i \langle x, \omega \rangle} dx 
+\\ &= -\int_{\bR^d} \phi(x) \partial_j (e^{-2\pi i \langle x, \omega \rangle}) dx
+\\ &= 2\pi i \omega_j \int_{\bR^d} \mathcal{F}(\phi) (\omega)
+\\& = 2\pi i M_j (\mathcal{F}(\phi)) (\omega).\end{align*}
+
+For the second identity, we apply differentiation under the integral sign (Proposition~\ref{prop: diff under int}) as follows:
+
+\begin{align*} \partial_j (\cF \phi)(\omega)  &= \int_{\bR^d} -2\pi i x_j \phi(x) e^{-2\pi i \langle x, \omega \rangle} dx \\
+&= -2\pi i \mathcal{F}(M_j\phi)(\omega) \end{align*}
+
+where the differentation under the integral sign is justified since $$|-2\pi i x_j \phi(x) e^{-2\pi i \langle x, \omega \rangle}| = 2\pi  |x_j \phi(x)|$$ and as $\phi$ is rapidly decreasing and measurable, we have that $x \mapsto x_j \phi(x)$ is integrable. Thus the integrand is bounded by an integrable function that is independent of $\omega$. \end{proof}
+
+
+\subsection{Fourier inversion of Schwarz functions}
+
+\appendix
+
+\section{Differentiation under the integral sign}
+
+\begin{prop} \label{prop: diff under int} Let $X$ be a measurable space with a finite signed measure (a different of finite positive measures) $\mu$ on $X$. Suppose $U \subset \bR$ is open and $K:X \times U \to \bC$ is measurable such that
+
+\begin{enumerate}
+	\item For each $x \in X$, the maps $K_x:U \to \bC$ given by $K_x(t) = K(x,t)$, are differentiable in on $U$. 
+	\item There exists a $\mu$-integrable function $g:X \to [0,\infty)$ (i.e., $\int_X g(x) d\mu(x) < \infty$) such that $|K_x'(t)| \leq g(x)$ for all $t \in U, x \in X$.
+	\item For each fixed $t \in U$, the map $x \mapsto K(x,t)$ is $\mu$-integrable.
+\end{enumerate}
+
+Then the map $F:U \to \bC$ given by $$F(t) = \int_{X} K(x,t) d\mu(x)$$ defines a differentiable function with derivative equal to $$F'(t) = \int_X K_x'(t) d\mu(x) = \int_X \frac{\partial}{\partial s}|_{s = t} K(x,s) d\mu(x)$$
+
+\end{prop}
+
+\begin{proof} By considering the real and imaginary parts of $K(x,t)$, we can reduce to the case where $K$ is a real valued function. Indeed, if $K(x,t) = K_1(x,t) + iK_2(x,t)$ where $K_1,K_2$ are real valued then $K_1,K_2$ are clearly differentiable in $t$ and $|K_1(x,t)|, |K_2(x,t)|  \leq |K(x,t)|$ thus the real and imaginary parts are integrable. Likewise, the derivatives of the real and imaginary parts are at most $|K'_x(t)|$ and so are at most $g$. So all the assumptions are preserved for the real and imaginary parts.
+
+Now to $t \in U$ fixed and sufficiently small $h$ we have that $$\frac{F(t+h) - F(t)}{h} = \int_X \frac{K_x(t+h) - K_x(t)}{h} d\mu(x).$$
+
+We wish to show that as $h \to 0$, both the left hand side and right hand side converge to the same limit, which will complete the proof. To justifty this we use Lebesgue's Dominated Convergence theorem, which may be justified since by the mean value theorem, there exists for each $x \in X$ and $h$ sufficiently small some $t_{h,x} \in [t,t+h]$ such that $$\frac{K_x(t+h) - K_x(t)}{h} = K_x'(t_{h,x}).$$ But by assumption $|K_x'(t_{h,x})| \leq g(x)$ and so the integrand is bounded, for each such $h$, by the integrable function $g$. Thus by Lebesgue's dominated convergence theorem, we have the desired limiting behaviour. \end{proof}
+
 
 \begin{thebibliography}{99}
 
