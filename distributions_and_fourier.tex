@@ -359,7 +359,7 @@ We now show that a convolution can be approximated by an average of translations
 
 \begin{align*} (f * g)(x) &= \sum_{y \in \frac{1}{N}\bZ^d} \int_{Q_{y,N}} f(x-u)g(u) du \\ &= \sum_{y \in \frac{1}{N}\bZ^d} \frac{1}{N^d}(f(x-y)g(y) + E_{y,N})\end{align*} where $|E_{y,N}|<\epsilon$. However, notice that $E_{y,N} = 0$ if $Q_{y,N} \cap \operatorname{supp}(g) = \emptyset$. But there are $O(N^d)$ such $y$ since the support of $g$ is compact (if the support is inside $[-B,B)^d$ for some positive integer $B$, then there are $(2BN)^d$ such $y$). Thus the total error is $O(\epsilon) \to 0$ as $N_0 \to 0$. This demonstrates the uniform convergence. \end{proof}
 
-\begin{prop}[Approximate identity]\label{prop: approx identity} Let $f:\bR^d \to [0,\infty)$ be an $L_1$ function such that $$\int_{\bR^d} f(x) dx = 1$$ and suppose that $g:\bR^d \to \bR$ is a compactly supported continuous function. Let $$f_{\epsilon}(x) = \frac{1}{\epsilon^d}f(\epsilon x).$$ Then $$f_{\epsilon} * g \to g \quad \text{ uniformly on } \bR^d.$$
+\begin{prop}[Approximate identity]\label{prop: approx identity} Let $f:\bR^d \to [0,\infty)$ be an $L_1$ function such that $$\int_{\bR^d} f(x) dx = 1$$ and suppose that $g:\bR^d \to \bR$ is a compactly supported continuous function. Let $$f_{\epsilon}(x) = \frac{1}{\epsilon^d}f(\epsilon^{-1} x).$$ Then $$f_{\epsilon} * g \to g \quad \text{ uniformly on } \bR^d.$$
 
 \end{prop}
 
@@ -513,7 +513,7 @@ We now that the convolution of two $L^1$ functions is commutative. We now addres
 
 where in the last line we made the substituion $y \mapsto -y$. Thus we have the desired equality. \end{proof}
 
-\section{Fourier Transform}
+\section{Fourier Transform of Schwarz Functions}
 
 \subsection{Definition and Riemann-Lebesgue Lemma}
 
@@ -567,7 +567,7 @@ Now clearly as $w \to 0$ then the integrand converges to the correct value. Thus
 
 Now if we assume $|w| \leq \epsilon$, we get that these terms in the upper bound are of the form $2\pi C_{\epsilon} |e^{-2\pi i x (z + \delta)}|$ where $|\delta| \leq \epsilon + \epsilon \leq 2\epsilon$. Thus they are of the form $|e^{-2\pi i x u}|$ where $u \in U$. Thus by assumption that this integral absolutely converges for $z \in U$, so we have the desired upper bound for $|w| \leq \epsilon$ so the uniform convergence theorem applies. \end{proof}
 
-\begin{eg} The Fourier-Laplace transform of a Gaussian $u(x) = C e^{- \alpha x^2}$, where $C,\alpha>0$, must be an entire function (holomorphic everywhere) on $\bC$. Let us compute it. Assume for convenience that $u(x) = C e^{-x^2}$ where $C>0$ is chosen so that $$\int_{\bR} u(x) dx = 1.$$ Now 
+\begin{eg}\label{eg: FT of Gaussian} The Fourier-Laplace transform of a Gaussian $u(x) = C e^{- \alpha x^2}$, where $C,\alpha>0$, must be an entire function (holomorphic everywhere) on $\bC$. Let us compute it. Assume for convenience that $u(x) = C e^{-x^2}$ where $C>0$ is chosen so that $$\int_{\bR} u(x) dx = 1.$$ Now 
 
 \begin{align*} \mathcal{F}u (z) &=  \int_{\bR} C \exp ( -(x^2 + 2\pi i x z)) \\ &=  \int_{\bR} C\exp (- ((x+\pi i z)^2 + \pi^2 z^2)) \\ &=  e^{-\pi^2z^2} \int_{\bR} C \exp(-(x+\pi i z)^2) dx. \end{align*}
 
@@ -612,7 +612,7 @@ We define the operator $M_j$ on the set of functions $\bR^d \to \bC$ given by $$
 
 \end{thm}
 
-\begin{proof} First note that these equations will show that the Fourier transform is a Schwarz function as follows. If $\alpha = (\alpha_1, \ldots, \alpha_d) \in \bZ_{\geq 0}^d$ is an index then by induction and the first equation we get that $$\mathcal{F}(\partial^{\alpha}\phi)(\omega) = (2\pi i)^{\|\alpha\|_1} \omega^{\alpha} (\mathcal{F}\phi)(\omega).$$ But by the Riemann-Lebesgue lemma, we have that the right hand side converges to $0$ and $\omega \to \infty$. Thus we have shown that $$\lim_{\omega \to \infty} |P(\omega)| (\mathcal{F}(\omega)) = 0$$ for all polynomials $P$. Thus the Fourier transform will be shown to be Schwarz by the first identity.
+\begin{proof} First note that these equations will show that the Fourier transform is a Schwarz function as follows. If $\alpha = (\alpha_1, \ldots, \alpha_d) \in \bZ_{\geq 0}^d$ is an index then by induction and the first equation we get that $$\mathcal{F}(\partial^{\alpha}\phi)(\omega) = (2\pi i)^{\|\alpha\|_1} \omega^{\alpha} (\mathcal{F}\phi)(\omega).$$ But by the Riemann-Lebesgue lemma, we have that the right hand side converges to $0$ and $\omega \to \infty$. Thus we have shown that $$\lim_{\omega \to \infty} |P(\omega)| (\mathcal{F}(\omega)) = 0$$ for all polynomials $P$. Thus the Fourier transform will be shown to be rapidly decreasing by the first identity. The second identity then shows that every element in the space $\mathcal{F}(\cS(\bR^d))$ has a continuous partial derivative and that this space is invariant under partial differentiation, which shows that the Fourier transform of a Schwarz function is smooth. Thus this will show that the Fourier transform of a Schwarz function is Schwarz.
 
 The first identity is an easy application of inegration by parts as follows:
 
@@ -630,6 +630,23 @@ where the differentation under the integral sign is justified since $$|-2\pi i x
 
 
 \subsection{Fourier inversion of Schwarz functions}
+
+\begin{thm}[Multiplication formula] If $\phi, \psi \in S(\bR^d)$ then $$\int_{\bR^d} \phi(x) \cdot \cF \psi(x) d(x) = \int_{\bR^d} \cF \phi (x) \cdot \psi(x) dx.$$
+
+\end{thm}
+
+\begin{proof} We may apply Fubini's theorem to show that the left hand side is equal to $$\int_{\bR^d} \phi(x) \left(\int_{\bR^d} \psi(y) e^{-2\pi i \langle x, y \rangle } dy \right) dx = \int_{\bR^d \times \bR^d} \phi(x) \psi(y) e^{-2\pi i \langle x, y \rangle } dx dy  $$ where the use of Fubini's theorem is justified as $|\phi(x)\phi(y)|$ is in $L^1(\bR^d \times \bR^d)$. Now this expression is symmetric in $\phi$ and $\psi$. \end{proof}
+
+\begin{thm}[Fourier inversion] For $\phi \in S(\bR^d)$ we have that $$\phi(x) = \int_{\bR^d} \mathcal{F}\phi (\omega) \cdot e^{2\pi i \langle x , \omega \rangle } d\omega.$$
+
+\end{thm}
+
+\begin{proof} Let $$K(x) = C e^{-\|x\|^2}$$ where $C>0$ is chosen so that $$\int_{\bR^d} K(x) dx = 1.$$ We know from Example~\ref{eg: FT of Gaussian} that $$\mathcal{F}K(\omega) = e^{-\pi^2 \|\omega\|^2}$$ is also a Gaussian. Now for $\alpha>0$ let $$K_{\alpha}(x) = K(\alpha x).$$ Thus we know that $$\mathcal{F}(K_{\alpha}) (\omega) = \alpha^{-d} \mathcal{F}(K) (\alpha \omega) = \alpha^{-d} e^{-\pi^2 \|\alpha^{-1} \omega\|^2}.$$ Now we apply the multiplication formula to $\phi$ and $K_{\alpha}$ to get $$ \int_{\bR^d} \phi(x) \cdot \cF K_{\alpha}(x) d(x) = \int_{\bR^d} \cF \phi (x) \cdot K_{\alpha}(x) dx.$$ Now as $\mathcal{F}\phi$ is Schwarz and thus integrable, we can apply the dominated converge theorem to show that as $\alpha \to 0$, the right hand side converges to $$\int_{\bR^d} \mathcal{F}\phi(\omega) d\omega.$$ On the other hand, the left hand side converges to $\phi(0)$ since for all $\alpha>0$ we have $$\int_{\bR^d} K_{\alpha}(x) dx = 1$$ but for all $\epsilon>0$ we have that $$\int_{|x|>\epsilon} K_{\alpha}(x) dx \to 1 \quad\text{ as } \alpha \to 0 .$$ Thus we have shown that $$\phi(0) = \int_{\bR^d} \mathcal{F}\phi(x) d\omega,$$ which is the $x = 0$ case. To derive the general case, we may consider the Schwarz function $\phi_y (x) = \phi(y+x)$ and apply the already proven $x = 0$ case to obtain that $$\phi(y) = \phi_y(0) = \int_{\bR^d} \mathcal{F}\phi_y(\omega) d\omega.$$ But $$(\mathcal{F}\phi_y) (\omega) = \int_{\bR^d} \phi(y+x) e^{-2\pi i \langle x , \omega \rangle} dx =  \int_{\bR^d} \phi(x) e^{-2\pi i \langle x - y , \omega \rangle} dx = (\mathcal{F}\phi)(\omega) e^{2\pi i y\omega},$$ as desired.
+
+\end{proof}
+
+\begin{eg}[Calculation of the Gaussian integral via Fourier Analysis] Continuing from Example~\ref{eg: FT of Gaussian} we have shown that if $$u(x) = C e^{-x^2}$$ where the constant $C$ is chosen so that $$\int_{\bR} u(x) dx = 1$$ then $$\mathcal{F}u(\omega) =  e^{-\pi^2 \omega^2}.$$ Applying the Fourier inversion formula, we get that $$C = u(0) = \int_{\bR} e^{-\pi^2 \omega^2} d\omega = \pi^{-1} \int_{\bR} e^{-x^2} dx = \pi^{-1}C^{-1}. $$ Thus $C = \frac{1}{\sqrt{\pi}}$, that is $$\int_{\bR} e^{-x^2} dx = \sqrt{\pi}.$$ Note that there is no circular logic here as although we needed the Fourier transform of a Gaussian, we did not need the exact value of $C$ in any of our proofs of Fourier inversion. \end{eg}
+\section{Tempered Distributions and their Fourier Transform}
 
 \appendix
 
