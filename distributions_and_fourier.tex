@@ -641,13 +641,35 @@ where the differentation under the integral sign is justified since $$|-2\pi i x
 
 \end{thm}
 
-\begin{proof} Let $$K(x) = C e^{-\|x\|^2}$$ where $C>0$ is chosen so that $$\int_{\bR^d} K(x) dx = 1.$$ We know from Example~\ref{eg: FT of Gaussian} that $$\mathcal{F}K(\omega) = e^{-\pi^2 \|\omega\|^2}$$ is also a Gaussian. Now for $\alpha>0$ let $$K_{\alpha}(x) = K(\alpha x).$$ Thus we know that $$\mathcal{F}(K_{\alpha}) (\omega) = \alpha^{-d} \mathcal{F}(K) (\alpha \omega) = \alpha^{-d} e^{-\pi^2 \|\alpha^{-1} \omega\|^2}.$$ Now we apply the multiplication formula to $\phi$ and $K_{\alpha}$ to get $$ \int_{\bR^d} \phi(x) \cdot \cF K_{\alpha}(x) d(x) = \int_{\bR^d} \cF \phi (x) \cdot K_{\alpha}(x) dx.$$ Now as $\mathcal{F}\phi$ is Schwarz and thus integrable, we can apply the dominated converge theorem to show that as $\alpha \to 0$, the right hand side converges to $$\int_{\bR^d} \mathcal{F}\phi(\omega) d\omega.$$ On the other hand, the left hand side converges to $\phi(0)$ since for all $\alpha>0$ we have $$\int_{\bR^d} K_{\alpha}(x) dx = 1$$ but for all $\epsilon>0$ we have that $$\int_{|x|>\epsilon} K_{\alpha}(x) dx \to 1 \quad\text{ as } \alpha \to 0 .$$ Thus we have shown that $$\phi(0) = \int_{\bR^d} \mathcal{F}\phi(x) d\omega,$$ which is the $x = 0$ case. To derive the general case, we may consider the Schwarz function $\phi_y (x) = \phi(y+x)$ and apply the already proven $x = 0$ case to obtain that $$\phi(y) = \phi_y(0) = \int_{\bR^d} \mathcal{F}\phi_y(\omega) d\omega.$$ But $$(\mathcal{F}\phi_y) (\omega) = \int_{\bR^d} \phi(y+x) e^{-2\pi i \langle x , \omega \rangle} dx =  \int_{\bR^d} \phi(x) e^{-2\pi i \langle x - y , \omega \rangle} dx = (\mathcal{F}\phi)(\omega) e^{2\pi i y\omega},$$ as desired.
+\begin{proof} Let $$K(x) = C e^{-\|x\|^2}$$ where $C>0$ is chosen so that $$\int_{\bR^d} K(x) dx = 1.$$ We know from Example~\ref{eg: FT of Gaussian} that $$\mathcal{F}K(\omega) = e^{-\pi^2 \|\omega\|^2}$$ is also a Gaussian. Now for $\alpha>0$ let $$K_{\alpha}(x) = K(\alpha x).$$ Thus we know that $$\mathcal{F}(K_{\alpha}) (\omega) = \alpha^{-d} \mathcal{F}(K) (\alpha^{-1} \omega) = \alpha^{-d} e^{-\pi^2 \|\alpha^{-1} \omega\|^2}.$$ Now we apply the multiplication formula to $\phi$ and $K_{\alpha}$ to get $$ \int_{\bR^d} \phi(x) \cdot \cF K_{\alpha}(x) d(x) = \int_{\bR^d} \cF \phi (x) \cdot K_{\alpha}(x) dx.$$ Now as $\mathcal{F}\phi$ is Schwarz and thus integrable, we can apply the dominated converge theorem to show that as $\alpha \to 0$, the right hand side converges to $$\int_{\bR^d} \mathcal{F}\phi(\omega) d\omega.$$ On the other hand, the left hand side converges to $\phi(0)$ since for all $\alpha>0$ we have $$\int_{\bR^d} K_{\alpha}(x) dx = 1$$ but for all $\epsilon>0$ we have that $$\int_{|x|>\epsilon} K_{\alpha}(x) dx \to 1 \quad\text{ as } \alpha \to 0 .$$ Thus we have shown that $$\phi(0) = \int_{\bR^d} \mathcal{F}\phi(x) d\omega,$$ which is the $x = 0$ case. To derive the general case, we may consider the Schwarz function $\phi_y (x) = \phi(y+x)$ and apply the already proven $x = 0$ case to obtain that $$\phi(y) = \phi_y(0) = \int_{\bR^d} \mathcal{F}\phi_y(\omega) d\omega.$$ But $$(\mathcal{F}\phi_y) (\omega) = \int_{\bR^d} \phi(y+x) e^{-2\pi i \langle x , \omega \rangle} dx =  \int_{\bR^d} \phi(x) e^{-2\pi i \langle x - y , \omega \rangle} dx = (\mathcal{F}\phi)(\omega) e^{2\pi i y\omega},$$ as desired.
 
 \end{proof}
 
 \begin{eg}[Calculation of the Gaussian integral via Fourier Analysis] Continuing from Example~\ref{eg: FT of Gaussian} we have shown that if $$u(x) = C e^{-x^2}$$ where the constant $C$ is chosen so that $$\int_{\bR} u(x) dx = 1$$ then $$\mathcal{F}u(\omega) =  e^{-\pi^2 \omega^2}.$$ Applying the Fourier inversion formula, we get that $$C = u(0) = \int_{\bR} e^{-\pi^2 \omega^2} d\omega = \pi^{-1} \int_{\bR} e^{-x^2} dx = \pi^{-1}C^{-1}. $$ Thus $C = \frac{1}{\sqrt{\pi}}$, that is $$\int_{\bR} e^{-x^2} dx = \sqrt{\pi}.$$ Note that there is no circular logic here as although we needed the Fourier transform of a Gaussian, we did not need the exact value of $C$ in any of our proofs of Fourier inversion. \end{eg}
+
+\begin{corol} The Fourier Transform is a bijection $\mathcal{F}:\cS(\bR^d) \to \cS(\bR^d)$ with inverse given by $$\mathcal{F}^{-1} = \mathcal{F} \circ S$$ where $S\phi (x) = \phi(-x)$.
+
+\end{corol}
+
+\begin{proof} The Fourier Inversion formula gives that $$\phi(x) = \int_{\bR^d} (\mathcal{F}\phi) (\omega) e^{2\pi  i \langle \omega, x \rangle} d\omega = \int_{\bR^d} (S(\mathcal{F}\phi))(\omega) e^{-2\pi i \langle\omega, x \rangle} d \omega = \mathcal{F}(S\mathcal{F}(\phi))(x).$$ This shows that $$\mathcal{F} \circ S \circ \mathcal{F} = \operatorname{Id}_{\cS(\bR^d)}.$$ Thus if we let $\mathcal{G} = S \circ \mathcal{F}$ and $\mathcal{G}' = \mathcal{F} \circ S$ then we see that $\cG$ is a right inverse and $\cG'$ is a left inverse of $\mathcal{F}$. But we must have $\cG = \cG'$ by simple algebra (i.e., we have $\cF \cG = 1$ and $\cG' \cF = 1$, now multiplying by $\cG$ on both sides of of the second equation we get $\cG' \cF \cG = \cG$ and then using the first equation we get $\cG' = \cG$). \end{proof}
+
 \section{Tempered Distributions and their Fourier Transform}
 
+\begin{mydef} We say that $\phi_1, \phi_2, \ldots \in \cS(\bR^d)$ converge in $\cS(\bR^d)$ to some $\phi \in \cS(\bR^d)$ if for all all indices $\alpha, \beta \in \bZ_{\geq 0}^d$ we have that $$x^{\beta}\partial^{\alpha}\phi_i \to x^{\beta}\partial^{\alpha}\phi \quad \text{uniformly on } \bR^d.$$
+
+\end{mydef}
+
+We observe that if $\phi_i \to \phi$ in $D(\bR^d)$ then they also converge in $\cS(\bR^d)$.  Thus we have a continuous embedding (preservers limits) $$D(\bR^d) \subset \cS(\bR^d).$$
+
+However if one considers the functions $\phi_1, \phi_2, \ldots \in D(\bR^d)$ given by $\phi_n (x) =\phi_1 (x-n)$ (a gliding hump) then although in $C^{\infty}(\bR^d)$ this sequence of functions converges to $0$ (i.e., all its partial derivatatives converge to $0$ uniformly on compact sets) but not in $\cS(\bR^d)$ as the convergence is not uniform on all of $\bR^d$.
+
+\begin{eg}[Multiplcation by $x^{\beta}$ is not reduntant] Let $\phi \in D(\bR)$ be any compactly supported non-zero smooth function. Let $\phi_n = 2^{-n} \phi(x-n)$. Say that support of $\phi$ is in $[0,1]$, thus the support of $\phi_n$ is $[n-1,n]$. Then $\phi_n \to 0$ in $\cS(\bR)$, which we justify as follows. Observe that $$\sup_{x \in \bR^d}|x^{\beta} \partial^{\alpha}\phi_n(x)| \leq 2^{-n}n^{|\beta|} \sup_{x \in [n-1,n]} | \partial^{\alpha}\phi(x)|$$ and this converges to $0$ uniformly since exponentials dominate polynomials. On the other hand, if we define $\psi_n = \frac{1}{n} \phi(x-n)$ then $\psi_n$ does not converge to $0$ in $\cS(\bR)$, even though all partial derivatives converge uniformly on $\bR$ to $0$. This is because $$\sup_{x \in \bR^d} | x^2 \phi_n(x) | \geq (n-1)^2 n^{-1} \sup_{x \in \bR^d} |\phi(x)|$$ which does not converge to $0$ as it is roughly linear in $n$.
+
+\end{eg}
+
+\begin{mydef}[Norms on Schwartz space] It will be convenient to define for $\phi \in \cS(\bR^d)$ the norm $$  .$$
+
+\end{mydef}
 \appendix
 
 \section{Differentiation under the integral sign}
