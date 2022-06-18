@@ -262,7 +262,7 @@ If $X \subset \bR^d$ is an open set, we let $\mathcal{E}(X) = C^{\infty}(X)$ den
 
 \end{mydef}
 
-We now aim to classify $\mathcal{E}'(X)$ and find a natural embedding into $D'(X)$. First observe that given $f \in \mathcal{E}'(X)$, if we restrict this function to $D(X)$, then we get an element of $\mathcal{D}'(X)$. Thus we have a map $$\iota:\mathcal{E}'(X) \to D(X).$$
+We now aim to classify $\mathcal{E}'(X)$ and find a natural embedding into $D'(X)$. First observe that given $f \in \mathcal{E}'(X)$, if we restrict this function to $D(X)$, then we get an element of $\mathcal{D}'(X)$. Thus we have a map $$\iota:\mathcal{E}'(X) \to D'(X).$$
 
 \begin{lemma} If $X \subset \bR^d$ is open, then it has an \textit{exhuastion by compact sets}, which we define to be a sequence $K_1 \subset K_2 \subset \ldots$ of compact sets such that $$X = \bigcup_{n=1}^{\infty} K_n$$ and such that any compact sets $K \subset X$ satisfies that $K \subset K_n$ for some $n$.
 
@@ -272,7 +272,7 @@ We now aim to classify $\mathcal{E}'(X)$ and find a natural embedding into $D'(X
 
 \end{proof}
 
-\begin{lemma} The map $\iota:\mathcal{E}'(X) \to D(X)$ is well defined, continuous (preserves limits) and injective.
+\begin{lemma}\label{lemma: E' embeds in D'} The map $\iota:\mathcal{E}'(X) \to 'D(X)$ is well defined, continuous (preserves limits) and injective.
 
 \end{lemma}
 
@@ -655,6 +655,8 @@ where the differentation under the integral sign is justified since $$|-2\pi i x
 
 \section{Tempered Distributions and their Fourier Transform}
 
+\subsection{Topology on Schwarz space}
+
 \begin{mydef} We say that $\phi_1, \phi_2, \ldots \in \cS(\bR^d)$ converge in $\cS(\bR^d)$ to some $\phi \in \cS(\bR^d)$ if for all all indices $\alpha, \beta \in \bZ_{\geq 0}^d$ we have that $$x^{\beta}\partial^{\alpha}\phi_i \to x^{\beta}\partial^{\alpha}\phi \quad \text{uniformly on } \bR^d.$$
 
 \end{mydef}
@@ -663,13 +665,70 @@ We observe that if $\phi_i \to \phi$ in $D(\bR^d)$ then they also converge in $\
 
 However if one considers the functions $\phi_1, \phi_2, \ldots \in D(\bR^d)$ given by $\phi_n (x) =\phi_1 (x-n)$ (a gliding hump) then although in $C^{\infty}(\bR^d)$ this sequence of functions converges to $0$ (i.e., all its partial derivatatives converge to $0$ uniformly on compact sets) but not in $\cS(\bR^d)$ as the convergence is not uniform on all of $\bR^d$.
 
-\begin{eg}[Multiplcation by $x^{\beta}$ is not reduntant] Let $\phi \in D(\bR)$ be any compactly supported non-zero smooth function. Let $\phi_n = 2^{-n} \phi(x-n)$. Say that support of $\phi$ is in $[0,1]$, thus the support of $\phi_n$ is $[n-1,n]$. Then $\phi_n \to 0$ in $\cS(\bR)$, which we justify as follows. Observe that $$\sup_{x \in \bR^d}|x^{\beta} \partial^{\alpha}\phi_n(x)| \leq 2^{-n}n^{|\beta|} \sup_{x \in [n-1,n]} | \partial^{\alpha}\phi(x)|$$ and this converges to $0$ uniformly since exponentials dominate polynomials. On the other hand, if we define $\psi_n = \frac{1}{n} \phi(x-n)$ then $\psi_n$ does not converge to $0$ in $\cS(\bR)$, even though all partial derivatives converge uniformly on $\bR$ to $0$. This is because $$\sup_{x \in \bR^d} | x^2 \phi_n(x) | \geq (n-1)^2 n^{-1} \sup_{x \in \bR^d} |\phi(x)|$$ which does not converge to $0$ as it is roughly linear in $n$.
+\begin{eg}[Multiplcation by $x^{\beta}$ is not reduntant] \label{eg: schwarz convergence} Let $\phi \in D(\bR)$ be any compactly supported non-zero smooth function. Let $\phi_n = 2^{-n} \phi(x-n)$. Say that support of $\phi$ is in $[0,1]$, thus the support of $\phi_n$ is $[n-1,n]$. Then $\phi_n \to 0$ in $\cS(\bR)$, which we justify as follows. Observe that $$\sup_{x \in \bR^d}|x^{\beta} \partial^{\alpha}\phi_n(x)| \leq 2^{-n}n^{|\beta|} \sup_{x \in [n-1,n]} | \partial^{\alpha}\phi(x)|$$ and this converges to $0$ uniformly since exponentials dominate polynomials. On the other hand, if we define $\psi_n = \frac{1}{n} \phi(x-n)$ then $\psi_n$ does not converge to $0$ in $\cS(\bR)$, even though all partial derivatives converge uniformly on $\bR$ to $0$. This is because $$\sup_{x \in \bR^d} | x^2 \phi_n(x) | \geq (n-1)^2 n^{-1} \sup_{x \in \bR^d} |\phi(x)|$$ which does not converge to $0$ as it is roughly linear in $n$.
 
 \end{eg}
 
-\begin{mydef}[Norms on Schwartz space] It will be convenient to define for $\phi \in \cS(\bR^d)$ the norm $$  .$$
+\begin{mydef}[Norms on Schwartz space] It will be convenient to define for $\phi \in \cS(\bR^d)$ the norm $$\| \phi \|_{\cS(k,N)} = \sup_{|\alpha|\leq k, |\beta|\leq N, x \in \bR^d} |x^{\beta} \partial^{\alpha} \phi| .$$
 
 \end{mydef}
+
+Thus we have that $\phi_i \to \phi$ in $\cS(\bR^d)$ if and only if $\| \phi_i - \phi\|_{\cS(k,N)} \to 0$ for all non-negative integers $k,N$.
+
+\begin{prop}\label{prop: Schwarz function is limit of compactly supported} If $\phi \in \cS(\bR^d)$ then there are $\phi_i \in \cS(\bR^d)$ that are compactly supported and $\phi_i \to \phi$ in $\cS(\bR^d)$.
+
+\end{prop} 
+
+\begin{proof} Let $\psi:\bR^d \to \bR$ be a smooth function with compact support such that $\psi(x) = 1$ for all $\|x \| \leq 1$. Now let $$\phi_n(x) = \psi(x/n) \phi(x).$$ Clearly $\phi_n \in \cS(\bR^d)$ is compactly supported. To show that $\phi_n \to \phi$ in $\cS(\bR^d)$, we will need to estimate the norms above as follows. First use the product rule to write $$x^{\beta} \partial^{\alpha}\left( (\psi(x/n) - 1) \phi(x) \right) =  x^{\beta} (\psi(x/n) - 1) \partial^{\alpha} \phi(x)  + \sum_{0 \neq \gamma \leq \alpha} O(n^{-|\gamma|}) x^{\beta}\partial^{\alpha - \gamma} \phi(x) $$ where the implicit $O$ constant depends on $\gamma$ (and thus can be chosen so it depends on $\alpha$ only). Thus we now wish to show that both terms convergence uniformly as $n \to \infty$. The first term is bounded by $$\|\psi\|_{\infty} \sup_{\|x\| > n} x^{\beta}  |\partial^{\alpha} \phi(x)|$$ and this converges to $0$ uniformly as $n \to \infty$ by definition of Schwarz function. The second term clearly converges to $0$ as $x^{\beta} \partial^{\alpha - \gamma}\phi(x)$ is bounded on $\bR^d$. \end{proof}
+
+We say that an operator $\cS(\bR^d) \to \cS(\bR^d)$ is continuous if it preserves limits in $\cS(\bR^d)$.
+
+\begin{lemma}\label{lemma: diff and poly continuous} The operators $\phi \mapsto \partial^{\alpha}\phi$ and $\phi \mapsto x^{\beta}\phi$ are continuous functions on $\cS(\bR^d)$.
+
+\end{lemma}
+
+\begin{proof} The claim about partial derivatives is obvious. For the second claim, assume that $\phi_n \to 0$ in $\cS(\bR^d)$. Then $$x^{\beta'} \partial^{\alpha} (x^{\beta} \phi_n(x))$$ is a finite sum of terms of the form $P(x)\partial^{\gamma}\phi_n(x)$ for some polynomials $P$ and indices $\gamma$. Thus by definition of Schwarz functions, we have that such terms converge to $0$ in $\cS(\bR^d)$. \end{proof}
+
+\begin{prop} The Fourier transform $\cF:\cS(\bR^d) \to \cS(\bR^d)$ is continuous. So is its inverse.
+
+\end{prop}
+
+\begin{proof} Suppose that $\phi_n \to 0$ in $\cS(\bR^d)$. We first show that $$\| \cF(\phi_n)\|_{\infty} \to 0.$$ To see this, note that $$|\cF(\phi_n) (\omega)| \leq \int_{\bR^d} |\phi_n(x)| dx$$ so it is enough to show that this upper bound, which is independent of $\omega$, converges to $0$. Letting $P(x) = (1 + \|x\|^2)^{d+1}$ we have that $$\int_{\bR^d}|\phi_n(x)| dx = \int_{\bR^d} \frac{1}{P(x)} |\phi_n(x)P(x)| dx \leq \sup_{x \in \bR^d} |\phi_n(x)P(x)|  \int_{\bR^d} \frac{1}{P(x)} dx.$$ On the other hand $$\sup_{x \in \bR^d} |\phi_n(x)P(x)| \to 0 \quad\text{uniformly for } x \in \bR^d.$$ Thus we have shown that $\|\cF(\phi_n)\|_{\infty} \to 0$ whenever $\phi_n \to 0$ in $\cS(\bR^d)$. It now remains to show that $$\lim_{n \to \infty} \|x^{\beta} \partial^{\alpha} \cF(\phi_n)\|_{\infty} = 0.$$ But $$x^{\beta} \partial^{\alpha} \cF(\phi_n) = (2\pi i)^{|\alpha|}(-2\pi i)^{-|\beta|} \cF(\partial^{\beta} (x^{\alpha} \phi_n)).$$ By Lemma~\ref{lemma: diff and poly continuous} $\partial^{\beta} x^{\beta} \phi_n \to 0$ in $\cS(\bR^d)$ and so by what we have already shown (the $\alpha = \beta = 0$ case) we see that indeed $$\|\cF(\partial^{\beta} (x^{\alpha} \phi_n))\|_{\infty} \to 0.$$
+
+Thus the Fourier transform is continuous. Moreover the inverse of the fourier transform is $\mathcal{F}^{-1} = \mathcal{F} \circ S$ where $S$ is clearly continuous in $\cS(\bR^d)$. Thus the $\mathcal{F}^{-1}$ is continuous. \end{proof}
+
+\subsection{Tempered distributions}
+
+\begin{mydef} A \textit{tempered distribution} is a linear functional $u:\cS(\bR^d) \to \bC$ that is continuous in the sense that if $\phi_n \to \phi$ in $\cS(\bR^d)$ then $u(\phi_n) \to u(\phi)$. We let $\mathcal{S}'(\bR^d)$ denote the space of tempered distributions. We say that a sequence of tempered distributions $u_1,u_2,\ldots$ converges to a tempered distribution $u$ \textit{in $\cS'(\bR^d)$} if for all $\phi \in \cS(\bR^d)$ we have that $u_j(\phi) \to u(\phi)$.
+
+\end{mydef}
+
+We now give some examples and non-examples.
+
+\begin{prop} ~
+\begin{itemize}
+	\item Every tempered distribution $u \in \mathcal{S}'(\bR^d)$ restricts to a distribution in $D'(\bR^d)$. This restriction mapping is injective and continuous.
+	\item Every compactly supported distribution $u \in \mathcal{E}'(\bR^d)$ restricts to a tempered distribution. This restriction mapping is injective and continuous.
+\end{itemize}
+
+\end{prop}
+
+\begin{proof} 
+
+First suppose that $u \in \mathcal{S}'(\bR^d)$ and $\phi_n \to \phi$ in $D(\bR^d)$. This means there is a compact set $K$ containing the support of all $\phi_n$ and $\phi$ and for each index $\alpha$ we have $ \partial^{\alpha} \phi_n \to \partial^{\alpha} \phi$ uniformly on $K$ and thus uniformly on $\bR^d$. So we have $\phi_n \to \phi$ in $\cS(\bR^d)$ and so indeed $u(\phi_n) \to u(\phi)$. Thus the restriction of $u$ to $D(\bR^d)$ gives a well defined continuous distribution $u \in D'(\bR^d)$. Clearly this restriction mapping is continuous since the definition of convergence of the distributions is the same. To show injectivity, note that by Proposition~\ref{prop: Schwarz function is limit of compactly supported} any tempered distribution $u$ is determined by its values on comapctly supported smooth functions. Thus if $u_1,u_2 \in \mathcal{S}'(\bR^d)$ restrict to the same element in $D'(\bR^d)$, then they must be equal.
+
+Now suppose $u \in \mathcal{E}'(\bR^d)$ and $\phi_n \to \phi$ in $\cS(\bR^d)$. Then in particular we may view $\phi_n, \phi \in C^{\infty}(\bR^d)$, thus $u$ restricts to a well defined linear map functional on $\cS(\bR^d)$. Now $\phi_n \to \phi$ uniformly on $\bR^d$ and so it clearly converges in $C^{\infty}(\bR^d)$ (which is uniform convergence on compact subsets). Continuity is clear as the definitions of convergence coincide. To show injectivity, suppose $u_1,u_2 \in \mathcal{E}'(\bR^d)$ restrict to the same element of $\cS'(\bR^d)$. Thus $u_1,u_2$ restrict to the same element of $D'(\bR^d)$. By Lemma~\ref{lemma: E' embeds in D'} that this means that $u_1 = u_2$ are the same element of $\mathcal{E}'(\bR^d)$.
+
+\end{proof}
+
+In summary, this means that we have natural inclusions of distributions $$\mathcal{E}'(\bR^d) \hookrightarrow \cS'(\bR^d) \hookrightarrow D'(\bR^d).$$ which are continuous in the sense that they preserve limits (i.e., if $u_j \to u$ then it does so when embedded in the larger space). We now show that these inclusions are proper.
+
+\begin{eg}[A non-tempered distribution] Consider the distribution $u \in D'(\bR)$ given by $$u(\phi) = \int e^x \phi(x) dx.$$ We claim that there is no tempered distribution that restricts to this distribution. Suppose there was such a distribution $u$. Now choose a compactly supported non-negative and non-zero smooth function $\phi \in D(\bR)$. Let us assume it is supported on $[0,1]$. We already know that $$\phi_n(x) = e^{-n/2}\phi(x-n)$$ is a sequence of compactly supported Schwarz functions that converge to $0$ in $\cS(\bR^d)$ (see Example~\ref{eg: schwarz convergence}). However $$u(\phi_n) = \int_{n-1}^n e^{x - n/2} \phi(x-n) \geq e^{\frac{n}{2} - 1} \int_0^1 \phi(x) \to \infty \neq 0 = u(0),$$ thus $u$ is not continuous in $\cS(\bR^d)$.
+
+\end{eg}
+
+We now demonstrate many tempered distributions that are not compactly supported.
+
 \appendix
 
 \section{Differentiation under the integral sign}
