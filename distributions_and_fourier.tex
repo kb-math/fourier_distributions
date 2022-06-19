@@ -103,11 +103,11 @@
 
 \section{Distributions}
 
-\begin{mydef} Let $U \subset \bR^n$ be an open set. We define $$D(U) = \{ \varphi :\bR^n \to \bC ~|~ \varphi \text{ is smooth, compactly supported and } \operatorname{supp}(\varphi) \subset U  \}$$ to be the set of \textit{test functions} on $U$. Given $\varphi_1,\varphi_2, \ldots \in D(U)$ and $\varphi \in D(U)$, then we say that $\varphi = \lim_{n \to \infty} \varphi_n$ if there exists a compact set $K \subset U$ such that $\varphi$ and all $\varphi_n$ have support inside $K$ and for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \varphi_n \to \partial^{\alpha} \varphi \text{ uniformly on K.}$$ 
+\begin{mydef} Let $U \subset \bR^n$ be an open set. We define $$D(U) = \{ \varphi :\bR^n \to \bC ~|~ \varphi \text{ is smooth, compactly supported and } \operatorname{supp}(\varphi) \subset U  \}$$ to be the set of \textit{test functions} on $U$. Given $\varphi_1,\varphi_2, \ldots \in D(U)$ and $\varphi \in D(U)$, then we say that $\varphi = \lim_{j \to \infty} \varphi_j$ if there exists a compact set $K \subset U$ such that $\varphi$ and all $\varphi_n$ have support inside $K$ and for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \varphi_n \to \partial^{\alpha} \varphi \text{ uniformly on K.}$$ 
 
 \end{mydef}
 
-\begin{eg} Let $h:\bR \to \bC$ be the map $h(x) = \mathds{1}_{(0,\infty)} \exp(-\frac{1}{x})$. This is a smooth map with support $[0, \infty)$. Thus $\varphi:\bR \to \bC$ given by $\varphi(x) = h(x)h(1-x)$ is a smooth map with support $[0,1]$. Thus $\varphi \in D((-\epsilon, 1 + \epsilon))$ for all $\epsilon >0$ (but not for $\epsilon = 0$). Now let $\phi_t \in D(\bR)$ be given by $\phi_t(x) = \phi(x+t)$, then clearly $\lim_{n \to \infty} \phi_{1/n} \phi$ in $D(\bR)$ but the sequence $\phi_n$, $n \in \bZ$, does not converge (because the union of the supports is unbounded, hence not compact).
+\begin{eg} Let $h:\bR \to \bC$ be the map $h(x) = \mathds{1}_{(0,\infty)} \exp(-\frac{1}{x})$. This is a smooth map with support $[0, \infty)$. Thus $\varphi:\bR \to \bC$ given by $\varphi(x) = h(x)h(1-x)$ is a smooth map with support $[0,1]$. Thus $\varphi \in D((-\epsilon, 1 + \epsilon))$ for all $\epsilon >0$ (but not for $\epsilon = 0$). Now let $\phi_t \in D(\bR)$ be given by $\phi_t(x) = \phi(x+t)$, then clearly $\lim_{j \to \infty} \phi_{1/j} = \phi$ in $D(\bR)$ but the sequence $\phi_j$, $j \in \bZ$, does not converge (because the union of the supports is unbounded, hence not contained in any compact set).
 \end{eg}
 
 Note that $D(U)$ is closed under partial differentiation, and partial differentiation is continuous (preserves limits).
@@ -128,15 +128,15 @@ The following definition describes why we called the example above $\delta'$.
 
 We now explain the minus sign in the definition.
 
-\begin{prop} Let $f$ be a continuously differentiable function on $\bR^n$ (not necessarily compactly supported). This defines a distribution $\mu_f$ on $\bR^n$ via $\mu_f (\phi) = \int \phi(x) f(x) d^n x$ where $d^n x$ is the lebesgue measure on $\bR^n$. Then $$\partial_j \mu_f = \mu_{\partial_j f}.$$
+\begin{prop} Let $f$ be a continuously differentiable function on $\bR^n$ (not necessarily compactly supported). This defines a distribution $\mu_f$ on $\bR^n$ via $\mu_f (\phi) = \int_{\bR^n} \phi(x) f(x) d^n x$ where $d^n x$ is the lebesgue measure on $\bR^n$. Then $$\partial_j \mu_f = \mu_{\partial_j f}.$$
 
 \end{prop}
 
 \begin{proof} For convenience, suppose $j = n$. Then for any $\phi \in D(U)$ we have 
 
-$$ \mu_{\partial_n f} (\phi) = \int \partial_n f(x) \phi (x) d^n x $$
+$$ \mu_{\partial_n f} (\phi) = \int_{\bR^n} \partial_n f(x) \phi (x) d^n x $$
 
-Now by Fubini's theorem (the integrand has compact support) we can write this integral as $$ \int \left(\int_{-R}^{R} \partial_n f(x_1, \ldots, x_{n-1}, t) \phi (x_1, \ldots, x_{n-1}, t)  dt \right) d^{n-1}(x_1, \ldots, x_{n-1})$$ where $R > 0$ is chosen large enough so that $\phi = 0$ outside of $[-R,R]^n$. Finally, we apply integration by parts to the inner integral and use $\phi(x_1, \ldots, x_{n-1}, \pm R) = 0$ to get that this integral is $$\int \left(\int_{-R}^{R} - f(x_1, \ldots, x_{n-1}, t) \partial_n \phi (x_1, \ldots, x_{n-1}, t)  dt \right) d^{n-1}(x_1, \ldots, x_{n-1})$$ which equals $- \int f(x) \partial_n \phi(x) d^n x$ since $\partial_n \phi = 0$ outside of $[-R,R]^n$.  But this is precisely $-\mu_f(\partial_n) = \partial_n \mu_f$. \end{proof}
+Now by Fubini's theorem (the integrand has compact support) we can write this integral as $$ \int_{\bR^{n-1}} \left(\int_{-R}^{R} \partial_n f(x_1, \ldots, x_{n-1}, t) \phi (x_1, \ldots, x_{n-1}, t)  dt \right) d^{n-1}(x_1, \ldots, x_{n-1})$$ where $R > 0$ is chosen large enough so that $\phi = 0$ outside of $[-R,R]^n$. Finally, we apply integration by parts to the inner integral and use $\phi(x_1, \ldots, x_{n-1}, \pm R) = 0$ to get that this integral is $$\int_{\bR^{n-1}} \left(\int_{-R}^{R} - f(x_1, \ldots, x_{n-1}, t) \partial_n \phi (x_1, \ldots, x_{n-1}, t)  dt \right) d^{n-1}(x_1, \ldots, x_{n-1})$$ which equals $- \int_{\bR^n} f(x) \partial_n \phi(x) d^n x$ since $\partial_n \phi = 0$ outside of $[-R,R]^n$.  But this is precisely $-\mu_f(\partial_n) = \partial_n \mu_f$. \end{proof}
 
 Thus we have extended the notion of differentiation to distributions, which include also non-differentiable but locally integrable functions via the embedding $f \mapsto \mu_f$ in the proposition above. We now identify $\mu_f$ and $f$ as is standard practice. 
 
@@ -156,11 +156,15 @@ Thus we have extended the notion of differentiation to distributions, which incl
 
 \end{eg}
 
-\begin{lemma} Suppose that $\phi_n, \psi_n, \phi, \psi:U \to \bR$ are smooth functions, where $U \subset \bR^d$ is open, such that for some compact $K \subset U$ and for all $\alpha \in \bZ^d_{\geq 0}$ we have that $\partial^{\alpha} \phi_n \to \partial^{\alpha}\phi$ and $\partial^{\alpha} \psi_n \to \partial^{\alpha}\psi$ uniformly on $K$. Then for all $\alpha$, we have that $\partial^{\alpha} (\phi_n \psi_n) \to \partial^{\alpha} (\phi_n \psi_n)$ uniformly on $K$.
+\begin{lemma} Suppose that $\phi_n, \psi_n, \phi, \psi:U \to \bR$ are smooth functions, where $U \subset \bR^d$ is open, such that for some compact $K \subset U$ and for all $\alpha \in \bZ^d_{\geq 0}$ we have that $\partial^{\alpha} \phi_n \to \partial^{\alpha}\phi$ and $\partial^{\alpha} \psi_n \to \partial^{\alpha}\psi$ uniformly on $K$. Then for all $\alpha$, we have that $\partial^{\alpha} (\phi_n \psi_n) \to \partial^{\alpha} (\phi \psi)$ uniformly on $K$.
 
 \end{lemma}
 
-\begin{proof} First we note that $$|\phi_n \psi_n - \phi \psi| = |\phi_n (\psi_n - \psi) + \psi (\phi_n - \phi)| \leq |\phi_n||\psi_n - \phi_n| + |\psi||\phi_n - \phi|$$ converges to $0$ uniformly on $K$. We now prove by induction on $k$ that all order $n$ derivatives of $\phi_n \psi_n$ converge to the corresponding derivatives of $\phi \psi$ (the induction hypothesis is on any such $\phi$, $\psi$ and not just for this specific ones). The base case $k=0$ has now been establishes. Now choose any $1\leq j \leq n$ and use the product rule to see that $$\partial_j (\phi_n \psi_n) = \partial_j(\phi_n) \psi_n + \phi_n (\partial_j \phi_n) \to \partial_j(\phi) \psi + \phi (\partial_j \phi) = \partial_j(\phi \psi)$$ uniformly on $K$ where we applied this $k=0$ case. Now by induction hypothesis for $|\alpha| = k$ we have $\partial_{\alpha} \partial_j(\phi_n) \psi_n \to \partial_{\alpha} \partial_j(\phi) \psi $ uniformly on $K$ and likewise for the second term. Thus $\partial_{\alpha} \partial_j (\phi_n \psi_n) \to \partial_{\alpha} (\phi \psi)$, and this completes the induction step. \end{proof}
+\begin{proof} First we note that $$|\phi_n \psi_n - \phi \psi| = |\phi_n (\psi_n - \psi) + \psi (\phi_n - \phi)| \leq |\phi_n||\psi_n - \phi_n| + |\psi||\phi_n - \phi|$$ converges to $0$ uniformly on $K$. We now prove by induction on $k$ that all order $k$ derivatives of $\phi_n \psi_n$ converge to the corresponding derivatives of $\phi \psi$. Note that we have already shown the $k=0$ case. Thus suppose $\alpha \in \bZ^d_{\geq 0}$ is an index with $k = |\alpha|$ such that $$\partial^{\alpha} (\phi_n \psi_n) \to \partial^{\alpha} (\phi \psi)$$ uniformly on $K$ for any $\psi,\psi$ satisfying the hypothesis of this Lemma (in particular, the partial derivatives of $\phi,\psi$). We wish to show that for $1\leq j \leq n$ we have that $\partial^{\alpha}\partial^j (\phi_n\psi_n) \to \partial^{\alpha}\partial^j(\phi \psi)$, as this will show the induction step. Now use the product rule to see that $$\partial_j (\phi_n \psi_n) = \partial_j(\phi_n) \psi_n + \phi_n (\partial_j \psi_n) \to \partial_j(\phi) \psi + \phi (\partial_j \psi) = \partial_j(\phi \psi)$$ uniformly on $K$, where we applied this $k=0$ case. Now by induction hypothesis for $|\alpha| = k$ aplied to $\partial_j\phi_n$ and $\psi_n$ we have that
+
+$$\partial_{\alpha} \left(\partial_j(\phi_n) \psi_n \right) \to \partial_{\alpha} \left( \partial_j(\phi) \psi \right) $$ uniformly on $K$. 
+
+Likewise we get that the same statement when swapping $\phi_n$ with $\psi_n$ and $\phi$ with $\psi$. Thus $\partial_{\alpha} \partial_j (\phi_n \psi_n) \to \partial_{\alpha} (\phi \psi)$, and this completes the induction step. \end{proof}
 
 \begin{mydef}[Multiplying a distribution by a smooth function] If $f \in D(U)$ is a distributiona and $\psi \in C^{\infty}(U)$ is any smooth function (not necessarily of compact support in $U$) then we can define $\psi f \in D(U)$ by $$\psi f (\phi) = f(\psi \phi).$$ Note that $\psi f$ is indeed a distribution as the above lemma shows that if $\phi_n \to \phi$ in $D(U)$ then $\psi \phi_n \to \psi \phi$ in $D(U)$ as well, and so $\psi f (\phi_n) \to \psi f(\phi)$ by the continuity of $f$.
 
@@ -657,7 +661,7 @@ where the differentation under the integral sign is justified since $$|-2\pi i x
 
 \subsection{Topology on Schwarz space}
 
-\begin{mydef} We say that $\phi_1, \phi_2, \ldots \in \cS(\bR^d)$ converge in $\cS(\bR^d)$ to some $\phi \in \cS(\bR^d)$ if for all all indices $\alpha, \beta \in \bZ_{\geq 0}^d$ we have that $$x^{\beta}\partial^{\alpha}\phi_i \to x^{\beta}\partial^{\alpha}\phi \quad \text{uniformly on } \bR^d.$$
+\begin{mydef} We say that $\phi_1, \phi_2, \ldots \in \cS(\bR^d)$ converge in $\cS(\bR^d)$ to some $\phi \in \cS(\bR^d)$ if for all all indices $\alpha, \beta \in \bZ_{\geq 0}^d$ we have that $$x^{\beta}\partial^{\alpha}\phi_i (x) \to x^{\beta}\partial^{\alpha}\phi (x) \quad \text{uniformly on } \bR^d.$$
 
 \end{mydef}
 
@@ -665,7 +669,7 @@ We observe that if $\phi_i \to \phi$ in $D(\bR^d)$ then they also converge in $\
 
 However if one considers the functions $\phi_1, \phi_2, \ldots \in D(\bR^d)$ given by $\phi_n (x) =\phi_1 (x-n)$ (a gliding hump) then although in $C^{\infty}(\bR^d)$ this sequence of functions converges to $0$ (i.e., all its partial derivatatives converge to $0$ uniformly on compact sets) but not in $\cS(\bR^d)$ as the convergence is not uniform on all of $\bR^d$.
 
-\begin{eg}[Multiplcation by $x^{\beta}$ is not reduntant] \label{eg: schwarz convergence} Let $\phi \in D(\bR)$ be any compactly supported non-zero smooth function. Let $\phi_n = 2^{-n} \phi(x-n)$. Say that support of $\phi$ is in $[0,1]$, thus the support of $\phi_n$ is $[n,n+1]$. Then $\phi_n \to 0$ in $\cS(\bR)$, which we justify as follows. Observe that $$\sup_{x \in \bR^d}|x^{\beta} \partial^{\alpha}\phi_n(x)| \leq 2^{-n}n^{|\beta|} \sup_{x \in [0,1]} | \partial^{\alpha}\phi(x)|$$ and this converges to $0$ uniformly since exponentials dominate polynomials. On the other hand, if we define $\psi_n = \frac{1}{n} \phi(x-n)$ then $\psi_n$ does not converge to $0$ in $\cS(\bR)$, even though all partial derivatives converge uniformly on $\bR$ to $0$. This is because $$\sup_{x \in \bR^d} | x^2 \phi_n(x) | \geq n^2 n^{-1} \sup_{x \in \bR^d} |\phi(x)| = n \sup_{x \in \bR^d} |\phi(x)|$$ which does not converge to $0$ as the lower bound is linear in $n$.
+\begin{eg}[Multiplcation by $x^{\beta}$ is not reduntant] \label{eg: schwarz convergence} Let $\phi \in D(\bR)$ be any compactly supported non-zero smooth function. Let $\phi_n = 2^{-n} \phi(x-n)$. Say that support of $\phi$ is in $[0,1]$, thus the support of $\phi_n$ is $[n,n+1]$. Then $\phi_n \to 0$ in $\cS(\bR)$, which we justify as follows. Observe that $$\sup_{x \in \bR^d}|x^{\beta} \partial^{\alpha}\phi_n(x)| \leq 2^{-n}n^{|\beta|} \sup_{x \in [0,1]} | \partial^{\alpha}\phi(x)|$$ and this converges to $0$ uniformly since exponentials dominate polynomials. On the other hand, if we define $\psi_n (x) = \frac{1}{n} \phi(x-n)$ then $\psi_n$ does not converge to $0$ in $\cS(\bR)$, even though all partial derivatives converge uniformly on $\bR$ to $0$. This is because $$\sup_{x \in \bR^d} | x^2 \psi_n(x) | \geq n^2 n^{-1} \sup_{x \in \bR^d} |\phi(x)| = n \sup_{x \in \bR^d} |\phi(x)|$$ which does not converge to $0$ as the lower bound is linear in $n$.
 
 \end{eg}
 
