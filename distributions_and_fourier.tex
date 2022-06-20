@@ -735,6 +735,24 @@ In summary, this means that we have natural inclusions of distributions $$\mathc
 
 We now demonstrate many tempered distributions that are not compactly supported.
 
+\begin{prop} Let $\mu$ be a finite Borel measure on $\bR^d$ (i.e., $\mu = \mu_1 - \mu_2$ where $\mu_1,\mu_2$ are finite positive measure), then $\mu \in \cS'(\bR^d)$ is a tempered distribution.
+
+\end{prop}
+
+\begin{proof} As Schwarz functions are bounded, $$\mu(\phi) := \int_{\bR^d} \phi(x) d\mu(x)$$ is well defined linear functional on $\cS(\bR^d)$. If $\phi_n \to \phi$ in $\cS(\bR^d)$ then in particular $\phi_n \to \phi$ uniformly, thus $\mu(\phi_n) \to \mu(\phi)$ and so $\mu$ is continuous on $\cS(\bR^d)$. \end{proof}
+
+In particular, we get that $L^1(\bR^d) \subset \cS'(\bR^d)$ as $L^1(\bR^d)$ can be identified with those finite measures that are absolutely continuous (have a density with respect to the Lebesgue measure). In fact, we can do better.
+
+\begin{prop} For $1 \leq p \leq \infty$ we have that any $u \in L^p(\bR^d)$ gives a tempered distribution, i.e., the distribution $$u(\phi) = \int_{\bR^d} u(x)\phi(x) dx.$$
+
+\end{prop}
+
+\begin{proof} We first consider the $p = \infty$ case. Note that for $\phi \in \cS(\bR^d)$ we have that $|u(x)\phi(x)| = \|u\|_{\infty} |\phi(x)|$ is integrable, thus $u(\phi)$ is a well defined linear functional on $\cS(\bR^d)$. Now suppose that $\phi_n(x) \to 0$ in $\cS(\bR^d)$. Letting $P(x) = |1+ \|x\|^2|^{d+2}$ we see that $$|u(\phi_n)| \leq \|u \|_{\infty} \| P \phi_n \|_{\infty} \int_{\bR^d} (P(x))^{-1} dx.$$ But as $\phi_n \to 0$ in $\cS(\bR^d)$ we have that the term $ \| P \phi_n \|_{\infty} \to 0$ while the other terms are finite. 
+
+Now it remains to demonstrate this result for the case $1<p<\infty$. For this, we let $P_D(x) = (1+\|x\|^2)^{D}$ for integers $D>0$ Let $q$ by such that $p^{-1} + q^{-1} = 1$. Now using Holder's inequality we get that $$|u(\phi_n)| = \| u\phi_n \|_1 \leq \|u \|_{p} \| \phi_n \|_q$$ and so we just need to show that $\| \phi_n \|_q \to 0$. To see this note that $$\| \phi_n \|_q^q = \int_{\bR^d} |\phi_n(x)|^{1/q} dx \leq \| P_D(x) \phi_n^{1/q} \|_{\infty} \int_{\bR^d} P_D(x) dx.$$ Now $P_{qD}(x)\phi_n \to 0$ uniformly (as $\phi_n \to 0$ in Schwartz space) thus $P_D(x)\phi_n^{1/q} \to 0$ uniformly for $x \in \bR^d$. Finally, if we choose $D$ large enough so that $\int_{\bR^d} P_D(x) dx < \infty$ then we are done. Note that this proof also showed that $|u(\phi)| < \infty$ for any Schwarz function $\phi$. \end{proof}
+
+
+
 \appendix
 
 \section{Differentiation under the integral sign}
