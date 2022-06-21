@@ -523,7 +523,7 @@ where in the last line we made the substituion $y \mapsto -y$. Thus we have the 
 
 \subsection{Definition and Riemann-Lebesgue Lemma}
 
-\begin{mydef} If $u \in L^1(\bR)$ is integrable, then we define the Fourier transform $\mathcal{F}u:\bR^d \to \bC$ by $$\mathcal{F}u(\omega) = \int_{\bR^d} u(x) e^{-2\pi i \langle x, \omega \rangle } d\omega.$$
+\begin{mydef}\label{def: fourier of integrable} If $u \in L^1(\bR)$ is integrable, then we define the Fourier transform $\mathcal{F}u:\bR^d \to \bC$ by $$\mathcal{F}u(\omega) = \int_{\bR^d} u(x) e^{-2\pi i \langle x, \omega \rangle } d\omega.$$
 
 \end{mydef}
 
@@ -614,7 +614,7 @@ Thus we have shown that $$\partial_j (f*g)(x) = (f*\partial_g(x)).$$ Since $\par
 
 We define the operator $M_j$ on the set of functions $\bR^d \to \bC$ given by $$M_jf (x) = x_j f(x) \quad\text{for } x=(x_1, \ldots, x_d) \in \bR^d.$$ Clearly the $M_j$ preserve Schwarz space.
 
-\begin{thm} If $\phi:\bR^d \to \bC$ is Schwarz, then so is its Fourier transform $\mathcal{F}\phi:\bR^d \to \bC$. Moreover, for $\phi \in \cS(\bR^d)$ we have that $$ \cF(\partial_j \phi) = 2\pi i M_j (\mathcal{F} \phi) $$ and $$\partial_j (\cF \phi) = -2\pi i \cF(M_j \phi).$$
+\begin{thm}\label{thm: Fourier transform properties} If $\phi:\bR^d \to \bC$ is Schwarz, then so is its Fourier transform $\mathcal{F}\phi:\bR^d \to \bC$. Moreover, for $\phi \in \cS(\bR^d)$ we have that $$ \cF(\partial_j \phi) = 2\pi i M_j (\mathcal{F} \phi) $$ and $$\partial_j (\cF \phi) = -2\pi i \cF(M_j \phi).$$
 
 \end{thm}
 
@@ -695,7 +695,7 @@ We say that an operator $\cS(\bR^d) \to \cS(\bR^d)$ is continuous if it preserve
 
 \begin{proof} The claim about partial derivatives is obvious. For the second claim, assume that $\phi_n \to 0$ in $\cS(\bR^d)$. Then $$x^{\beta'} \partial^{\alpha} (x^{\beta} \phi_n(x))$$ is a finite sum of terms of the form $P(x)\partial^{\gamma}\phi_n(x)$ for some polynomials $P$ and indices $\gamma$. Thus by definition of Schwarz functions, we have that such terms converge to $0$ in $\cS(\bR^d)$. \end{proof}
 
-\begin{prop} The Fourier transform $\cF:\cS(\bR^d) \to \cS(\bR^d)$ is continuous. So is its inverse.
+\begin{prop}\label{prop: fourier continuous on schwarz} The Fourier transform $\cF:\cS(\bR^d) \to \cS(\bR^d)$ is continuous. So is its inverse.
 
 \end{prop}
 
@@ -743,13 +743,46 @@ We now demonstrate many tempered distributions that are not compactly supported.
 
 In particular, we get that $L^1(\bR^d) \subset \cS'(\bR^d)$ as $L^1(\bR^d)$ can be identified with those finite measures that are absolutely continuous (have a density with respect to the Lebesgue measure). In fact, we can do better.
 
-\begin{prop} For $1 \leq p \leq \infty$ we have that any $u \in L^p(\bR^d)$ gives a tempered distribution, i.e., the distribution $$u(\phi) = \int_{\bR^d} u(x)\phi(x) dx.$$
+\begin{prop}\label{prop: Lp are tempered} For $1 \leq p \leq \infty$ we have that any $u \in L^p(\bR^d)$ gives a tempered distribution, i.e., the distribution $$u(\phi) = \int_{\bR^d} u(x)\phi(x) dx.$$
 
 \end{prop}
 
 \begin{proof} We first consider the $p = \infty$ case. Note that for $\phi \in \cS(\bR^d)$ we have that $|u(x)\phi(x)| = \|u\|_{\infty} |\phi(x)|$ is integrable, thus $u(\phi)$ is a well defined linear functional on $\cS(\bR^d)$. Now suppose that $\phi_n(x) \to 0$ in $\cS(\bR^d)$. Letting $P(x) = |1+ \|x\|^2|^{d+2}$ we see that $$|u(\phi_n)| \leq \|u \|_{\infty} \| P \phi_n \|_{\infty} \int_{\bR^d} (P(x))^{-1} dx.$$ But as $\phi_n \to 0$ in $\cS(\bR^d)$ we have that the term $ \| P \phi_n \|_{\infty} \to 0$ while the other terms are finite. 
 
 Now it remains to demonstrate this result for the case $1<p<\infty$. For this, we let $P_D(x) = (1+\|x\|^2)^{D}$ for integers $D>0$ Let $q$ by such that $p^{-1} + q^{-1} = 1$. Now using Holder's inequality we get that $$|u(\phi_n)| = \| u\phi_n \|_1 \leq \|u \|_{p} \| \phi_n \|_q$$ and so we just need to show that $\| \phi_n \|_q \to 0$. To see this note that $$\| \phi_n \|_q^q = \int_{\bR^d} |\phi_n(x)|^{1/q} dx \leq \| P_D(x) \phi_n^{1/q} \|_{\infty} \int_{\bR^d} P_D(x) dx.$$ Now $P_{qD}(x)\phi_n \to 0$ uniformly (as $\phi_n \to 0$ in Schwartz space) thus $P_D(x)\phi_n^{1/q} \to 0$ uniformly for $x \in \bR^d$. Finally, if we choose $D$ large enough so that $\int_{\bR^d} P_D(x) dx < \infty$ then we are done. Note that this proof also showed that $|u(\phi)| < \infty$ for any Schwarz function $\phi$. \end{proof}
+
+\subsection{Fourier transform of a tempered distribution}
+
+\begin{mydef} Let $u \in \cS'(\bR^d)$ be a tempered distribution. Then define the Fourier transform $\cF u \in \cS'(\bR^d)$ by $$(\cF u)(\phi) = u(\cF \phi) \quad \text{for } \phi \in \cS(\bR^d)$$
+
+\end{mydef}
+
+Let us check that indeed this defines a tempered distribution, i.e., we need to show that $\cF u$ is well defined and continuous. To show that it is well defined, note that by Theorem~\ref{thm: Fourier transform properties} we have that if $\phi \in \cS(\bR^d)$ then $\cF \phi$ is indeed a Schwartz function, thus $u(\cF \phi)$ make sense. Continuity follows from Proposition~\ref{prop: fourier continuous on schwarz}, which says that if $\phi_i \to \phi$ in $\cS(\bR^d)$ then $(\cF u) (\phi_i) \to (\cF u) (\phi)$ and so by continuity of $u$ we indeed that that $\cF u$ is continuous.
+
+Let us now show that the Fourier transform of a tempered distribution coincides with previous definitions of the Fourier transform defined on various subspaces of $\cS'(\bR^d)$. First, if $\mu$ is a finite Borel measure on $\bR^d$ then, viewed as a distribution, we have that $$(\cF \mu) \phi = \int_{\bR^d} \cF \phi (\omega) d\mu(\omega) = \int_{\bR^d} \left( \int_{\bR^d} \phi(x) e^{-2\pi i \langle x ,\omega \rangle} dx \right) d\mu(\omega).$$ But now since $(x,\omega) \mapsto \phi(x)$ is an integrable function with respect to the Lebesgue measure times $\mu$, Fubini's theorem applies and we can interchange the order of integration. We thus get that $$(\cF u)\phi = \int_{\bR^d} \left(e^{-2\pi i \langle x ,\omega \rangle} d\mu(\omega) \right) \phi(x) dx.$$ Thus $\cF\mu$ is a distribution given by the function $$\cF \mu (x) = \int_{\bR^d} e^{-2\pi i \langle x ,\omega \rangle} d \mu(\omega).$$ If we swap the names of the variables $\omega$ and $x$, we get that $$\cF \mu (\omega) = \int_{\bR^d} e^{-2\pi i \langle x ,\omega \rangle} d \mu(x)$$ which makes obvious the fact that this definition coincides with the previous definition given for finite Borel measures. Moreover, it also shows that if $u \in L^1(\bR^d)$ then $\cF u$ corresponds to the original definition of a Fourier transform of an integrable functions given in Definition~\ref{def: fourier of integrable} (i.e., because $\phi \mapsto \int u(x)\phi(x) dx$ is a finite Borel measure).
+
+\begin{eg} Let $u(x) = 1$ by the constant function. It is not integrable and definitely not Schwarz, thus we have not been able to take its Fourier transform. We now can if we view it as a tempered distribution (which we can by Proposition~\ref{prop: Lp are tempered}  since $u \in L^{\infty}(\bR^d)$). For Schwarz functions $\phi$ we have that $$(\cFu)(\phi) = u(\cF \phi) = \int_{\bR^d} \cF(\phi)(\omega) d\omega = \phi(0)$$ where in the last equality we used the Fourier inversion formula for Schwarz functions given in Theorem~\ref{}. 
+
+\end{eg}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
