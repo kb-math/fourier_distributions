@@ -653,7 +653,7 @@ where the differentation under the integral sign is justified since $$|-2\pi i x
 
 \begin{eg}[Calculation of the Gaussian integral via Fourier Analysis] Continuing from Example~\ref{eg: FT of Gaussian} we have shown that if $$u(x) = C e^{-x^2}$$ where the constant $C$ is chosen so that $$\int_{\bR} u(x) dx = 1$$ then $$\mathcal{F}u(\omega) =  e^{-\pi^2 \omega^2}.$$ Applying the Fourier inversion formula, we get that $$C = u(0) = \int_{\bR} e^{-\pi^2 \omega^2} d\omega = \pi^{-1} \int_{\bR} e^{-x^2} dx = \pi^{-1}C^{-1}. $$ Thus $C = \frac{1}{\sqrt{\pi}}$, that is $$\int_{\bR} e^{-x^2} dx = \sqrt{\pi}.$$ Note that there is no circular logic here as although we needed the Fourier transform of a Gaussian, we did not need the exact value of $C$ in any of our proofs of Fourier inversion. \end{eg}
 
-\begin{corol} The Fourier Transform is a bijection $\mathcal{F}:\cS(\bR^d) \to \cS(\bR^d)$ with inverse given by $$\mathcal{F}^{-1} = \mathcal{F} \circ S$$ where $S\phi (x) = \phi(-x)$.
+\begin{corol} The Fourier Transform is a bijection $\mathcal{F}:\cS(\bR^d) \to \cS(\bR^d)$ with inverse given by $$\mathcal{F}^{-1} = \mathcal{F} \circ S = S \circ \mathcal{F}$$ where $S\phi (x) = \phi(-x)$.
 
 \end{corol}
 
@@ -761,11 +761,37 @@ Let us check that indeed this defines a tempered distribution, i.e., we need to 
 
 Let us now show that the Fourier transform of a tempered distribution coincides with previous definitions of the Fourier transform defined on various subspaces of $\cS'(\bR^d)$. First, if $\mu$ is a finite Borel measure on $\bR^d$ then, viewed as a distribution, we have that $$(\cF \mu) \phi = \int_{\bR^d} \cF \phi (\omega) d\mu(\omega) = \int_{\bR^d} \left( \int_{\bR^d} \phi(x) e^{-2\pi i \langle x ,\omega \rangle} dx \right) d\mu(\omega).$$ But now since $(x,\omega) \mapsto \phi(x)$ is an integrable function with respect to the Lebesgue measure times $\mu$, Fubini's theorem applies and we can interchange the order of integration. We thus get that $$(\cF u)\phi = \int_{\bR^d} \left(e^{-2\pi i \langle x ,\omega \rangle} d\mu(\omega) \right) \phi(x) dx.$$ Thus $\cF\mu$ is a distribution given by the function $$\cF \mu (x) = \int_{\bR^d} e^{-2\pi i \langle x ,\omega \rangle} d \mu(\omega).$$ If we swap the names of the variables $\omega$ and $x$, we get that $$\cF \mu (\omega) = \int_{\bR^d} e^{-2\pi i \langle x ,\omega \rangle} d \mu(x)$$ which makes obvious the fact that this definition coincides with the previous definition given for finite Borel measures. Moreover, it also shows that if $u \in L^1(\bR^d)$ then $\cF u$ corresponds to the original definition of a Fourier transform of an integrable functions given in Definition~\ref{def: fourier of integrable} (i.e., because $\phi \mapsto \int u(x)\phi(x) dx$ is a finite Borel measure).
 
-\begin{eg} Let $u(x) = 1$ by the constant function. It is not integrable and definitely not Schwarz, thus we have not been able to take its Fourier transform. We now can if we view it as a tempered distribution (which we can by Proposition~\ref{prop: Lp are tempered}  since $u \in L^{\infty}(\bR^d)$). For Schwarz functions $\phi$ we have that $$(\cFu)(\phi) = u(\cF \phi) = \int_{\bR^d} \cF(\phi)(\omega) d\omega = \phi(0)$$ where in the last equality we used the Fourier inversion formula for Schwarz functions given in Theorem~\ref{}. 
+\begin{eg} Let $u(x) = 1$ by the constant function. It is not integrable and definitely not Schwarz, thus we have not been able to take its Fourier transform. We now can if we view it as a tempered distribution (which we can by Proposition~\ref{prop: Lp are tempered}  since $u \in L^{\infty}(\bR^d)$). For Schwarz functions $\phi$ we have that $$(\cF u)(\phi) = u(\cF \phi) = \int_{\bR^d} (\cF\phi)(\omega) d\omega = \phi(0)$$ where in the last equality we used the Fourier inversion formula for Schwarz functions given in Theorem~\ref{}. 
 
 \end{eg}
 
+We can extend Fourier inversion to tempered distributions. We can be a bit more general. Suppose that $\cG:S(\bR^d) \to S(\bR^d)$ is a continuous linear operator (for example, $\cF$ of $\cF^{-1}$). Then we can define a dual operator $\cG^*:S'(\bR^d) \to S'(\bR^d)$, defined for $u \in \cS'(\bR^d)$ by $$(\cG^* u)(\phi) = u(\cG \phi) \quad\text{for } \phi \in \cS(\bR^d).$$  So the fourier transform on $\cS'(\bR^d)$ is just the dual of the fourier transform on $\cS(\bR^d)$, but we drop the $^*$ for convenience. 
 
+Note that $(\cG_1 \cG_2)^* = \cG_2^* \cG_1^*$ and $\operatorname{Id}_{\cS(\bR^d)}^* = \operatorname{Id}_{\cS'(\bR^d)}.$ Thus if $\cG$ is invertible then $(\cG^{-1})^* = (\cG^*)^{-1}$. This shows that the Fourier Inversion formula naturally extends to tempered distributions as follows.
+
+\begin{thm} The Fourier transform $\cF:\cS'(\bR^d) \to \cS'(\bR^d)$ is a continuous bijection with inverse given by $\cF^{-1}:S'(\bR^d) \to S'(\bR^d)$ given by $$(\cF^{-1} u)(\phi) = u(\cF^{-1} \phi) \quad \text{for } \phi \in \cS(\bR^d).$$
+
+\end{thm}
+
+\begin{eg} We already saw that $\cF 1 = \delta$ as distributions. Thus we have $\cF^{-1}\delta = 1$. But $\cF^{-1} = \cF S^*$ where $S\phi(x) = \phi(-x)$. Now $$(S^* \delta)(\phi) = \delta(S \phi) = (S\phi)(0) = \phi(0) = \delta(\phi).$$ Thus $\delta$ is symmetric, i.e., invariant number $x \mapsto -x$. Hence $\cF \delta = \cF^{-1} \delta = 1$.
+
+In summary, Fourier Transform maps $1$ to $\delta$ and vice versa.
+
+Now let $e_{\omega}:\bR^d \to \bC$ be given by $$e_{\omega}(x) = e^{2\pi i \langle \omega, x \rangle}$$ and let us compute its Fourier Transform. We have for $\phi \in \cS(\bR^d)$ that $$(\cF e_{\omega_0}) \phi = \int_{\bR^d} e_{\omega_0}(\omega) (\cF \phi)(\omega) d\omega =  \int_{\bR^d} e_{\omega}(\omega_0) (\cF \phi)(\omega) d\omega = \phi(\omega_0) $$ where in the last equality we have used the Fourier Inversion formula. Thus it follows that $$\cF e_{\omega_0} = \delta_{\omega_0}$$ where $\delta_{\omega_0}$ is the point mass at $\omega$. More generally, this means that if we have a trigonometric polynomial $$f = \sum_{i=1}^n c_i e_{\omega_i}$$ then we have $$\cF f = \sum_{i=1}^n c_i \delta_{\omega_i}.$$ In other words Fourier transform consists of point masses at frequencies with weights given by the coefficients of this trigonometric polynomial. In poetic terms, the Fourier Transform gives the \textit{frequency distribution}, which is the main philosophy of Fourier Analysis.
+
+\end{eg}
+
+\subsection{Various properties of the Fourier Transform}
+
+\begin{prop} If $\mu$ and $\nu$ are finite Borel measures on $\bR^d$, then the convolution $\mu * \nu$ is a well defined finite Borel measure given by $$(\mu * \nu) (A) = (\mu \times \nu) (\Sigma^{-1} A) \quad\text{for Borel } A \subset \bR^d$$ where $\sigma:\bR^d \times \bR^d \to \bR^d$ is the summation map $\sigma(x,y) = x+y$. We have that $$\cF( \mu \times \nu) = \cF(\mu) \cF(\nu).$$
+
+\end{prop}
+
+\begin{proof} TODO \end{proof}
+
+\begin{prop}
+
+\end{prop}
 
 
 
