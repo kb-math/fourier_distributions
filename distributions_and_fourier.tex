@@ -438,7 +438,7 @@ We define $T_{-x}\phi(y) = \phi(x+y)$ for functions $\phi$ on $\bR^d$ and $x \in
 
 The previous two lemmata now show that the convolution of a compactly supported distribution and another distribution is well defined.
 
-\begin{mydef} If $u \in \mathcal{E}'(\bR^d)$ and $v \in D'(\bR^d)$ are distributions with $v$ compactly supported then we can define their convolution $u * v \in D'(\bR^d)$ by the formula $$(u * v)(\phi) = u(x \mapsto v(y \mapsto \phi(x+y))).$$ If instead we assume $u \in D'(\bR^d)$ and $v \in \mathcal{E}'(\bR^d)$ then the conolution is also a well defined distribution.
+\begin{mydef} If $u \in \mathcal{E}'(\bR^d)$ and $v \in D'(\bR^d)$ are distributions with $u$ compactly supported then we can define their convolution $u * v \in D'(\bR^d)$ by the formula $$(u * v)(\phi) = u(x \mapsto v(y \mapsto \phi(x+y))).$$ If instead we assume $u \in D'(\bR^d)$ and $v \in \mathcal{E}'(\bR^d)$ then the conolution is also a well defined distribution.
 
 \end{mydef}
 
@@ -446,7 +446,7 @@ The previous two lemmata now show that the convolution of a compactly supported 
 
 Now consider the other case $u \in D'(\bR^d)$ and $v \in \mathcal{E}'(\bR^d)$. Then the inner map $$x \mapsto v(y \mapsto \phi(x+y))$$ has compact support since for large enough $y$, we have that $v$ and $x \mapsto \phi(y+x)$ will have disjoint supports, hence the expression $(u * v)(\phi)$ is well defined in this case. Now we show continuity. Suppose $\phi_i \to 0$ in $D(\bR^d)$. Then there is a compact set $K$ containing the supports of all the $\phi_i$. Thus each map $y \mapsto \phi_i(x+y)$ is supported on the compact set $K-x$. But for all large enough $x$, the support of $v$ is disjoint from $K-x$. Thus for large enough $x$ we have that $$v(y \mapsto (\phi_i (x+y))) = 0 \text{ for all } i \in \bN.$$ Therefore indeed the map $$x \mapsto v(y \mapsto (\phi_i (x+y)))$$ are supported on a single compact set and converge in $D(\bR^d)$ (by Lemma~\ref{lemma: T_x v continuous}) to $0$. Thus by continuity of $u$, we have that $(u*v)(\phi) \to 0$ and thus $u*v$ is continuous. \end{proof}
 
-\begin{eg} If $\delta_a$ is the point mass at $a \in \bR^d$ and $u \in D'(\bR^d)$. Then $$(\delta_a * u) = \delta_a(x \mapsto u(y \mapsto \phi(y+a))) = u(y \mapsto \phi(y+a)).$$ In particular $\delta_0 * u = u$. Now if $u(\phi) = \int f(x) \phi(x) dx$ for some locally integrable function $f$. Then $$(\delta_a * u) = \int f(y)\phi(y+a) dy = \int f(y-a)\phi(y) dy.$$ Thus $\delta_a * u$ has a density function $f(y-a)$, so convolution with $\delta_a$ translates the density by $a$. Moreover, we have that $$\delta_a * \delta_b (\phi) = \delta_a(x \mapsto \delta_b(y \mapsto \phi(x+y))) = \delta_b (y \mapsto \phi(a+y)) = \phi(a+b) = \delta_{a+b}(\phi).$$ Thus $$\delta_a * \delta_b = \delta_{a+b}.$$
+\begin{eg} If $\delta_a$ is the point mass at $a \in \bR^d$ and $u \in D'(\bR^d)$. Then $$(\delta_a * u)(\phi) = \delta_a(x \mapsto u(y \mapsto \phi(y+x))) = u(y \mapsto \phi(y+a)).$$ In particular $\delta_0 * u = u$. Now if $u(\phi) = \int f(x) \phi(x) dx$ for some locally integrable function $f$. Then $$(\delta_a * u)(\phi) = \int f(y)\phi(y+a) dy = \int f(y-a)\phi(y) dy.$$ Thus $\delta_a * u$ has a density function $f(y-a)$, so convolution with $\delta_a$ translates the density by $a$. Moreover, we have that $$\delta_a * \delta_b (\phi) = \delta_a(x \mapsto \delta_b(y \mapsto \phi(x+y))) = \delta_b (y \mapsto \phi(a+y)) = \phi(a+b) = \delta_{a+b}(\phi).$$ Thus $$\delta_a * \delta_b = \delta_{a+b}.$$
 
 \end{eg}
 
