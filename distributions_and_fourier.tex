@@ -101,6 +101,10 @@
 \newtheorem{Exercise}[dummy]{Exercise}
 \newtheorem{question}[dummy]{Question}
 
+\tableofcontents
+
+\part{Basic theory}
+
 \section{Distributions}
 
 \begin{mydef} Let $U \subset \bR^n$ be an open set. We define $$D(U) = \{ \varphi :\bR^n \to \bC ~|~ \varphi \text{ is smooth, compactly supported and } \operatorname{supp}(\varphi) \subset U  \}$$ to be the set of \textit{test functions} on $U$. Given $\varphi_1,\varphi_2, \ldots \in D(U)$ and $\varphi \in D(U)$, then we say that $\varphi = \lim_{j \to \infty} \varphi_j$ if there exists a compact set $K \subset U$ such that $\varphi$ and all $\varphi_n$ have support inside $K$ and for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \varphi_n \to \partial^{\alpha} \varphi \text{ uniformly on K.}$$ 
@@ -519,6 +523,8 @@ We now that the convolution of two $L^1$ functions is commutative. We now addres
 
 where in the last line we made the substituion $y \mapsto -y$. Thus we have the desired equality. \end{proof}
 
+\part{Fourier Transform}
+
 \section{Fourier Transform of Schwarz Functions}
 
 \subsection{Definition and Riemann-Lebesgue Lemma}
@@ -781,28 +787,26 @@ Now let $e_{\omega}:\bR^d \to \bC$ be given by $$e_{\omega}(x) = e^{2\pi i \lang
 
 \end{eg}
 
-\subsection{Various properties of the Fourier Transform}
+\subsection{Fourier transform on $L^2(\bR^d)$}
 
-\begin{prop} If $\mu$ and $\nu$ are finite Borel measures on $\bR^d$, then the convolution $\mu * \nu$ is a well defined finite Borel measure given by $$(\mu * \nu) (A) = (\mu \times \nu) (\Sigma^{-1} A) \quad\text{for Borel } A \subset \bR^d$$ where $\sigma:\bR^d \times \bR^d \to \bR^d$ is the summation map $\sigma(x,y) = x+y$. We have that $$\cF( \mu \times \nu) = \cF(\mu) \cF(\nu).$$
+By observing $u \in L^2(\bR^d)$ as a tempered distribution we may take its Fourier transform, which we now show is also in $L^2(\bR^d)$.
 
-\end{prop}
+First observe that we have a natural inner product on Schwartz space given by $$\langle \phi, \psi \rangle = \int_{\bR^d} \phi(x) \cdot \overline{\psi(x)} d(x).$$
 
-\begin{proof} TODO \end{proof}
+\begin{thm} The fourier transform $\mathcal{F}:\cS(\bR^d) \to \cS(\bR^d)$ is an isometry for this inner product. That is, for $\phi, \psi \in \cS(\bR^d)$ we have that $$\langle \phi, \psi \rangle = \langle \cF \phi,\cF \psi \rangle.$$ 
 
-\begin{prop}
+\end{thm}
 
-\end{prop}
+\begin{proof} We only need to show the $\phi = \psi$ case. Note that the multiplication formula can be written as $$\langle \cF \phi, \overline{\psi} \rangle = \langle \phi, \overline{\cF \psi } \rangle.$$ Now we let $\psi = \overline{\cF \phi}$ to obtain that  $$\langle \cF \phi, \cF \phi \rangle = \langle \phi, \overline{\cF \psi} \rangle.$$ Observe that $$\overline{\cF(\psi)(\omega)} = \int_{\bR^d} \overline{\psi(x)} e^{2\pi i \omega \cdot x} dx = \cF^{-1} \overline{\psi} (\omega)$$ by the Fourier inversion formula (with $x$ and $\omega$ swapped). In other words $$\overline{\cF(\psi)} = \cF^{-1} (\overline{\psi}) = \cF^{-1} \cF \phi = \phi$$ which completes the proof. \end{proof}
 
+\begin{thm} If $u \in L^2(\bR^d)$ is considered as a tempered distribution, then $\cF u \in L^2(\bR^d)$ and $\cF$ thus becomes an isometry on $L^2(\bR^d)$.
 
+\end{thm}
 
-
-
-
-
-
+\begin{proof} We first note that $\cS(\bR^d)$ is $L^2$-dense in the complete metric space $L^2(\bR^d)$ and thus $\cF$ extends uniquely to an isometry $\widetilde{\cF}:L^2(\bR^d) \to L^2(\bR^d)$. Now Let $u \in L^2(\bR^d)$ and choose  $u_j \in \cS(\bR^d)$ so that $u_j \to u$ in $L^2(\bR^d)$. Thus $\cF u_j \to \widetilde{\cF} u$ in $L^2(\bR^d)$. By Cauchy-Schwartz we have that $u_j(\phi) \to u (\phi)$ for all Schwartz functions $\phi$. For any $\phi \in \cS(\bR^d)$ we now have that $$\cF u (\phi) = u(\cF \phi) = \lim_{j \to \infty} u_j(\cF \phi) = \lim_{j \to \infty} \cF u_j (\phi) = \widetilde{\cF} u(\phi).$$ This shows that $\cF u = \widetilde{\cF}u$ and thus $\cF u \in L^2(\bR^d)$. \end{proof}
 
 
-
+\part{Sobolev Spaces}
 
 
 
@@ -811,6 +815,12 @@ Now let $e_{\omega}:\bR^d \to \bC$ be given by $$e_{\omega}(x) = e^{2\pi i \lang
 
 
 
+
+
+
+
+
+\part{Appendices}
 
 \appendix
 
