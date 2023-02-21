@@ -808,6 +808,78 @@ First observe that we have a natural inner product on Schwartz space given by $$
 
 \part{Sobolev Spaces}
 
+\section{Sobolev spaces definition}
+
+\begin{mydef} For integers $k \geq 0$ and $\Omega \subset \bR^d$ open, we define the \textit{Sobolev space} $H^k(\Omega)$ denote the space of those $u \in L^2(\Omega)$ such that whenever $|\alpha| \leq k$ then the distribution $D^{\alpha}u$ is an element off $L^2(\Omega)$.
+
+We define an inner product on $H^k(\Omega)$ given by $$\langle u, v \rangle_{H_k(\Omega)} = \sum_{0 \leq |\alpha| \leq k} \langle D^{\alpha}u, D^{\alpha}v \rangle.$$
+
+\end{mydef}
+
+\begin{lemma} The inner product $H_k(\Omega)$ is a Hilbert space (metric is complete).
+
+\end{lemma}
+
+\begin{proof} We may isometrically embed $H_k(\Omega)$ into the direct sum of finitely many Hilbert spaces $\oplus_{\alpha} L^2(\Omega)$ via the mapping $$u \mapsto  \oplus_{\alpha} (D^{\alpha}u).$$ It thus remains to show that the image of this embedding is closed. To see this, suppose that $u_1,u_2, \ldots \in H^k(\Omega)$ is such that $v_{\alpha} := \lim_{i \to \infty} D^{\alpha} u_i$ exists in $L^2(\Omega)$ for all $0 \leq |\alpha| \leq k$. Then $u_i \to v_0 \in L^2(\Omega)$ and thus $u_i \to v_0$ as a distribution as well. It follows that the distribution $D^{\alpha} u_i$ converges to the distribution $D^{\alpha} v_0$. But we know that $D^{\alpha} u_i$ converges to $v_{\alpha}$ in $L^2$ and thus also the convergence takes place as a distribution. This means that $v_{\alpha} = D^{\alpha}v_0$ as distributions and thus also as element of $L^2$. This means that $\iota(u_1),\iota(u_2), \ldots $ converges to $\iota(v_0)$ as desired. \end{proof}
+
+\begin{eg} Let $I = (-1,1)$ be an open interval. Note that the function $\mathds{1}_I$ is in $H^k(\Omega)$ for all $\Omega$ as all its derivatives are $0$. But it is not in $H^k(\bR^d)$ for $k \geq 1$ since its derivative is a signed measure supported on $\{-1,1\}$. So the underlying domain matters. The function $u(x) = \mathds{1}_I |x|$ is in $H^1(-1,1)$ even though it is not differentiable. It is not in $H^2(-1,1)$.
+
+\end{eg}
+
+\begin{eg} Let $B = B(0,1) \subset \bR^d$ be the open ball of radius $1$ around $0 \in \bR^d$. Fix $\alpha>0$ and let $u:B \to \bR \cup \{ \infty\}$ be the map given by $u(x) = \|x\|^{-\alpha}$. We ask now for which $\alpha>0$ we have that $u \in H^1(B)$. Note if $S_r$ is a sphere of radius $r$ then $\int_{S_r} u(x)^2 dS = C r^{-2\alpha + d-1}  $ for some constant $C$. Thus by the coarea formula (integrate of $S_r$ then over $r$) we have that $$\int_B u(x)^2 dx = \int_0^1 Cr^{-2\alpha + d -1} dr $$ and this is finite if $-2\alpha + d >0$. So for $\alpha < \frac{d}{2}$ we have that $u \in L^2(B)$. 
+
+We now compute the weak partial derivatives of $u$ (in the case $\alpha < \frac{d}{2}$, so $u$ is a distribution). Let $\phi \in D(B(0,1))$ be a test function. Then 
+
+\begin{align*} \partial_j u (\phi) &= - \int_B u(x) (\partial_j \phi)(x) dx \\ &= -\int_B \partial_j (u \phi)(x) dx + \int_B (\partial_j u)(x) \phi(x) dx. \end{align*}
+
+Note that by dominated convergence theorem we have that $$\int_B \partial_j (u \phi)(x) dx \lim_{r \to 0} \int_{B_r} \partial_j(u \phi)(x) dx$$ where $B_r = \{ x \in B ~|~ \|x\| \geq r \}$. We can compute this using the divergence theorem (applied to the vector field $u(x)\phi(x) e_j$ where $e_j$ is the $j$-th basis vector for $\bR^d$) to get that $$\left| \int_{B_r} \partial_j(u \phi)(x) dx \right| = \left| \int_{|x| = r} u \phi(x) e_j \cdot \hat{n} dS \right| \leq C r^{-\alpha} r^{d-1} \|\phi\|_{\infty}. $$
+
+Now notice that this converges to $0$ as $r \to 0$ provided that $\alpha < d-1$. Thus we have shown that in the case $\alpha < d-1$ we have that the weak derivative of $u$ is the usual derivative $\partial_j u$ (undefined at $0$). We now want $\partial_j u \in L^2(B)$. For this, we can estimate $$|\partial_j u| = |\partial_j (\sum x_i^2)^{-\alpha/2}| \leq C |x_j| (\sum x_i^2 )^{-\alpha/2 - 1} =C |x_j| \|x\|^{-\alpha - 2}  \leq C \|x\|^{-\alpha - 1}$$ thus it is sufficient to have $\alpha + 1 < \frac{d}{2}$.
+
+In summary, this means that $u \in H^1(B)$ if $\alpha < \frac{d}{2} - 1$. For example, the Newton potential in $\bR^3$ given by $u(x) = \|x\|^{-1}$ is in $H^1(B)$
+
+\end{eg}
+
+\begin{eg} Letting $B = B(0,1)$,  we can give an example of $u \in H^1(B)$ such that $u$ is unbounded on any non-empty open subset of $B$, thus at no point differentiable despite having a weak derivative in $L^2(B)$. First, choose $0<\alpha < \frac{d}{2} - 1$ as in the previous example. Hence $|x - q_k|^{-\alpha} \in H^1(B)$ for each point $q_k \in B(0,1)$. Thus if $q_1, q_2, \ldots$ is a dense subset of $B(0,1)$ then $$u(x) = \sum_{k=1}^{\infty} \frac{1}{2^k} |x - q_k|^{-\alpha} \in H^1(B).$$ However, $u$ is unbounded on any open subset as $\lim_{x \to q_k} u(x) = \infty$ for all $k$.
+
+\end{eg}
+
+Note that if $\Omega = \bR^d$, we may replace distribution with tempered distribution in the above definition. This is convenient since we may then take the Fourier transform of an element in $H^k(\bR^d)$. 
+
+\section{Fourier Transform characterization of Sobolev Space}
+
+We now seek to classify $H^k(\bR^d)$ in terms of the Fourier transform. Recall that if $u$ is a tempered distribution, then so is $M_j u$ where $M_j u (\phi) := u(M_j \phi)$ where $M_j \phi (x) = x_j \phi(x)$ is the multiplication operator. We define $M^{\alpha} = M_1^{\alpha_1} \cdots M_d^{\alpha_d}$ for $\alpha = (\alpha_1, \ldots, \alpha_d) \in \bZ_{\geq 0}^d$.
+
+\begin{lemma} Let $u$ be a tempered distribution. Then $$\cF(D^{\alpha}u) = (2\pi i )^{|\alpha|} M_j^{\alpha} \cF u.$$
+
+\end{lemma}
+
+\begin{corol} Let $u \in L^2(\bR^d)$. Then $D^{\alpha}u \in L^2(\bR^d)$ if and only if $$\int_{\bR^d} |\cF (\omega)|^2 |\omega^{\alpha}|^2 d\omega < \infty.$$
+
+\end{corol}
+
+\begin{proof} First suppose $D^{\alpha}u \in L^2(\bR^d)$. This means that $\cF(D^{\alpha}u) \in L^2(\bR^d)$. Then we have by the lemma above that $M_j^{\alpha} \cF u \in L^2(\bR^d)$ and thus, by considering this tempered distribution as a function, we see that it is square-integrable, as desired. The converse follows from also applying this lemma and using the fact that the Fourier transform is a bijection on $L^2(\bR^d)$. \end{proof}
+
+\begin{corol} Let $u \in L^2(\bR^d)$. Then $u \in H^k(\bR^d)$ if and only if $$\int_{\bR^d} |\cF u(\omega)|^2 (1+\|\omega\|)^{2k} d\omega < \infty.$$ 
+
+\end{corol}
+
+We let $L^2(\bR^d, \mu)$ denote the $L^2$ space for a measure $\mu$ on $\bR^d$. We let $L^2(\bR^d, f(\omega)d\omega)$ denote the $L^2$ space of the measure $\mu$ given by $$\int \phi(\omega) d\mu(\omega) = \int  \phi(\omega) f(\omega) d\omega.$$
+
+\begin{prop} The Fourier Transform provides a linear homeomorphism $$\cF: H^k(\bR^d) \to L^2_k(\bR^d) := L^2(\bR^d, (1+\|\omega\|)^{2k} d\omega).$$
+
+\end{prop}
+
+\begin{proof} It is a linear isomorphism by the above corollary. Let us now show continuity of this map and its inverse. For $u \in H^k(\bR^d)$ we have that 
+
+\begin{align*} \| u \|^2_{H_k} &= \sum_{\alpha} \| D^{\alpha}u\|_{L^2}^2 \\
+&= \sum_{\alpha} \|\cF D^{\alpha}u\|_{L^2}^2 \\
+&= \sum_{\alpha} (2\pi)^{|\alpha|}\|M^{\alpha} \cF u\|_{L^2}^2 \\ 
+&= \int |\cF u (\omega)|^2 \sum_{\alpha} 2\pi^{|\alpha|}|\omega^{2\alpha}| d\omega \end{align*}
+
+where we always sum over those $\alpha$ such that $0 \leq |\alpha| \leq 2k$.
+
+So it is enough to show that $\sum_{\alpha} |\omega^{2\alpha}|$ and $(1+\|\omega\|)^{2k}$ are Lipschitz equivalent. This can be seen from the estimate $$|\omega^{2\alpha}| \leq 1+|\omega|^{2\alpha} \leq (1+\|\omega\|)^{2\alpha} \leq (1+\|\omega \|)^{2k}$$ as well as from an expansion of $(1+\|\omega\|)^{2k}$ into monomials. \end{proof}
 
 
 
