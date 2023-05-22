@@ -810,7 +810,7 @@ First observe that we have a natural inner product on Schwartz space given by $$
 
 \section{Sobolev spaces definition}
 
-\begin{mydef} For integers $k \geq 0$ and $\Omega \subset \bR^d$ open, we define the \textit{Sobolev space} $H^k(\Omega)$ denote the space of those $u \in L^2(\Omega)$ such that whenever $|\alpha| \leq k$ then the distribution $D^{\alpha}u$ is an element off $L^2(\Omega)$.
+\begin{mydef} For integers $k \geq 0$ and $\Omega \subset \bR^d$ open, we define the \textit{Sobolev space} $H^k(\Omega)$ denote the space of those $u \in L^2(\Omega)$ such that whenever $|\alpha| \leq k$ then the distribution $D^{\alpha}u$ is an element of $L^2(\Omega)$.
 
 We define an inner product on $H^k(\Omega)$ given by $$\langle u, v \rangle_{H_k(\Omega)} = \sum_{0 \leq |\alpha| \leq k} \langle D^{\alpha}u, D^{\alpha}v \rangle.$$
 
@@ -820,7 +820,7 @@ We define an inner product on $H^k(\Omega)$ given by $$\langle u, v \rangle_{H_k
 
 \end{lemma}
 
-\begin{proof} We may isometrically embed $H_k(\Omega)$ into the direct sum of finitely many Hilbert spaces $\oplus_{\alpha} L^2(\Omega)$ via the mapping $$u \mapsto  \oplus_{\alpha} (D^{\alpha}u).$$ It thus remains to show that the image of this embedding is closed. To see this, suppose that $u_1,u_2, \ldots \in H^k(\Omega)$ is such that $v_{\alpha} := \lim_{i \to \infty} D^{\alpha} u_i$ exists in $L^2(\Omega)$ for all $0 \leq |\alpha| \leq k$. Then $u_i \to v_0 \in L^2(\Omega)$ and thus $u_i \to v_0$ as a distribution as well. It follows that the distribution $D^{\alpha} u_i$ converges to the distribution $D^{\alpha} v_0$. But we know that $D^{\alpha} u_i$ converges to $v_{\alpha}$ in $L^2$ and thus also the convergence takes place as a distribution. This means that $v_{\alpha} = D^{\alpha}v_0$ as distributions and thus also as element of $L^2$. This means that $\iota(u_1),\iota(u_2), \ldots $ converges to $\iota(v_0)$ as desired. \end{proof}
+\begin{proof} We may isometrically embed $H_k(\Omega)$ into the direct sum of finitely many Hilbert spaces $\oplus_{\alpha} L^2(\Omega)$ via the mapping $$\iota:u \mapsto  \oplus_{\alpha} (D^{\alpha}u).$$ It thus remains to show that the image of this embedding is closed. To see this, suppose that $u_1,u_2, \ldots \in H^k(\Omega)$ is such that $v_{\alpha} := \lim_{i \to \infty} D^{\alpha} u_i$ exists in $L^2(\Omega)$ for all $0 \leq |\alpha| \leq k$. Then $u_i \to v_0 \in L^2(\Omega)$ and thus $u_i \to v_0$ as a distribution as well. It follows that the distribution $D^{\alpha} u_i$ converges to the distribution $D^{\alpha} v_0$. But we know that $D^{\alpha} u_i$ converges to $v_{\alpha}$ in $L^2$ and thus also the convergence takes place as a distribution. This means that $v_{\alpha} = D^{\alpha}v_0$ as distributions and thus also as element of $L^2$. This means that $\iota(u_1),\iota(u_2), \ldots $ converges to $\iota(v_0)$ as desired. \end{proof}
 
 \begin{eg} Let $I = (-1,1)$ be an open interval. Note that the function $\mathds{1}_I$ is in $H^k(\Omega)$ for all $\Omega$ as all its derivatives are $0$. But it is not in $H^k(\bR^d)$ for $k \geq 1$ since its derivative is a signed measure supported on $\{-1,1\}$. So the underlying domain matters. The function $u(x) = \mathds{1}_I |x|$ is in $H^1(-1,1)$ even though it is not differentiable. It is not in $H^2(-1,1)$.
 
@@ -845,6 +845,20 @@ In summary, this means that $u \in H^1(B)$ if $\alpha < \frac{d}{2} - 1$. For ex
 \end{eg}
 
 Note that if $\Omega = \bR^d$, we may replace distribution with tempered distribution in the above definition. This is convenient since we may then take the Fourier transform of an element in $H^k(\bR^d)$. 
+
+\section{Sobolev subspace $H_0^k$}
+
+\begin{mydef} For an open set $U$ let $H_0^k(U)$ denote the closure of $D(U) = C_c^{\infty}(U)$ in $H^k(U)$.
+
+\end{mydef}
+
+\begin{eg} Let us show that the closed subspace $H_0^k(U)$ can be a proper subspace of $H_k(U)$. Consider $U = (0,1)$ and $k=1$. We wish to construct a smooth $u \in H^1(U)$ so that $u \neq 0$ and $\langle u, \phi \rangle =0$ for all $\phi \in D(U)$, as it will then follow that $\langle u, v \rangle = 0$ for all $v \in H_0^1(U)$ and hence $u \notin H_0^1(U)$. To do this, note that $$\langle u, \overline{\phi} \rangle = \int_0^1 u\phi dx + \int_0^1 u' \phi' dx$$ and by the identity $(u'\phi)' = u''\phi + u' \phi'$ together with the fact that $\phi(0) = \phi(1) = 0$  we have 
+
+$$ \langle u, \overline{\phi} \rangle = \int_0^1 (u - u'') \phi dx.$$
+
+So it suffices to select a smooth function so that $u = u''$. 
+\end{eg}
+
 
 \section{Fourier Transform characterization of Sobolev Space}
 
