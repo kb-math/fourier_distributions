@@ -181,7 +181,11 @@ Likewise we get that the same statement when swapping $\phi_n$ with $\psi_n$ and
 
 \end{mydef}
 
-For $K \subset \bR^n$ compact we define the norm $$\| \phi \|_{C^k} = \sup_{x \in K, |\alpha| \leq k} |\partial^{\alpha} \phi| (x).$$ Note that $C_0^k(K)$ is a Banach space and hence a Frechet space with respect to this norm. We define $C_0^{\infty}(K)$ to be the smooth functions with support inside $K$ and for $\phi \in C_0^{\infty}(K)$ we define $$\|\phi\|_{C_0^{\infty}(K)} = \sum_{k=0}^{\infty} 2^{-k} \min\{1, \| \phi \|_{C^k} \} $$ and we note that $d(\phi_1, \phi_2) = \| \phi_1 - \phi_2 \|_{C_0^{\infty}(K)}$ is an invariant metric that is complete. Moreover, a sequence of test functions $\phi_1, \phi_2, \ldots \in C_0^{\infty}(K)$ converge to $\phi \in C_0^{\infty}(K)$ if and only if for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \phi_i \to \phi$$ uniformly on $K$. In other words, a sequence of test functions in $D(U)$ converges if they all have support inside the same compact subset $K \subset U$ and they converge in $C_0^{\infty}(K)$ with respect to this metric. This in particular verifies that $C_0^{\infty}(K)$ is a topological vector space with respect to this metric (the continuity of addition and scalar multiplcation inherits from the same properties of the norms $\|\cdot \|_{C_k}$).
+For $K \subset \bR^n$ compact and $k \in \bZ_{\geq 0}$ we define the norm $$\| \phi \|_{C^k} = \sup_{x \in K, |\alpha| \leq k} |\partial^{\alpha} \phi (x)|.$$ We define $C_0^{k}(K)$ to be the $C^k$ functions $\bR^n \to \bC$ with support inside $K$ (where $k \in \bZ_{\geq 0} \cup \{\infty\}$). Note that $C_0^k(K)$ is a Banach space and hence a Frechet space with respect to this norm for $k < \infty$. For $\phi \in C_0^{\infty}(K)$ we define $$\|\phi\|_{C_0^{\infty}(K)} = \sum_{k=0}^{\infty} 2^{-k} \min\{1, \| \phi \|_{C^k} \} $$ and we note that $d(\phi_1, \phi_2) = \| \phi_1 - \phi_2 \|_{C_0^{\infty}(K)}$ is an invariant metric that is complete. Moreover, a sequence of test functions $\phi_1, \phi_2, \ldots \in C_0^{\infty}(K)$ converge to $\phi \in C_0^{\infty}(K)$ if and only if for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \phi_i \to \phi$$ uniformly on $K$. In other words, a sequence of test functions in $D(U)$ converges if they all have support inside the same compact subset $K \subset U$ and they converge in $C_0^{\infty}(K)$ with respect to this metric. This in particular verifies that $C_0^{\infty}(K)$ is a topological vector space with respect to this metric (the continuity of addition and scalar multiplcation inherits from the same properties of the norms $\|\cdot \|_{C_k}$).
+
+\begin{remark} \textbf{Warning!:} Note that $\|\cdot \|_{C_0^{\infty}(K)}$ is not a norm because it fails the scaling property. In fact, it is bounded by $2$. So we cannot say that $C_0^{\infty}(K)$ is a Banach space (TODO: really is not?).
+
+\end{remark}
 
 \begin{thm}[Theorem 3.8 of \cite{DK}] \label{thm: distributions are lipschitz on compact sets} Let $U \subset \bR^d$ be open. A linear functional $f:D(U) \to \bC$ is a distribution (in $D'(U)$) if and only if for all compact subsets $K \subset U$ there exists $c>0$ and $k \in \bZ_{\geq 0}$ such that
 
@@ -191,16 +195,16 @@ $$ |f(\phi)| \leq c \|\phi\|_{C^k} \quad \text{for all } \phi \in C_0^{\infty}(K
 
 \begin{proof} Easy to see that any functional satisfying this property is a distribution. To see the converse, suppose that this conditional fails for some compact set $K \subset U$. Then for each positive integer $c = k$ we have $$|f(\phi_k)| > k \|\phi_k\|_{C^k}$$ for some $\phi_k \in C_0^{\infty}(K)$. Let $\psi_k = \frac{1}{|f(\phi_k)|} \phi_k$. Thus $|f(\psi_n)| = 1$ but we have $$|\psi_n|_{C^k} \leq |\psi_n|_{C^n} < \frac{1}{n}$$ for all $n \geq k$ so $\psi_n \to 0$ on $C_0^{\infty}(K)$, which shows that $f$ is not continuous, i.e., not a distribution. \end{proof}
 
-\begin{thm}[Uniform boundedness] Let $V$ be a Frechet space and suppose that $\mathcal{F}$ is a set of continuous linear functions $f:V \to \bC$ such that $\{ f(x) ~|~ f \in \mathcal{F} \}$ is bounded in $\bC$ for all $x \in V$. Then there is an open set $U \subset V$ with $0 \in V$ such that $|f(u)| \leq 1$ for all $f \in \mathcal{F}$ and $u \in U$. \end{thm}
+\begin{thm}[Uniform boundedness] Let $V$ be a Frechet space and suppose that $\mathcal{F}$ is a set of continuous linear functions $f:V \to \bC$ such that $\{ f(x) ~|~ f \in \mathcal{F} \}$ is bounded in $\bC$ for all $x \in V$. Then there is an open set $U \subset V$ with $0 \in U$ such that $|f(u)| \leq 1$ for all $f \in \mathcal{F}$ and $u \in U$. \end{thm}
 
 
-\begin{proof} Let $$U_n = \{ x \in V ~|~ |f(x)| > n \text{ for some } f \in \mathcal{F} \}$$. Now $U_n$ is an open set. For each $x \in V$, we have that there exists $n$ such that $|f(x)| \leq n$ for all $f \in \mathcal{F}$, which means that $x \notin U_n$. Consequently $$\emptyset = \bigcap_{n=1}^{\infty} U_n.$$ Thus not all $U_n$ can be dense by Baire's theorem. As some $U_n$ is dense, we have a non-empty open set $V$ such that $V \cap U_n = \emptyset$. Choosing $v_0 \in V$, we have that if $u \in V-v_0$ then $u = v-v_0$ for some $v \in V$ and so $$|f(u)| = |f(v) - f(v_0)| \leq |f(v)| + |f(v_0)| \leq 2n.$$ Thus we may set $U = \frac{1}{2n}(V-v_0)$, which is open by definition of topological vector space. \end{proof}
+\begin{proof} Let $$U_n = \{ x \in V ~|~ |f(x)| > n \text{ for some } f \in \mathcal{F} \}.$$ Now $U_n$ is an open set. For each $x \in V,$ we have that there exists $n$ such that $|f(x)| \leq n$ for all $f \in \mathcal{F}$, which means that $x \notin U_n$. Consequently $$\emptyset = \bigcap_{n=1}^{\infty} U_n.$$ Thus not all $U_n$ can be dense by Baire's theorem. As some $U_n$ is not dense, we have a non-empty open set $U'$ such that $U' \cap U_n = \emptyset$. Choosing $u_0' \in U'$, we have that if $u \in U'-u_0'$ then $u = u'-u'_0$ for some $u' \in U'$ and so $$|f(u)| = |f(u') - f(u'_0)| \leq |f(u')| + |f(u'_0)| \leq 2n.$$ Thus we may set $U = \frac{1}{2n}(U'-u_0')$, which is open by definition of topological vector space. \end{proof}
 
 \begin{thm}[Lemma 5.4 in \cite{DK}, no proof given there] Let $f_j$ be a sequence of distributions in $D'(U)$, where $U \subset \bR^d$ is open such that $f_j(\phi)$ is bounded for all $\phi \in D(U)$. Then for all compact $K \subset U$ there exists a constant $c>0$ and $k \in \bZ_{\geq 0}$ such that $$\|f_j(\phi)\| \leq c \| \phi \|_{C_0^k(K)} \quad \text{ for all } j \in \bN \text{ and } \phi \in C_0^{\infty}(K).$$
 
 \end{thm}
 
-\begin{proof} We apply the uniform boundedness principle above. This implies that there is an open neighbhourhood $\mathcal{U} \subset C_0^{\infty}(K)$ such that $f_j(u) \leq 1$ for all $u \in \mathcal{U}$ and $j \in \bN$. So there exists an $R$ such that if $\| \phi \|_{C_0^{\infty}(K)} < R$ then $f_j(\phi) \leq 1$. Now take $k$ large enough so that $$\sum_{i=k}^{\infty} 2^{-i} < \frac{R}{2}.$$ This means that if $\|\phi \|_{C_0^{k}(K)} < \frac{R}{2}$ then $\| \phi \|_{C_0^k(K)} < R$ and so $f_j(\phi) < 1$. As $\|\cdot \|_{C_0^k(K)}$ is a norm on $C_0^{\infty}(K)$, we have completed the proof with $c= \frac{2}{R}$.  \end{proof}
+\begin{proof} We apply the uniform boundedness principle above. This implies that there is an open neighbhourhood $\mathcal{U} \subset C_0^{\infty}(K)$ such that $f_j(u) \leq 1$ for all $u \in \mathcal{U}$ and $j \in \bN$. So there exists an $R$ such that if $\| \phi \|_{C_0^{\infty}(K)} < R$ then $f_j(\phi) \leq 1$. Now take $k$ large enough so that $$\sum_{i=k}^{\infty} 2^{-i} < \frac{R}{2}.$$ This means that if $\|\phi \|_{C_0^{k}(K)} < \frac{R}{2}$ then $\| \phi \|_{C_0^{\infty}(K)} < R$ and so $f_j(\phi) < 1$. As $\|\cdot \|_{C_0^k(K)}$ is a norm on $C_0^{\infty}(K)$, we have completed the proof with $c= \frac{2}{R}$.  \end{proof}
 
 \begin{thm} Let $U \subset \bR^d$ be an open set and suppose that $f_1,f_2, \ldots \in D(U)$ is a sequence of distributions such that $\lim_{j\to \infty} f_j(\varphi)$ exists in $\bC$ for all $\varphi \in D(U)$. 
 \begin{enumerate}
@@ -228,7 +232,7 @@ This lemma shows that if $f|_V = 0$ for all $V \in \mathcal{V}$, where $\mathcal
 
 \end{mydef}
 
-\begin{eg} Consider the distribution $f \in D'(\bR_{>0})$ given by $$f(\phi) = \int_0^{\infty} e^{1/x^2} \phi(x) dt.$$ It is indeed a distribution since $e^{-1/x^2}$ is integrable on each compact subset of $\bR_{>0}$, but on any other compact subset containing $0$. This distribution is not the restriction of any distribution $g \in D(\bR)$. To see this, suppose that it was. Now let $\phi_n = \phi(x+\frac{1}{n})$ where $\phi:\bR \to [0,1]$ is smooth and has support in $[0,1]$ and $\phi(x) > e^{-1/x}$ on $(0,\frac{1}{2})$. Thus $$g(\phi) = \lim_{n \to \infty} g(\phi_n) = \lim_{n \to \infty} f(\phi_n) = \infty,$$ a contradiction (distributions have finite values in $\bC$).
+\begin{eg} Consider the distribution $f \in D'(\bR_{>0})$ given by $$f(\phi) = \int_0^{\infty} e^{1/x^2} \phi(x) dt.$$ It is indeed a distribution since $e^{1/x^2}$ is integrable on each compact subset of $\bR_{>0}$ (but is not on any open set containing $0$). This distribution is not the restriction of any distribution $g \in D(\bR)$. To see this, suppose that it was. Now let $\phi_n = \phi(x+\frac{1}{n})$ where $\phi:\bR \to [0,1]$ is smooth and has support in $[0,1]$ and $\phi(x) > e^{-1/x}$ on $(0,\frac{1}{2})$. Thus $$g(\phi) = \lim_{n \to \infty} g(\phi_n) = \lim_{n \to \infty} f(\phi_n) = \infty,$$ a contradiction (distributions have finite values in $\bC$).
 
 \end{eg}
 
@@ -278,11 +282,11 @@ We now aim to classify $\mathcal{E}'(X)$ and find a natural embedding into $D'(X
 
 \end{lemma}
 
-\begin{proof} If $X = \bR^d$, just take a compact ball of radius $n$. Otherwise, let $C = \bR^d \setminus X$. Note that $C$ is closed. Now let $K_n \subset X$ be those points in ball of radius $n$ around $0$ with distance at most $\frac{1}{n}$ to $C$. Clearly $X = \bigcup_{n=1}^{\infty} K_n$ since any point not in $C$ must have positive distance to $C$ as $C$ is closed. Now let $K \subset X$ be any open set. Then $K \cap C = \emptyset$ and it follows that $K$ has positive distance to $C$, as otherwise there is $k_n \in K$ and $c_n \in C$ such that $d(k_n, c_n) \to 0$ and by taking a subsequence we assume $k_n \to k \in K$, thus $d(k, C) = 0$, contradicting the disjointness of $K$ and $C$. It follows that $K \subset K_n$ for large enough $n$ as $K$ is bounded and has positive distance to $C$.
+\begin{proof} If $X = \bR^d$, just take a compact ball of radius $n$. Otherwise, let $C = \bR^d \setminus X$. Note that $C$ is closed. Now let $K_n \subset X$ be those points in the closed ball of radius $n$ around $0$ with distance at most $\frac{1}{n}$ to $C$. Clearly $X = \bigcup_{n=1}^{\infty} K_n$ since any point not in $C$ must have positive distance to $C$ as $C$ is closed. Now let $K \subset X$ be any compact set. Then $K \cap C = \emptyset$ and it follows that $K$ has positive distance to $C$, as otherwise there is $k_n \in K$ and $c_n \in C$ such that $d(k_n, c_n) \to 0$ and by taking a subsequence we assume $k_n \to k \in K$, thus $d(k, C) = 0$, contradicting the disjointness of $K$ and $C$. It follows that $K \subset K_n$ for large enough $n$ as $K$ is bounded and has positive distance to $C$.
 
 \end{proof}
 
-\begin{lemma}\label{lemma: E' embeds in D'} The map $\iota:\mathcal{E}'(X) \to 'D(X)$ is well defined, continuous (preserves limits) and injective.
+\begin{lemma}\label{lemma: E' embeds in D'} The map $\iota:\mathcal{E}'(X) \to D'(X)$ is well defined, continuous (preserves limits) and injective.
 
 \end{lemma}
 
@@ -296,7 +300,7 @@ The next example shows that this embedding is not surjective.
 
 \end{eg}
 
-\begin{lemma} Let $f \in D'(X)$ be a distribution with support $K$ such that $K \subset X$. Then $f$ extends to an element of $\mathcal{E}'(X)$ (is in the image of the map $\iota$).
+\begin{lemma} Let $f \in D'(X)$ be a distribution with compact support $K$ such that $K \subset X$. Then $f$ extends to an element of $\mathcal{E}'(X)$ (is in the image of the map $\iota$).
 
 \end{lemma}
 
@@ -477,7 +481,7 @@ Next, we attempt to compute $\psi * u$ where $\psi \in C_0^{\infty}(\bR)$ is a c
 
 Next, we show that the convolution of a compactly supported smooth function and a distribution is a smooth function (more precisely, the distribution corresponding to a smooth function).
 
-\begin{thm}  Let $\psi \in C_0^{\infty}(\bR^d)$ and let $u \in D'(\bR^d)$. Then $\psi * u \in C^{\infty}(\bR^d)$, where we embed $C^{\infty}(\bR^d)$ into $D'(\bR)$ as usual. In particular, $$(\psi * u) (x) = u(y \mapsto \psi(y-x)) .$$
+\begin{thm} \label{thm: convolution of function with distribution is function}  Let $\psi \in C_0^{\infty}(\bR^d)$ and let $u \in D'(\bR^d)$. Then $\psi * u \in C^{\infty}(\bR^d)$, where we embed $C^{\infty}(\bR^d)$ into $D'(\bR)$ as usual. In particular, $$(\psi * u) (x) = u(y \mapsto \psi(y-x)) .$$
 
 \end{thm}
 
@@ -491,7 +495,7 @@ Thus the distribution $\psi * u$ has a density function $x \mapsto u(y \mapsto \
 
 \subsection{Applications: approximating a distribution with a smooth function}
 
-\begin{lemma} If $u_n \to u$ in $\mathcal{E}'(\bR)$ then $u_n * v \to u_n * v$ in $D'(\bR)$ for $v \in D'(\bR)$. 
+\begin{lemma}\label{lemma: convolution continuous} If $u_n \to u$ in $\mathcal{E}'(\bR)$ then $u_n * v \to u * v$ in $D'(\bR)$ for $v \in D'(\bR)$.
 
 \end{lemma}
 
@@ -501,17 +505,43 @@ Thus the distribution $\psi * u$ has a density function $x \mapsto u(y \mapsto \
 
 We can now show that any distribution is a limit of compactly supported smooth functions.
 
-\begin{thm} The space $C_0^{\infty}(\bR^d)$ is a dense subspace of $D'(\bR^d)$. Moreover, if $u \in D'(\bR^d)$ has compact support, then there exists a compact set $K \supset \operatorname{supp} u$ and $\theta_n \in C_0^{\infty}(\bR^d)$  such that all $\theta_n$ have support inside $K$ and $\theta_n \to u$ in $\mathcal{E}'(\bR^d)$.
+\begin{thm} \label{thm: approximate distribution by functions} The space $C_0^{\infty}(\bR^d)$ is a dense subspace of $D'(\bR^d)$. Moreover, if $u \in D'(\bR^d)$ has compact support, then there exists a compact set $K \supset \operatorname{supp} u$ and $\theta_n \in C_0^{\infty}(\bR^d)$  such that all $\theta_n$ have support inside $K$ and $\theta_n \to u$ in $\mathcal{E}'(\bR^d)$.
 
 \end{thm}
 
-\begin{proof} Let $u \in D'(\bR^d)$ be a distribution. We can find a sequence of functions $\psi_n \in C_0^{\infty}(\bR^d)$ such that $\psi_n \to \delta$ in $\mathcal{E}'(\bR^d)$ and $\psi_n$ all have support inside $[-1,1]^d$. It now follows that $$\psi_n * u \to \delta * u = u$$ in $D'(\bR^d)$. However we know that $\psi_n * u \in C^{\infty}(\bR^d)$ corresponds to the smooth function $$\theta_n(x) = u(y \mapsto \psi_n(y-x)).$$ Now $\theta_n$ does not necessarily have compact support. Let $\chi_n:\bR^d \to [0,1]$ be a sequence of smooth functions with compact support such that $\chi_n(x)=1$ for $\|x \| \leq n$. Thus $\chi_n \theta_n \in C_0^{\infty}(\bR^d)$. Now suppose $\phi \in D'(\bR^d)$, thus the support of $\phi$ is contained in a ball of radius $n_0$ for some positive integer $n_0$. For $n\geq n_0$ we thus have that $$(\chi_n\theta_n) (\phi) = \int_{\bR^d} \chi_n(x) dx \theta_n(x) \phi(x) dx = \int_{\bR^d} \theta_n(x)\phi(x) dx = \theta_n(\phi) \to u(\phi). $$ Thus $\chi_n \theta_n \to u$ in $D(\bR^d)$.
+\begin{proof} Let $u \in D'(\bR^d)$ be a distribution. We can find a sequence of functions $\psi_n \in C_0^{\infty}(\bR^d)$ such that $\psi_n \to \delta$ in $\mathcal{E}'(\bR^d)$ and $\psi_n$ all have support inside $[-1,1]^d$. It now follows that $$\psi_n * u \to \delta * u = u$$ in $D'(\bR^d)$. However we know that $\psi_n * u \in C^{\infty}(\bR^d)$ corresponds to the smooth function $$\theta_n(x) = u(y \mapsto \psi_n(y-x)).$$ Now $\theta_n$ does not necessarily have compact support. Let $\chi_n:\bR^d \to [0,1]$ be a sequence of smooth functions with compact support such that $\chi_n(x)=1$ for $\|x \| \leq n$. Thus $\chi_n \theta_n \in C_0^{\infty}(\bR^d)$. Now suppose $\phi \in D(\bR^d)$, thus the support of $\phi$ is contained in a ball of radius $n_0$ for some positive integer $n_0$. For $n\geq n_0$ we thus have that $$(\chi_n\theta_n) (\phi) = \int_{\bR^d} \chi_n(x) dx \theta_n(x) \phi(x) dx = \int_{\bR^d} \theta_n(x)\phi(x) dx = \theta_n(\phi) \to u(\phi). $$ Thus $\chi_n \theta_n \to u$ in $D(\bR^d)$.
 
 Now suppose that $u$ has compact support. Then if $\theta_n(x) \neq 0$ then we must have $\psi_n(y-x) \neq 0$ for some $y \in \operatorname{supp}\phi$ and thus $y-x \in [-1,1]^d$ and so $x \in K = [-1,1]^d + \operatorname{supp} u$. Hence all these maps $\theta_n$ have support inside the compact set $K \supset \operatorname{supp} u$. We know that $\theta_n \to u$ in $D'(\bR^d)$ but now let us show that the convergence occurs in $\mathcal{E}'(\bR^d)$ as well. Thus suppose that $\varphi \in C^{\infty}(\bR^d)$ is a smooth function (not necessarily of compact support). Then there exists a large enough integer $R$ such that $K$ is inside the ball of radius $R$ around $0$. Now it follows that $$\theta_n(\varphi) = \int_{\bR^d} \theta_n(x)\varphi(x) dx = \int_{\bR^d} \theta_n(x)\varphi(x)\chi_R(x) dx = \theta_n(\chi_R \varphi) \to u(\chi_R\varphi) = u(\varphi) $$ where in the last equality we used that the support of $u$ is inside $K$. Thus indeed the convergence occurs in $\mathcal{E}'(\bR^d)$. \end{proof}
 
-\subsection{Commutativity}
+\subsection{Commutativity and associativity}
 
-We now that the convolution of two $L^1$ functions is commutative. We now address the question for distributions.
+We know that the convolution of two $L^1$ functions is commutative and associative. We now address the question for distributions.
+
+\begin{lemma} Let $V$ be a normed vector space and suppose that $C \subset V$ is closed and $K \subset V$ is compact. Then $C+K$ is closed.
+
+\end{lemma}
+
+\begin{proof} Suppose that $v \in V$ is in the closure of $C+K$. Thus these exists $c_i \in C$ and $k_i \in K$ so that $c_i + k_i \to v$. After passing to a subsequence, we assume that $k_i \to k$ for some $k \in K$. Thus $\|(c_i + k) - (c_i + k_i)\| \to 0$ and so $c_i + k \to v$. Thus $c_i \to v - k$. As $C$ is closed, this means $v-k \in C$ and so $v \in C+k \subset C+K$ as required. \end{proof}
+
+\begin{prop} Let $u,v \in D'(\bR^d)$ be distributions with at least one of them of comapct support. Then $$\operatorname{supp}(u * v) \subset \operatorname{supp}(u) + \operatorname{supp}(v).$$
+
+\end{prop}
+
+\begin{proof} We must show that the open (by previous lemma) set $U = \bR^d \setminus (\operatorname{supp}(u) + \operatorname{supp}(v))$ satisfies $$U \subset \bR^d \setminus \operatorname{supp}(u *v).$$ So we must show that if  $\phi \in D(\bR^d)$ has support inside $U$ then $(u*v)(\phi) = 0$. Suppose for contradiction that $$0 \neq (u * v) (\phi) = u(x \mapsto v(y \mapsto \phi(x+y))).$$ It now follows that the inner map $x \mapsto v(y \mapsto \phi(x+y))$ cannot vanish outside of $\operatorname{supp}(u)$. Thus there exists $x_0 \in \operatorname{supp}(u)$ so that $0 \neq v(y \mapsto \phi(x_0 +y))$. Now It follows that there exists $y_0 \in \operatorname{supp}(v)$ so that $\phi(x_0 + y_0) \neq 0$, which means that $\phi$ is not supported on $U$, a contradiction. \end{proof}
+
+Using this proposition, it now makes sense to talk about associativity.
+
+\begin{thm}(Associativity of convolution) Suppose that $u,v,w \in D'(\bR^d)$ are such that at least two of them have compact support. Then $$(u * v) * w = u * (v * w).$$
+
+\end{thm}
+
+\begin{proof} Note that by the previous proposition, both expressions are well defined (i.e., for the first expression: if both $u,v$ have compact support then so does $u*v$ has compact support and so $(u*v)*w$ makes sense. Otherwise, $w$ must have compact support and so $(u*v)*w$ still makes sense). Now we compute  \begin{align*} ((u*v)*w)(\phi) &= (u*v)(x \mapsto w(y \mapsto \phi(x+y))) \\
+&= u(x' \mapsto v(y' \mapsto w(y \mapsto (x'+y'+y)))).   \end{align*} 
+
+We perform a similar calculation \begin{align*} (u*(v*w)) (\phi) &= u(x \mapsto (v*w)(y \mapsto \phi(x+y))) \\
+&= u (x \mapsto v(x' \mapsto w(y' \mapsto \phi(x+x'+y')))) \end{align*} and so we see that these two expressions agree. \end{proof}
+
+We first prove commutativity for a special case.
 
 \begin{lemma} Let $\psi \in C_0^{\infty}(\bR^d)$ and $u \in D'(\bR^d)$. Then $u * \psi = \psi * u$.
 
@@ -522,6 +552,14 @@ We now that the convolution of two $L^1$ functions is commutative. We now addres
 \begin{align*} (u*\psi)(\phi) &= u(x \mapsto \psi(y \mapsto (\phi(x+y)))) \\ &= u\left( x \mapsto \int_{\bR^d} \psi(y)\phi(x+y) dy \right) \\ &= u\left( x \mapsto \int_{\bR^d} (S\psi)(y)\phi(x-y) dy \right)  \end{align*} 
 
 where in the last line we made the substituion $y \mapsto -y$. Thus we have the desired equality. \end{proof}
+
+Now by regularization we can deduce commutativity in general.
+
+\begin{thm}[Commutativity] Suppose that $u,v \in D'(\bR^d)$ and $v$ has compact support. Then $$u*v = v*u.$$
+
+\end{thm}
+
+\begin{proof} Note that by Theorem~\ref{thm: approximate distribution by functions} we have compactly supported functions $\psi_n \in C_0^{\infty}(\bR^d)$ with support inside a common compact set $K$ containing $0$ such that $\psi_n \to \delta_0$ in $\mathcal{E}'(\bR^d)$. Now by Theorem~\ref{thm: convolution of function with distribution is function} we have that $\psi_n * v \in C^{\infty}(\bR^d)$ and in fact $\psi_n * v \in C_0^{\infty}(\bR)$ has compact support as both $\psi_n$ and $v$ have compact support. This means that $$(\psi_n * v) *u = u * (\psi_n * v)$$ by the previous Lemma. We may now use associativity and the previous Lemma again to see that $$\psi_n * (u*v) = (\psi_n * v) * u = u * (\psi_n * v) = (u*\psi_n)*v = (\psi_n * u) * v = \psi_n * (u*v).$$ Now finally the proof is complete by using Lemma~\ref{lemma: convolution continuous} which says that $\psi_n * w \to \delta_0 * w = w$ for any $w \in D'(\bR^d)$. \end{proof}
 
 \part{Fourier Transform}
 
