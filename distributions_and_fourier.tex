@@ -177,11 +177,13 @@ Likewise we get that the same statement when swapping $\phi_n$ with $\psi_n$ and
 \end{mydef}
 \section{Test functions as a Frechet space}
 
-\begin{mydef} A Frechet space is a topological vector space (addition and scalar multiplcation is continuous, the field is either $\bR$ or $\bC$ which has the usual topology) whose topology comes from an invariant metric $d$ (i.e., $d(v_1+v, v_2+v) = d(v_1, v_2)$ for all $v_1,v_22,v \in V$) that is complete.
+\begin{mydef} A Frechet space is a topological vector space (addition and scalar multiplcation is continuous, the field is either $\bR$ or $\bC$ which has the usual topology) whose topology comes from an invariant metric $d$ (i.e., $d(v_1+v, v_2+v) = d(v_1, v_2)$ for all $v_1,v_2,v \in V$) that is complete.
 
 \end{mydef}
 
-For $K \subset \bR^n$ compact and $k \in \bZ_{\geq 0}$ we define the norm $$\| \phi \|_{C^k} = \sup_{x \in K, |\alpha| \leq k} |\partial^{\alpha} \phi (x)|.$$ We define $C_0^{k}(K)$ to be the $C^k$ functions $\bR^n \to \bC$ with support inside $K$ (where $k \in \bZ_{\geq 0} \cup \{\infty\}$). Note that $C_0^k(K)$ is a Banach space and hence a Frechet space with respect to this norm for $k < \infty$. For $\phi \in C_0^{\infty}(K)$ we define $$\|\phi\|_{C_0^{\infty}(K)} = \sum_{k=0}^{\infty} 2^{-k} \min\{1, \| \phi \|_{C^k} \} $$ and we note that $d(\phi_1, \phi_2) = \| \phi_1 - \phi_2 \|_{C_0^{\infty}(K)}$ is an invariant metric that is complete. Moreover, a sequence of test functions $\phi_1, \phi_2, \ldots \in C_0^{\infty}(K)$ converge to $\phi \in C_0^{\infty}(K)$ if and only if for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \phi_i \to \phi$$ uniformly on $K$. In other words, a sequence of test functions in $D(U)$ converges if they all have support inside the same compact subset $K \subset U$ and they converge in $C_0^{\infty}(K)$ with respect to this metric. This in particular verifies that $C_0^{\infty}(K)$ is a topological vector space with respect to this metric (the continuity of addition and scalar multiplcation inherits from the same properties of the norms $\|\cdot \|_{C_k}$).
+ We define $C_0^{k}(K)$ to be the $C^k$ functions $\bR^n \to \bC$ with support inside $K$ (where $k \in \bZ_{\geq 0} \cup \{\infty\}$).
+
+For $K \subset \bR^n$ compact and $k \in \bZ_{\geq 0}$ we define on $C_0^{k}(K)$ the norm $$\| \phi \|_{C^k} = \sup_{x \in K, |\alpha| \leq k} |\partial^{\alpha} \phi (x)|.$$ Note that $C_0^k(K)$ is a Banach space and hence a Frechet space with respect to this norm for $k < \infty$. For $\phi \in C_0^{\infty}(K)$ we define $$\|\phi\|_{C_0^{\infty}(K)} = \sum_{k=0}^{\infty} 2^{-k} \min\{1, \| \phi \|_{C^k} \} $$ and we note that $d(\phi_1, \phi_2) = \| \phi_1 - \phi_2 \|_{C_0^{\infty}(K)}$ is an invariant metric that is complete. Moreover, a sequence of test functions $\phi_1, \phi_2, \ldots \in C_0^{\infty}(K)$ converge to $\phi \in C_0^{\infty}(K)$ if and only if for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \phi_i \to \phi$$ uniformly on $K$. In other words, a sequence of test functions in $D(U)$ converges if they all have support inside the same compact subset $K \subset U$ and they converge in $C_0^{\infty}(K)$ with respect to this metric. This in particular verifies that $C_0^{\infty}(K)$ is a topological vector space with respect to this metric (the continuity of addition and scalar multiplcation inherits from the same properties of the norms $\|\cdot \|_{C_k}$).
 
 \begin{remark} \textbf{Warning!:} Note that $\|\cdot \|_{C_0^{\infty}(K)}$ is not a norm because it fails the scaling property. In fact, it is bounded by $2$. So we cannot say that $C_0^{\infty}(K)$ is a Banach space (TODO: really is not?).
 
@@ -193,7 +195,14 @@ $$ |f(\phi)| \leq c \|\phi\|_{C^k} \quad \text{for all } \phi \in C_0^{\infty}(K
 
 \end{thm}
 
-\begin{proof} Easy to see that any functional satisfying this property is a distribution. To see the converse, suppose that this conditional fails for some compact set $K \subset U$. Then for each positive integer $c = k$ we have $$|f(\phi_k)| > k \|\phi_k\|_{C^k}$$ for some $\phi_k \in C_0^{\infty}(K)$. Let $\psi_k = \frac{1}{|f(\phi_k)|} \phi_k$. Thus $|f(\psi_n)| = 1$ but we have $$|\psi_n|_{C^k} \leq |\psi_n|_{C^n} < \frac{1}{n}$$ for all $n \geq k$ so $\psi_n \to 0$ on $C_0^{\infty}(K)$, which shows that $f$ is not continuous, i.e., not a distribution. \end{proof}
+\begin{proof} Easy to see that any functional satisfying this property is a distribution. To see the converse, suppose that this conditional fails for some compact set $K \subset U$. Then for each positive integer $c = k$ we have $$|f(\phi_k)| > k \|\phi_k\|_{C^k}$$ for some $\phi_k \in C_0^{\infty}(K)$. Let $\psi_k = \frac{1}{|f(\phi_k)|} \phi_k$. Thus $|f(\psi_n)| = 1$ but we have $$|\psi_n|_{C^k} \leq |\psi_n|_{C^n} < \frac{1}{n}$$ for all $n \geq k$ so $\psi_n \to 0$ on $C_0^{\infty}(K)$, which shows that $f$ is not a distribution. \end{proof}
+
+\begin{eg} Let $f \in D(\bR)$ be the distribution $f(\phi) = \phi^{(k)}(0)$, i.e., kth derivative at $0$. For any compact set $K$ we have that $$|f(\phi)| \leq \| \phi \|_{C^k}.$$ However, there is not constant $c$ so that $$|f(\phi)| \leq c\| \phi \|_{C^{k-1}} \quad\text{ for all } \phi \in C_{0}^{\infty}(K)$$ if $0 \in K$. To see this, first choose $\phi_1 \in D(\bR)$ so that $\phi_1^{(k)}(0) = 1$ and support of $\phi_1$ is $K = [-1,1]$. Now set $\phi_{\alpha}(x) = \alpha^{1-k} \phi_1(\alpha x)$ for $\alpha \geq 1$. Then $\phi_{\alpha}^{(k)}(x) = \alpha \phi_1(\alpha x)$ and so $$f(\phi_{\alpha}) = \alpha \to \infty \text{ as } \alpha \to \infty.$$ On the other hand, for $j\leq k-1$ we have $$\|\phi_{\alpha}^{(j)}\|_{\infty} = \alpha^{1-k+j}\|\phi_1^{(j)} \|_{\infty} \leq \|\phi_1^{(j)} \|_{\infty}$$ is bounded over all $\alpha \geq 1$ . Note that all $\phi_{\alpha}$ have support inside the support of $\phi_1$ (as $\alpha \geq 1$) and hence are all in $C_0^{\infty}(K)$ for the same compact set $K$, which justifies this counterexample. \end{eg}
+
+\iffalse
+\section{Uniform boundedness}
+
+It seems the theorems in this section are not used anywhere so far, so this section may be skipped.
 
 \begin{thm}[Uniform boundedness] Let $V$ be a Frechet space and suppose that $\mathcal{F}$ is a set of continuous linear functions $f:V \to \bC$ such that $\{ f(x) ~|~ f \in \mathcal{F} \}$ is bounded in $\bC$ for all $x \in V$. Then there is an open set $U \subset V$ with $0 \in U$ such that $|f(u)| \leq 1$ for all $f \in \mathcal{F}$ and $u \in U$. \end{thm}
 
@@ -215,6 +224,8 @@ $$ |f(\phi)| \leq c \|\phi\|_{C^k} \quad \text{for all } \phi \in C_0^{\infty}(K
 \end{thm}
 
 \begin{proof} Define $f(\varphi) = \lim_{j \to \infty} f_j(\varphi)$. It remains to show that this defines a distribution (is continuous). Let $K$ be a compact set. Applying the uniform boundedness principle we have a constant $c>0$ and $k \in \bZ_{\geq 0}$ such that $$|f_j(\varphi)| \leq c \| \varphi \|_{C_0^k(K)} \quad \text{ for all } j \in \bN, \varphi \in C_0^{\infty}(K).$$ Thus as $f_j(\varphi) \to f(\varphi)$ we have that $$|f(\varphi)| \leq c \| \varphi \|_{C_0^k(K)} \quad \text{ for all } \varphi \in C_0^{\infty}(K).$$ This implies the continuity of $f$, thus $f \in D(U)$. Now suppose that $\varphi_j \in C_0^{\infty}(K)$ converge to $\varphi \in C_0^{\infty}(K)$. Thus $$|f_j(\varphi_j) - f(\varphi)| \leq |f_j(\varphi_j - \varphi)| + |f_j(\varphi) - f(\varphi)| \leq c\|\varphi_j - \varphi\|_{C^k} +  |f_j(\varphi) - f(\varphi)|$$ and the first term converges to $0$ as $\varphi_j \to \varphi$ while the second converges to $0$ as $f_j \to f$.\end{proof}
+
+\fi
 
 \section{Support of a distribution}
 
