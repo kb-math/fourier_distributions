@@ -107,6 +107,8 @@
 
 \section{Distributions}
 
+Recall that the \textit{support} of a function $\varphi:\bR^n \to \bC$ is the set $$\operatorname{supp} \varphi = \overline{\{x \in \bR^n ~|~ \phi(x) \neq 0 \}} \subset \bR^n,$$ i.e., the closure of the set of points where $\varphi$ does not vanish. We say that $\varphi$ is \textit{compactly supported} if the support of $\phi$ is compact.
+
 \begin{mydef} Let $U \subset \bR^n$ be an open set. We define $$D(U) = \{ \varphi :\bR^n \to \bC ~|~ \varphi \text{ is smooth, compactly supported and } \operatorname{supp}(\varphi) \subset U  \}$$ to be the set of \textit{test functions} on $U$. Given $\varphi_1,\varphi_2, \ldots \in D(U)$ and $\varphi \in D(U)$, then we say that $\varphi = \lim_{j \to \infty} \varphi_j$ if there exists a compact set $K \subset U$ such that $\varphi$ and all $\varphi_n$ have support inside $K$ and for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \varphi_n \to \partial^{\alpha} \varphi \text{ uniformly on K.}$$ 
 
 \end{mydef}
@@ -274,7 +276,7 @@ where we used that $\phi \psi_i \sum_j \psi'_j = \phi_i\psi_i$ since $\sum_j \ps
 
 \section{Distributions with compact supports}
 
-If $X \subset \bR^d$ is an open set, we let $\mathcal{E}(X) = C^{\infty}(X)$ denote the set of all smooth functions on $X$. We have $D(X) \subset \mathcal{E}(X)$ and the inclusion may be strict, for example constant non-zero functions are not in $D(\bR)$ but are in $C(\bR)$.
+If $X \subset \bR^d$ is an open set, we let $\mathcal{E}(X) = C^{\infty}(X)$ denote the set of all smooth functions on $X$. We have\footnote{Technically, if $\phi \in D(X)$ then $\phi:\bR^d \to \bC$ by definition, we then restrict $\phi$ to $X$ to get $\phi in \mathcal{E}(X)$.} $D(X) \subset \mathcal{E}(X)$ and the inclusion may be strict, for example constant non-zero functions are not in $D(\bR)$ but are in $C(\bR)$.
 
 \begin{mydef} We say that $\phi_j \in \mathcal{E}(X)$ converges to $\phi \in \mathcal{E}(X)$ if for all compact sets $K \subset X$ and $\alpha \in \bZ_{\geq 0}^d$ we have that $$\partial^{\alpha}\phi_j \to \partial^{\alpha}\phi \quad \text{uniformly on } K. $$
 
@@ -282,17 +284,17 @@ If $X \subset \bR^d$ is an open set, we let $\mathcal{E}(X) = C^{\infty}(X)$ den
 
 \begin{eg} In $\mathcal{E}(\bR)$, we have that $f_n(x) = \frac{1}{n}x$ converge to the $0$ function. However the convergence is not uniform on the whole of $\bR$ itself, but is on every bounded (hence every compact) set. If $\phi:\bR \to \bR$ is a smooth compactly supported non-zero function then $\phi \in D(X) \subset \mathcal{E}(X)$ and $\phi_n(x) = \phi(x-n)$ are also in $\mathcal{E}(X)$. Note that $\phi_n \to 0$ in $\mathcal{E}(X)$ but not in $D(X)$ (as there is no compact subset containing all supports of the $\phi_n$). \end{eg}
 
-\begin{mydef} If $X \subset \bR^d$ is open, we let $\mathcal{E}'(X)$ denote the space of linear maps $f:\mathcal{E}(X) \to \bC$ that satisfy the property that if $\phi_j \in \mathcal{E}(X)$ converges to $\phi \in \mathcal{E}(X)$. We say $f_j \in \mathcal{E}'(X)$ converges to $f \in \mathcal{E}'(X)$ if $f_j(\phi) \to f(\phi)$ for all $\phi \in \mathcal{E}(X)$.
+\begin{mydef} If $X \subset \bR^d$ is open, we let $\mathcal{E}'(X)$ denote the space of linear maps $f:\mathcal{E}(X) \to \bC$ that satisfy the property that if $\phi_j \in \mathcal{E}(X)$ converges to $\phi \in \mathcal{E}(X)$, then $f(\phi_j)$ converges to $f(\phi)$. We say $f_j \in \mathcal{E}'(X)$ converges to $f \in \mathcal{E}'(X)$ if $f_j(\phi) \to f(\phi)$ for all $\phi \in \mathcal{E}(X)$.
 
 \end{mydef}
 
-We now aim to classify $\mathcal{E}'(X)$ and find a natural embedding into $D'(X)$. First observe that given $f \in \mathcal{E}'(X)$, if we restrict this function to $D(X)$, then we get an element of $\mathcal{D}'(X)$. Thus we have a map $$\iota:\mathcal{E}'(X) \to D'(X).$$
+We now aim to classify $\mathcal{E}'(X)$ and find a natural embedding into $D'(X)$. First observe that given $f \in \mathcal{E}'(X)$, if we restrict this functional to $D(X)$, then we get an element of $\mathcal{D}'(X)$. Thus we have a map $$\iota:\mathcal{E}'(X) \to D'(X).$$
 
-\begin{lemma} If $X \subset \bR^d$ is open, then it has an \textit{exhuastion by compact sets}, which we define to be a sequence $K_1 \subset K_2 \subset \ldots$ of compact sets such that $$X = \bigcup_{n=1}^{\infty} K_n$$ and such that any compact sets $K \subset X$ satisfies that $K \subset K_n$ for some $n$.
+\begin{lemma} If $X \subset \bR^d$ is open, then it has an \textit{exhuastion by compact sets}, which we define to be a sequence $K_1 \subset K_2 \subset \ldots$ of compact sets such that $$X = \bigcup_{n=1}^{\infty} K_n$$ and such that any compact set $K \subset X$ satisfies that $K \subset K_n$ for some $n$.
 
 \end{lemma}
 
-\begin{proof} If $X = \bR^d$, just take a compact ball of radius $n$. Otherwise, let $C = \bR^d \setminus X$. Note that $C$ is closed. Now let $K_n \subset X$ be those points in the closed ball of radius $n$ around $0$ with distance at most $\frac{1}{n}$ to $C$. Clearly $X = \bigcup_{n=1}^{\infty} K_n$ since any point not in $C$ must have positive distance to $C$ as $C$ is closed. Now let $K \subset X$ be any compact set. Then $K \cap C = \emptyset$ and it follows that $K$ has positive distance to $C$, as otherwise there is $k_n \in K$ and $c_n \in C$ such that $d(k_n, c_n) \to 0$ and by taking a subsequence we assume $k_n \to k \in K$, thus $d(k, C) = 0$, contradicting the disjointness of $K$ and $C$. It follows that $K \subset K_n$ for large enough $n$ as $K$ is bounded and has positive distance to $C$.
+\begin{proof} If $X = \bR^d$, just take a compact ball of radius $n$. Otherwise, let $C = \bR^d \setminus X$. Note that $C$ is closed. Now let $K_n \subset X$ be those points in the closed ball of radius $n$ around $0$ with distance at least $\frac{1}{n}$ to $C$, i.e., $$K_n = \{x \in X ~|~ \|x\| \leq n \text{ and } d(x, C) \geq 1/n \}.$$ Clearly $X = \bigcup_{n=1}^{\infty} K_n$ since any point not in $C$ must have positive distance to $C$ as $C$ is closed. Now let $K \subset X$ be any compact set. Then $K \cap C = \emptyset$ and it follows that $K$ has positive distance to $C$, as otherwise there is $k_n \in K$ and $c_n \in C$ such that $d(k_n, c_n) \to 0$ and by taking a subsequence we assume $k_n \to k \in K$, thus $d(k, C) = 0$, contradicting the disjointness of $K$ and $C$. It follows that $K \subset K_n$ for large enough $n$ as $K$ is bounded and has positive distance to $C$.
 
 \end{proof}
 
@@ -306,7 +308,7 @@ Now we show injectivity, thus we wish to show that this linear map $\iota$ has a
 
 The next example shows that this embedding is not surjective.
 
-\begin{eg} Consider the distribution $f \in D'(\bR)$ given by $f(\phi) = \int_{\bR} \phi(x) dx $. We claim that $f \neq \iota g$ for some $g \in \mathcal{E}'(X)$. Again let $\phi_n:\bR \to [0,1]$ be a compactly supported function equal to $1$ on $[-n,n]$. Then $g(\phi_n) = f(\phi_n) > 2n$ does not converge to any value. But $\phi_n$ converges in $\mathcal{E}(X)$ to the constant function $1$ thus $g(\phi_n)$ should converge, a contradiction. 
+\begin{eg} Consider the distribution $f \in D'(\bR)$ given by $f(\phi) = \int_{\bR} \phi(x) dx $. We claim that $f \neq \iota g$ for any $g \in \mathcal{E}'(X)$. Again let $\phi_n:\bR \to [0,1]$ be a compactly supported function equal to $1$ on $[-n,n]$. Then $g(\phi_n) = f(\phi_n) > 2n$ does not converge to any value. But $\phi_n$ converges in $\mathcal{E}(X)$ to the constant function $1$ thus $g(\phi_n)$ should converge, a contradiction. 
 
 \end{eg}
 
@@ -314,21 +316,21 @@ The next example shows that this embedding is not surjective.
 
 \end{lemma}
 
-\begin{proof} Let $\psi \in \mathcal{E}(X)$. Let $\phi \in D(X)$ be an element such that $\phi = 1$ on some open set $U \supset K$ such that $\overline{U} \subset X$ and $\overline{U}$ is compact (exists as $K \subset X$ and we use partition of unity). Now define $g(\psi) = f(\psi \phi)$. We claim that this defines $g \in \mathcal{E}'(X)$. To show that it is well defined, we see that $\psi \phi \in D(X)$ thus $f(\psi \phi)$ makes sense (no need to show independence on $\phi$, just consider it fixed throughout). Continuity of $g$ is clear since if $\psi_n \to \psi$ in $\mathcal{E}(X)$ then their partial derivatives convege uniformly on the support of $\phi$, thus $\psi_n\phi \to \psi_n \phi$ in $D(X)$. Now it remains to show that $g$ agrees with $f$ on $D(X)$. Thus assume $\psi \in D(X)$ already. Now observe that $\psi - \psi\phi = 0$ on $\overline{U}$ and thus $X \in D(U \setminus K)$  and by definition of support, we have that $f|_{X \setminus K} = 0$ and so $f(\psi - \psi \phi) = 0$, thus $g(\psi) = f(\psi)$ as desired.\end{proof}
+\begin{proof} Let $\phi \in D(X)$ be an element such that $\phi = 1$ on some open set $U \supset K$ such that $\overline{U} \subset X$ and $\overline{U}$ is compact (exists as $K \subset X$ and we use partition of unity). Now define $g(\psi) = f(\psi \phi)$ for $\psi \in \mathcal{E}(X)$. We claim that this defines $g \in \mathcal{E}'(X)$. To show that it is well defined, we see that $\psi \phi \in D(X)$ thus $f(\psi \phi)$ makes sense (no need to show independence on $\phi$, just consider it fixed throughout). Continuity of $g$ is clear since if $\psi_n \to \psi$ in $\mathcal{E}(X)$ then their partial derivatives convege uniformly on the support of $\phi$, thus $\psi_n\phi \to \psi_n \phi$ in $D(X)$. Now it remains to show that $g$ agrees with $f$ on $D(X)$. Thus assume $\psi \in D(X)$ already. Now observe that $\psi - \psi\phi = 0$ on $\overline{U}$ and thus $\psi - \psi\phi$ has support inside $X \setminus K$.  By definition of support, we have that $f|_{X \setminus K} = 0$ and so $f(\psi - \psi \phi) = 0$, thus $g(\psi) = f(\psi)$ as desired.\end{proof}
 
-We now show that the converse is true, i.e., that $\mathcal{E}'(X)$ coincides with those distributions in $\mathcal{D}'(X)$ whose support is a compact subset of $K$.
+We now show that the converse is true, i.e., that $\mathcal{E}'(X)$ coincides with those distributions in $\mathcal{D}'(X)$ whose support is a compact subset of $X$.
 
 \begin{thm} A distribution $f \in D'(X)$ is the restriction of some $g \in \mathcal{E}'(X)$ if and only if the support of $f$ is some compact subset $K \subset X$. 
 
 \end{thm}
 
-\begin{proof} Suppose that $g \in \mathcal{E}'(X)$, we wish to show that it has compact support $K$ for some $K \subset X$ as an element $g \in D'(X)$. Suppose that it does not, thus for any compact set $K \subset X$ we have that $g|_{X \setminus K}$ is not the zero distribution on $X \setminus K$. Thus there exists $\phi_K \in D(X \setminus K)$ such that $g(\phi_K) = 1$. Now let $K_1 \subset K_2 \subset \ldots $ be an exhaustion of $X$ by compact sets. Set $\phi_{n} = \phi_{K_n}$.We claim that $\phi_n \to 0$ in $\mathcal{E}(X)$ (not necessarily in $D(X)$ though). To see this, let $K \subset X$ be any compact set. Then $K \subset K_n$ for large enough $n$, but then $\phi_n = 0$ on such $K_n$ as $\phi_n \in D(X \setminus K_n)$. Thus indeed $\phi_n \to 0$ uniformly on each compact set of $K$, thus $1 = g(\phi_n) = f(\phi_n) \to 0$ by continuity of $f$ on $\mathcal{E}(X)$. A contradiction. \end{proof}
+\begin{proof} Suppose that $g \in \mathcal{E}'(X)$, we wish to show that it has compact support $K$ for some $K \subset X$ as an element $f \in D'(X)$. Suppose that it does not, thus for any compact set $K \subset X$ we have that $f|_{X \setminus K}$ is not the zero distribution on $X \setminus K$. Thus there exists $\phi_K \in D(X \setminus K)$ such that $f(\phi_K) = 1$. Now let $K_1 \subset K_2 \subset \ldots $ be an exhaustion of $X$ by compact sets. Set $\phi_{n} = \phi_{K_n}$.We claim that $\phi_n \to 0$ in $\mathcal{E}(X)$ (not necessarily in $D(X)$ though). To see this, let $K \subset X$ be any compact set. Then $K \subset K_n$ for large enough $n$, but then $\phi_n = 0$ on such $K_n$ as $\phi_n \in D(X \setminus K_n)$. Thus indeed $\phi_n \to 0$ uniformly on each compact set of $K$, thus $1 = f(\phi_n) = g(\phi_n) \to 0$ by continuity of $g$ on $\mathcal{E}(X)$. A contradiction. \end{proof}
 
 \begin{eg} The distribution $f(\phi) = \int_{0}^1 \phi(x) dx $ is a compactly supported distribution on $\bR$, thus it is defined and continuous on all of $C^{\infty}(\bR)$. Note that if $\phi_n(x) = \phi(x+n)$ where $\phi:\bR \to \bR$ is a non-zero compactly supported smooth function, then $\phi_n \to 0$ in $\mathcal{E}(X)$ and indeed $f(\phi_n) \to 0$. However $\phi_n$ does not converge to $0$ in $D(X)$.
 
 \end{eg}
 
-\begin{eg} Consider the distribution on $(0,1)$ given by $$f(\phi) = \int_{0}^1 e^{1/x^2} \phi(x) dx.$$ It is continuous and well defined since $e^{1/x^2}$ is integrable on each compact subset $K$ in $(0,1)$. However, $f \notin \mathcal{E}'((0,1))$ (not the restriction of any element in $\mathcal{E}'((0,1))$). Indeed, it is not supported on any compact subset $K$ of $(0,1)$. This is despite the support being the bounded subset $(0,1)$ that is closed in $(0,1)$ but not in $\bR$. One can directly see that there is not continuous extension of $f$ to $\mathcal{E}((0,1))$ by considering a sequence of elements $\phi_n \in D((0,1))$ that converge monotonically in $\mathcal{E}(X)$ to the constant function $1$ on $(0,1)$ and seeing a lack of convergence ($f(\phi_n)$ diverges to $\infty$).
+\begin{eg} Consider the distribution $f \in D'(X)$ on $X=(0,1)$ given by $$f(\phi) = \int_{0}^1 e^{1/x^2} \phi(x) dx.$$ It is continuous and well defined since $e^{1/x^2}$ is integrable on each compact subset $K$ in $(0,1)$. However, $f \notin \mathcal{E}'((0,1))$ (not the restriction of any element in $\mathcal{E}'(X)$). Indeed, it is not supported on any compact subset $K$ of $X=(0,1)$. This is despite the support being the bounded subset $(0,1)$ that is closed in $X=(0,1)$, but is not closed in $\bR$. One can directly see that there is no continuous extension of $f$ to $\mathcal{E}(X)$ by considering a sequence of elements $\phi_n \in D((0,1))$ that converge monotonically in $\mathcal{E}(X)$ to the constant function $1$ on $(0,1)$ and seeing a lack of convergence ($f(\phi_n)$ diverges to $\infty$).
 
 \end{eg}
 
@@ -336,11 +338,11 @@ We now show that the converse is true, i.e., that $\mathcal{E}'(X)$ coincides wi
 
 \end{thm}
 
-\begin{proof} Let $K_1 \subset K_2 \subset \ldots $ be an exhuastion of $X$ be compact subsets. Choose a $\psi_n \in D(X)$ such that $\psi_n = 1$ on $K_n$. Now let $f \in D(X)$ be any distribution and define $f_n = \psi_n f \in D(X)$ by $$f_n(\phi) = f_n(\phi \psi_n).$$ We claim that $f_n \in \mathcal{E}'(X)$ and $f_n \to f$ in $D'(X)$. To justify the first claim, note that for $\phi \in D(U \setminus \operatorname{supp} \psi_n)$ we have that $$f_n(\phi) = f(\psi_n \phi) = f(0) = 0$$ which shows that $f_n$ has support a subset of $\operatorname{supp} f$, thus has compact support. Now for any $\phi \in D(X)$, there is a compact set $K \subset X$ such that $\phi(x) = 0$ for $x \notin K$. Also, for $n$ large enough we have $K \subset K_n$, thus $\phi = \phi \psi_n$ and so $f_n(\phi) = f(\phi)$ for large enough $n$. \end{proof}
+\begin{proof} Let $K_1 \subset K_2 \subset \ldots $ be an exhuastion of $X$ by compact subsets. Choose a $\psi_n \in D(X)$ such that $\psi_n = 1$ on $K_n$. Now let $f \in D(X)$ be any distribution and define $f_n = \psi_n f \in D(X)$ by $$f_n(\phi) = f_n(\phi \psi_n).$$ We claim that $f_n \in \mathcal{E}'(X)$ and $f_n \to f$ in $D'(X)$. To justify the first claim, note that for $\phi \in D(U \setminus \operatorname{supp} \psi_n)$ we have that $$f_n(\phi) = f(\psi_n \phi) = f(0) = 0$$ which shows that $f_n$ has support a subset of $\operatorname{supp} \psi_n$, thus has compact support. Now for any $\phi \in D(X)$, there is a compact set $K \subset X$ such that $\phi(x) = 0$ for $x \notin K$. Also, for $n$ large enough we have $K \subset K_n$, thus $\phi = \phi \psi_n$ and so $f_n(\phi) = f(\phi)$ for large enough $n$. \end{proof}
 
 \section{Convolution of Functions}
 
-\begin{prop}\label{prop: convolution of L1 is L1} Let $f,g:\bR^d \to \bC$ be $L^1$ functions. Then the function $$(f * g) (x) := \int_{\bR^d} f(x-y)g(y) dy$$ is almost an everywhere well defined function $\bR^d \to \bR$ that is $L^1$.
+\begin{prop}\label{prop: convolution of L1 is L1} Let $f,g:\bR^d \to \bC$ be $L^1$ functions. Then the function $$(f * g) (x) := \int_{\bR^d} f(x-y)g(y) dy$$ is almost an everywhere well defined function $\bR^d \to \bC$ that is $L^1$.
 
 \end{prop}
 
