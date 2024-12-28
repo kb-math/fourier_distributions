@@ -354,10 +354,14 @@ Convolution is commutative (use translation invariance) and bilinear. It also pr
 
 \end{prop}
 
-\begin{proof} We just focus on the $n=1$ and $n=0$ cases and the rest follows from induction. For the $n=0$ case we just have to show that $\phi * g$ is continuous if $\phi$ is continuous and $g \in L^1(\bR^d)$. As $\phi$ is compactly supported, it is uniformly continuous and so we have that $$\phi(x+h) - \phi(x) \to 0 \text{ uniformly on } \bR^d \text{ as } h \to 0.$$ It now follows that, for each fixed $x \in \bR^d$, we have that $$(\phi * g)(x+h) - \phi*g(x) = \int_{\bR^d} (\phi*(x+h-y) - \phi*(x-y)) g(y) \to 0$$ as $h \to 0$ by the dominated convergence theorem. Now assuming that $\phi$ is once continuously differentiable and letting $\partial_1 = \frac{\partial}{\partial x_1}$ we must show that $$
+\begin{proof} We just focus on the $n=1$ and $n=0$ cases and the rest follows from induction. For the $n=0$ case we just have to show that $\phi * g$ is continuous if $\phi$ is continuous and $g \in L^1(\bR^d)$. As $\phi$ is compactly supported, it is uniformly continuous and so we have that $$\phi(x+h) - \phi(x) \to 0 \text{ uniformly on } \bR^d \text{ as } h \to 0.$$ It now follows that, for each fixed $x \in \bR^d$, we have that 
+\begin{align*}|(\phi * g)(x+h) - \phi*g(x)| &= |\int_{\bR^d} (\phi*(x+h-y) - \phi*(x-y)) g(y)|  \\
+&\leq \sup_{u \in \bR^d} |\phi(u+h) - \phi(u)| \|g\|_1 \to 0 \quad \text{ as } h \to 0.\end{align*} 
+
+Now assuming that $\phi$ is once continuously differentiable and letting $\partial_1 = \frac{\partial}{\partial x_1}$ we must show that $$
 \lim_{t \to 0} \frac{(\phi * g)(x+ te_1) - (\phi *g)(x)}{t} = ((\partial_1 \phi) * g)(x).$$
 
-By the mean value theorem\footnote{To apply it we have to assume $\phi$ is real valued, but it is easy to see that it is enough to consider this case.}, we have that $\frac{1}{t}(\phi(x+ te_1) - \phi(x) )= \partial_1 \phi (x + s_{t,x}e_1)$ for some $0 \leq s_{t,x} \leq t$. Thus by uniform continuity of $\partial_1 \phi$ we have that $$\frac{1}{t} (\phi(x+ te_1) - \phi(x)) \to \partial_1(\phi)(x) $$ uniformly for $x \in \bR^d$ as $t \to 0$. We now by the dominated convergence theorem that
+By the mean value theorem\footnote{To apply it we have to assume $\phi$ is real valued, but it is easy to see that it is enough to consider this case.}, we have that $\frac{1}{t}(\phi(x+ te_1) - \phi(x) )= \partial_1 \phi (x + s_{t,x}e_1)$ for some $0 \leq s_{t,x} \leq t$. Thus by uniform continuity of $\partial_1 \phi$ we have that $$\frac{1}{t} (\phi(x+ te_1) - \phi(x)) \to \partial_1(\phi)(x) $$ uniformly for $x \in \bR^d$ as $t \to 0$. This implies that
 
 \begin{align*} \frac{(\phi * g)(x+ te_1) - (\phi *g)(x)}{t} &= \int_{\bR^d} \frac{\phi(x-y+ te_1) - \phi(x-y)}{t} g(y) dy \\ &\to \int_{\bR^d} (\partial_1\phi(x-y)) g(y) dy \\ &= ((\partial_1 \phi) * g)(x) \end{align*} as $t \to 0$. \end{proof}
 
@@ -367,33 +371,37 @@ By the mean value theorem\footnote{To apply it we have to assume $\phi$ is real 
 
 \begin{proof}
 
-For each $x \in \bR^d$ we have $$|(f_n * g) (x) - (f*g)(x)| = |\int_{\bR^d} (f_n(x-y) - f(x-y)) g(y)| \leq |f - f_n|_{\infty} \int_{\bR^d} |g(y)| dy$$ and thus we have uniform convergence. \end{proof}
+For each $x \in \bR^d$ we have $$|(f_n * g) (x) - (f*g)(x)| = |\int_{\bR^d} (f_n(x-y) - f(x-y)) g(y)| \leq \|f - f_n\|_{\infty} \int_{\bR^d} |g(y)| dy$$ and thus we have uniform convergence. \end{proof}
 
 \begin{corol} The space $D(\bR^d)$ is closed under convolution. Moreover, if $\phi_n \to \phi$ in $D(\bR^d)$ then $\phi_n * \psi \to \phi * \psi$ in $D(\bR^d)$ for all $\psi \in D(\bR)$.
 
 \end{corol}
 
-\begin{proof} If $$0 \neq (\phi * \psi) (x) = \int \phi(x-y) \psi(y) dy$$ then there exists $y$ such that $x-y \in \operatorname{supp} \phi $ and $y \in \operatorname{supp} \psi$. Thus $x \in \operatorname{supp}(\phi) + \operatorname{supp}(\psi)$, which is a compact set. Thus $\phi * \psi$ is compactly supported. By the proposition above is smooth, thus $D(\bR^d)$ is indeed closed under convolution.  Now if $\phi_n \to \phi$, then there is some compact set $K$ containing the supports of all $\phi_n, \phi$ and $\psi$ and we have uniform convergence of all partial derivatives $\partial^{\alpha} \phi_n \to \partial^{\alpha} \phi$ thus we have uniform convergence $(\partial^{\alpha} \phi_n) * \psi \to (\partial^{\alpha} \phi) * \psi$ and all these functions are supported on a single compact set $K + K$. Finally, using the identity $\partial^{\alpha} (\phi * \psi) = (\partial^{\alpha} \phi) * \psi$ the proof is complete.  \end{proof}
+\begin{proof} If $$0 \neq (\phi * \psi) (x) = \int \phi(x-y) \psi(y) dy$$ then there exists $y$ such that $x-y \in \operatorname{supp} \phi $ and $y \in \operatorname{supp} \psi$. Thus $x \in \operatorname{supp}(\phi) + \operatorname{supp}(\psi)$, which is a compact set. Thus $\phi * \psi$ is compactly supported. By the proposition above is $\phi * \psi$ is smooth, thus $D(\bR^d)$ is indeed closed under convolution.  Now if $\phi_n \to \phi$, then there is some compact set $K$ containing the supports of all $\phi_n, \phi$ and $\psi$ and we have uniform convergence of all partial derivatives $\partial^{\alpha} \phi_n \to \partial^{\alpha} \phi$ thus we have uniform convergence $(\partial^{\alpha} \phi_n) * \psi \to (\partial^{\alpha} \phi) * \psi$ and all these functions are supported on a single compact set $K + K$. Finally, using the identity $\partial^{\alpha} (\phi * \psi) = (\partial^{\alpha} \phi) * \psi$ the proof is complete.  \end{proof}
 
 We now show that a convolution can be approximated by an average of translations. This is useful for establishing certain density results.
 
-\begin{prop}\label{prop: convolution is approximate average} Let $f,g:\bR^d \to \bR$ be uniformly continuous bounded $L^1$ functions and suppose $g$ has compact support. Then $$(f * g)(x) = \lim_{N \to \infty} \frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} f(x-y) g(y)$$ where the limit is uniform on $x \in \bR^d$. In particular, $(f*g)$ is a uniform limit of finite linear combinations of transates of $f$.
+\begin{prop}\label{prop: convolution is approximate average} Let $f,g:\bR^d \to \bR$ be uniformly continuous bounded $L^1$ functions and suppose $g$ has compact support. Then $$(f * g)(x) = \lim_{N \to \infty} \frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} f(x-y) g(y)$$ where the limit is uniform over $x \in \bR^d$. In particular, $f*g$ is a uniform limit of finite linear combinations of transates of $f$.
 
 \end{prop}
 
-\begin{proof} Let for $y \in \frac{1}{N}\bZ^d$, let $$Q_{y,N} = \left[y_1, y_1 + \frac{1}{N}\right) \times \cdots \times \left[y_d, y_d + \frac{1}{N}\right) $$ be the cube of side-length $\frac{1}{N}$ whose leftmost bottom corner is $y$. Fix $\epsilon>0$. By uniform continuity and boundedness of $f$ and $g$, we may find a large enough $N_0$ such that if for $N>N_0$ we have that $$|f(x-y)g(y) - f(x-u)g(u)| < \epsilon \quad\text{for all } u \in Q_{y,N}, y \in \frac{1}{N}\bZ^d.$$ Now it follows that 
+\begin{proof} Let for $y \in \frac{1}{N}\bZ^d$, let $$Q_{y,N} = \left[y_1, y_1 + \frac{1}{N}\right) \times \cdots \times \left[y_d, y_d + \frac{1}{N}\right) $$ be the cube of side-length $\frac{1}{N}$ whose leftmost bottom corner is $y$. Fix $\epsilon>0$. By uniform continuity and boundedness of $f$ and $g$, we may find a large enough $N_0$ such that for $N>N_0$ we have that $$|f(x-y)g(y) - f(x-u)g(u)| < \epsilon \quad\text{for all } u \in Q_{y,N}, y \in \frac{1}{N}\bZ^d, x \in \bR^d.$$ Now it follows that 
 
-\begin{align*} (f * g)(x) &= \sum_{y \in \frac{1}{N}\bZ^d} \int_{Q_{y,N}} f(x-u)g(u) du \\ &= \sum_{y \in \frac{1}{N}\bZ^d} \frac{1}{N^d}(f(x-y)g(y) + E_{y,N})\end{align*} where $|E_{y,N}|<\epsilon$. However, notice that $E_{y,N} = 0$ if $Q_{y,N} \cap \operatorname{supp}(g) = \emptyset$. But there are $O(N^d)$ such $y$ since the support of $g$ is compact (if the support is inside $[-B,B)^d$ for some positive integer $B$, then there are $(2BN)^d$ such $y$). Thus the total error is $O(\epsilon) \to 0$ as $N_0 \to 0$. This demonstrates the uniform convergence. \end{proof}
+\begin{align*} (f * g)(x) &= \sum_{y \in \frac{1}{N}\bZ^d} \int_{Q_{y,N}} f(x-u)g(u) du \\ &= \sum_{y \in \frac{1}{N}\bZ^d} \frac{1}{N^d}\left(f(x-y)g(y) + E_{y,N}\right)\end{align*} where $|E_{y,N}|<\epsilon$. However, notice that $E_{y,N} = 0$ if $Q_{y,N} \cap \operatorname{supp}(g) = \emptyset$. But there are only $O(N^d)$ many $y$ such that $Q_{y,N} \cap \operatorname{supp}(g) \neq \emptyset$ since the support of $g$ is compact (if the support is inside $[-B,B)^d$ for some positive integer $B$, then there are $(2BN)^d$ such $y$). Thus the total error is $O(\epsilon) \to 0$ as $N_0 \to 0$. This demonstrates the uniform convergence. \end{proof}
 
-\begin{prop}[Approximate identity]\label{prop: approx identity} Let $f:\bR^d \to [0,\infty)$ be an $L_1$ function such that $$\int_{\bR^d} f(x) dx = 1$$ and suppose that $g:\bR^d \to \bR$ is a compactly supported continuous function. Let $$f_{\epsilon}(x) = \frac{1}{\epsilon^d}f(\epsilon^{-1} x).$$ Then $$f_{\epsilon} * g \to g \quad \text{ uniformly on } \bR^d.$$
+\begin{prop}[Approximate identity]\label{prop: approx identity} Let $f:\bR^d \to [0,\infty)$ be an $L_1$ function such that $$\int_{\bR^d} f(x) dx = 1$$ and suppose that $g:\bR^d \to \bR$ is a compactly supported continuous function. Let $$f_{\delta}(x) = \frac{1}{\delta^d}f(\delta^{-1} x).$$ Then $$f_{\delta} * g \to g \quad \text{ uniformly on } \bR^d.$$
 
 \end{prop}
 
-\begin{proof} For each $r>0$, we let $$\Delta(r) = \sup_{x \in \bR^d} \{ |g(x+h) - g(x)| ~|~ \|h\| \leq r \}$$ and we observe that $\Delta(r) \to 0$ as $r \to 0$ by uniform continuity ($g$ is compactly supported).
+\begin{proof} For each $r>0$, we let $$\Delta(r) = \sup_{y \in \bR^d} \{ |g(y+h) - g(y)| ~|~ \|h\| \leq r \}$$ and we observe that $\Delta(r) \to 0$ as $r \to 0$ by uniform continuity ($g$ is compactly supported). Now fix $\epsilon>0$ and choose $r$ so that $\Delta(r) < \epsilon$. In the remainder of the proof, $O(a)$ will refer to a quantity such that $|O(a)| \leq |a|$. For all $x \in \bR^d$ we have
 
-\begin{align*} (f_{\epsilon} *g)(x) = \int_{\bR^d} f_{\epsilon} (y) g(x-y) dy &= \int_{|x| < r} f_{\epsilon}(y) g(x-y) dy + O(\| g \|_{\infty} \int_{|x|>r} f_{\epsilon}(y) dy) \\ &= \int_{|x| < r} f_{\epsilon}(y) g(x) dy + O(\Delta(r) \int_{|x| < r} f_{\epsilon}(y) dy )  + O(\| g \|_{\infty} \int_{|x|>r} f_{\epsilon}(y) dy) \end{align*} 
+\begin{align*} (f_{\delta} *g)(x) = \int_{\bR^d} f_{\delta} (y) g(x-y) dy &= \int_{|y| < r} f_{\delta}(y) g(x-y) dy + O(\| g \|_{\infty} \int_{|y|>r} f_{\delta}(y) dy) \\ &= \int_{|y| < r} f_{\delta}(y) g(x) dy + O(\Delta(r) \int_{|y| < r} f_{\delta}(y) dy )  + O(\| g \|_{\infty} \int_{|y|>r} f_{\delta}(y) dy) \\
+&= \int_{|y| < r} f_{\delta}(y) g(x) dy + O(\epsilon \int_{|y| < r} f_{\delta}(y) dy )  + O(\| g \|_{\infty} \int_{|y|>r} f_{\delta}(y) dy)
+ \end{align*} 
 
-Now observe that since $$\int_{\bR^d} f_{\epsilon}(x) = 1$$ we have that for each $r>0$ fixed this quantity converges, as $\epsilon>0$, to $$g(x) + O(\Delta(r)).$$ But by uniform continuity, we can choose $r$ small enough so that this error term is arbitrarily small and thus get the desired uniform continuity as the the implicit $O()$ constant does not depend on $x$. \end{proof}
+and thus $$|(f_{\delta} *g)(x) - g(x)| \leq |g(x)|\left|\int_{|y| < r} f_{\delta}(y) dy - 1\right| +  O(\epsilon \int_{|y| < r} f_{\delta}(y) dy )  + O(\| g \|_{\infty} \int_{|y|>r} f_{\delta}(y) dy). $$
+
+Now observe that since $$\int_{\bR^d} f_{\delta}(x) = 1$$ we have that for each fixed $r>0$ that $$\lim_{\delta \to 0} \int_{|y|<r} f_{\delta}(y) dy  = 1$$ and $$\lim_{\delta \to 0 } \int_{|y|>r} f_{\delta}(y) dy  = 0.$$ This shows that  $$\lim_{\delta \to 0} (f_{\delta}*g)(x) = g(x) + O(\epsilon) \quad \text{uniformly for } x \in \bR^d.$$ As $\epsilon$ is arbitrary, the proof is complete. \end{proof}
 
 The previous two propositions have same nice applications to approximating a function by a nice class of functions. For instance, we now recover the Weierstrass approximation theorem for polynomials.
 
@@ -401,9 +409,9 @@ The previous two propositions have same nice applications to approximating a fun
 
 \end{thm}
 
-\begin{proof} We let $f:\bR \to [0,\infty)$ be an entire function (a function given by a power series with an infinite radius of convergence) that is bounded, uniformly continuous and such that $$\int f(x) dx = 1.$$ For example, we can take $$f(x) = C e^{-x^2} = C \sum_{n=0}^{\infty} \frac{(-1)^n}{n!} x^{2n}$$ for some approximately chosen constant $C$. Thus, for $\epsilon>0$, we obtain by Proposition~\ref{prop: approx identity} that for sufficiently small $\delta>0$ we have $$|g(x) - (f_{\delta}*g)(x)| < \frac{\epsilon}{2} \quad \text{for all } x \in \bR.$$ But now we use Proposition~\ref{prop: convolution is approximate average}  to show that $$|(f_{\delta}*g) (x) - h(x)| < \frac{\delta}{2} \quad \text{ for all } x \in \bR$$ where $$h(x) = \lim_{N \to \infty} \frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} f_{\delta}(x-y) g(y). $$
+\begin{proof} We let $f:\bR \to [0,\infty)$ be an entire function (a function given by a power series with an infinite radius of convergence) that is bounded, uniformly continuous and such that $$\int f(x) dx = 1.$$ For example, we can take $$f(x) = C e^{-x^2} = C \sum_{n=0}^{\infty} \frac{(-1)^n}{n!} x^{2n}$$ for some approximately chosen constant $C$. Thus, for $\epsilon>0$, we obtain by Proposition~\ref{prop: approx identity} that for sufficiently small $\delta>0$ we have $$|g(x) - (f_{\delta}*g)(x)| < \frac{\epsilon}{2} \quad \text{for all } x \in \bR.$$ But now we use Proposition~\ref{prop: convolution is approximate average}  to show that $$|(f_{\delta}*g) (x) - h(x)| < \frac{\epsilon}{2} \quad \text{ for all } x \in \bR$$ where $$h(x) = \frac{1}{N^d} \sum_{y \in \frac{1}{N^d}\bZ^d} f_{\delta}(x-y) g(y)$$ with $N$ large enough.
 
-Thus as the sum defining $h(x)$ is finite, we see that $h(x)$ is a finite linear combination of entire functions $x \mapsto f_{\delta}(x-y)$. Thus $\|g - h \|_{\infty} < \epsilon$. Finally, we finish the proof by using the uniform convergence of the power series for $f_{\delta}(x)$ for $x \in K$. \end{proof}
+ Thus $\|g - h \|_{\infty} < \epsilon$. But the sum defining $h(x)$ is finite (as $g$ has compact support) and so we see that $h(x)$ is a finite linear combination of entire functions of the form $x \mapsto f_{\delta}(x-y)$. Finally, we finish the proof by using the uniform convergence of the power series for $f_{\delta}(x)$ for $x \in K$. \end{proof}
 
 \section{Tensor Products of Distributions}
 
