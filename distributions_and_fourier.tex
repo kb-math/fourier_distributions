@@ -556,11 +556,11 @@ We now show that distributions are limits of smooth functions with compact suppo
 It now follows by Lemma~\ref{lemma: disjoint supports} that the support of the inner map $x \mapsto v(y \mapsto \phi(x+y))$ has non-trivial intersection with $\operatorname{supp}(u)$. Thus there exists $x_0 \in \operatorname{supp}(u)$ so that $x_0$ is in the support of this inner map. Thus there exists $x_1,x_2, \ldots $ converging to $x_0$ such that $v(y \mapsto \phi(x_i+y)) \neq 0$. Applying Lemma~\ref{lemma: disjoint supports} now to $v$ we get that $\operatorname{supp}(v)$ has non-trivial intersection with the support of $y \mapsto \phi(x_i+y)$. Thus there exists $y_i \in \operatorname{supp}(v)$ such that $x_i + y_i \in \operatorname{supp}(\phi)$. By compactness of $\operatorname{supp}(\phi)$, we get that $x_i + y_i \to z_0 \in \operatorname{supp}(\phi)$ after passing to a subsequence. Thus $y_i \to y_0 := z_0 - x_0$ with $y_0 \in \operatorname{supp}(v)$ as support is closed by definition. In summary, $x_0 + y_0 = z _0$ with $x_0 \in \operatorname{supp}(u)$, $y_0 \in \operatorname{supp}(v)$ and $z_0 \in \operatorname{supp}(\phi) \subset U$. Thus $U \cap (\operatorname{supp}(u) + \operatorname{supp}(v))$ contains $z_0$ and is thus non-empty, contradicting the definition of $U$ given above.  \end{proof}
 
 
-\begin{lemma}\label{lemma: convolution continuous} If $u_n \to u$ in $\mathcal{E}'(\bR)$ then $u_n * v \to u * v$ in $D'(\bR)$ for $v \in D'(\bR)$.
+\begin{lemma}\label{lemma: convolution continuous} If $u_n \to u$ in $\mathcal{E}'(\bR^d)$ then $u_n * v \to u * v$ in $D'(\bR^d)$ for $v \in D'(\bR^d)$.
 
 \end{lemma}
 
-\begin{proof} For any $\phi \in D(\bR)$ we have that $$(u_n * v)(\phi) = u_n(x \mapsto v(y \mapsto \phi(x+y))) \to u(x \mapsto v(y \mapsto \phi(x+y))) = (u*v)(\phi).$$
+\begin{proof} For any $\phi \in D(\bR^d)$ we have that $$(u_n * v)(\phi) = u_n(x \mapsto v(y \mapsto \phi(x+y))) \to u(x \mapsto v(y \mapsto \phi(x+y))) = (u*v)(\phi).$$
 
 \end{proof}
 
@@ -582,8 +582,8 @@ We know that the convolution of two $L^1$ functions is commutative and associati
 
 \end{thm}
 
-\begin{proof} Note that by the Proposition~\ref{prop: support convolution sumset}, both expressions are well defined (i.e., for the first expression: if both $u,v$ have compact support then so does $u*v$ has compact support and so $(u*v)*w$ makes sense. Otherwise, $w$ must have compact support and so $(u*v)*w$ still makes sense). Now we compute  \begin{align*} ((u*v)*w)(\phi) &= (u*v)(x \mapsto w(y \mapsto \phi(x+y))) \\
-&= u(x' \mapsto v(y' \mapsto w(y \mapsto (x'+y'+y)))).   \end{align*} 
+\begin{proof} Note that by the Proposition~\ref{prop: support convolution sumset}, both expressions are well defined (i.e., for the first expression: if both $u,v$ have compact support then $u*v$ has compact support and so $(u*v)*w$ makes sense. Otherwise, $w$ must have compact support and so $(u*v)*w$ still makes sense). Now we compute  \begin{align*} ((u*v)*w)(\phi) &= (u*v)(x \mapsto w(y \mapsto \phi(x+y))) \\
+&= u(x' \mapsto v(y' \mapsto w(y \mapsto \phi(x'+y'+y)))).   \end{align*} 
 
 We perform a similar calculation \begin{align*} (u*(v*w)) (\phi) &= u(x \mapsto (v*w)(y \mapsto \phi(x+y))) \\
 &= u (x \mapsto v(x' \mapsto w(y' \mapsto \phi(x+x'+y')))) \end{align*} and so we see that these two expressions agree. \end{proof}
@@ -598,7 +598,7 @@ We first prove commutativity for a special case.
 
 \begin{align*} (u*\psi)(\phi) &= u(x \mapsto \psi(y \mapsto (\phi(x+y)))) \\ &= u\left( x \mapsto \int_{\bR^d} \psi(y)\phi(x+y) dy \right) \\ &= u\left( x \mapsto \int_{\bR^d} (S\psi)(y)\phi(x-y) dy \right)  \end{align*} 
 
-where in the last line we made the substituion $y \mapsto -y$. Thus we have the desired equality. \end{proof}
+where in the last line we made the substitution $y \mapsto -y$. Thus we have the desired equality. \end{proof}
 
 Now by regularization we can deduce commutativity in general.
 
@@ -606,7 +606,14 @@ Now by regularization we can deduce commutativity in general.
 
 \end{thm}
 
-\begin{proof} Note that by Theorem~\ref{thm: approximate distribution by functions} we have compactly supported functions $\psi_n \in C_0^{\infty}(\bR^d)$ with support inside a common compact set $K$ containing $0$ such that $\psi_n \to \delta_0$ in $\mathcal{E}'(\bR^d)$. Now by Theorem~\ref{thm: convolution of function with distribution is function} we have that $\psi_n * v \in C^{\infty}(\bR^d)$ and in fact $\psi_n * v \in C_0^{\infty}(\bR)$ has compact support as both $\psi_n$ and $v$ have compact support. This means that $$(\psi_n * v) *u = u * (\psi_n * v)$$ by the previous Lemma. We may now use associativity and the previous Lemma again to see that $$\psi_n * (u*v) = (\psi_n * v) * u = u * (\psi_n * v) = (u*\psi_n)*v = (\psi_n * u) * v = \psi_n * (u*v).$$ Now finally the proof is complete by using Lemma~\ref{lemma: convolution continuous} which says that $\psi_n * w \to \delta_0 * w = w$ for any $w \in D'(\bR^d)$. \end{proof}
+\begin{proof} Note that by Theorem~\ref{thm: approximate distribution by functions} we have compactly supported functions $\psi_n \in C_0^{\infty}(\bR^d)$ with support inside a common compact set $K$ containing $0$ such that $\psi_n \to \delta_0$ in $\mathcal{E}'(\bR^d)$. Now by Theorem~\ref{thm: convolution of function with distribution is function} we have that $\psi_n * v \in C^{\infty}(\bR^d)$ and in fact $\psi_n * v \in C_0^{\infty}(\bR)$ has compact support as both $\psi_n$ and $v$ have compact support. This means that $$(\psi_n * v) *w = w * (\psi_n * v)$$ and $\psi_n * w = w * \psi_n$  for any $w \in D'(\bR^d)$ by the previous Lemma. We may now use associativity and these two identities to see that 
+\begin{align*} \psi_n * (u*v) &= (\psi_n * u) * v \\
+&= (u * \psi_n) * v \\
+&= u * (\psi_n * v) \\
+&= (\psi_n * v) * u \\
+&= \psi_n * (v * u). \end{align*}
+
+Now finally the proof is complete by using Lemma~\ref{lemma: convolution continuous} which says that $\psi_n * w \to \delta_0 * w = w$ for any $w \in D'(\bR^d)$. \end{proof}
 
 \part{Fourier Transform}
 
