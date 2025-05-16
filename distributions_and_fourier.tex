@@ -107,13 +107,13 @@
 
 \section{Distributions}
 
-Recall that the \textit{support} of a function $\varphi:\bR^n \to \bC$ is the set $$\operatorname{supp} \varphi = \overline{\{x \in \bR^n ~|~ \phi(x) \neq 0 \}} \subset \bR^n,$$ i.e., the closure of the set of points where $\varphi$ does not vanish. We say that $\varphi$ is \textit{compactly supported} if the support of $\phi$ is compact.
+Recall that the \textit{support} of a function $\phi:\bR^n \to \bC$ is the set $$\operatorname{supp} \phi = \overline{\{x \in \bR^n ~|~ \phi(x) \neq 0 \}} \subset \bR^n,$$ i.e., the closure of the set of points where $\phi$ does not vanish. We say that $\phi$ is \textit{compactly supported} if the support of $\phi$ is compact.
 
-\begin{mydef} Let $U \subset \bR^n$ be an open set. We define $$D(U) = \{ \varphi :\bR^n \to \bC ~|~ \varphi \text{ is smooth, compactly supported and } \operatorname{supp}(\varphi) \subset U  \}$$ to be the set of \textit{test functions} on $U$. Given $\varphi_1,\varphi_2, \ldots \in D(U)$ and $\varphi \in D(U)$, then we say that $\varphi = \lim_{j \to \infty} \varphi_j$ if there exists a compact set $K \subset U$ such that $\varphi$ and all $\varphi_n$ have support inside $K$ and for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \varphi_n \to \partial^{\alpha} \varphi \text{ uniformly on K.}$$ 
+\begin{mydef} Let $U \subset \bR^n$ be an open set. We define $$D(U) = \{ \phi :\bR^n \to \bC ~|~ \phi \text{ is smooth, compactly supported and } \operatorname{supp}(\phi) \subset U  \}$$ to be the set of \textit{test functions} on $U$. Given $\phi_1,\phi_2, \ldots \in D(U)$ and $\phi \in D(U)$, then we say that $\phi = \lim_{j \to \infty} \phi_j$ if there exists a compact set $K \subset U$ such that $\phi$ and all $\phi_n$ have support inside $K$ and for all $\alpha \in \bZ_{\geq 0}^n$ we have that $$\partial^{\alpha} \phi_n \to \partial^{\alpha} \phi \text{ uniformly on K.}$$ 
 
 \end{mydef}
 
-	\begin{eg} Let $h:\bR \to \bC$ be the map $h(x) = \mathds{1}_{(0,\infty)} \exp(-\frac{1}{x})$. This is a smooth map with support $[0, \infty)$. Thus $\varphi:\bR \to \bC$ given by $\varphi(x) = h(x)h(1-x)$ is a smooth map with support $[0,1]$. Thus $\varphi \in D((-\epsilon, 1 + \epsilon))$ for all $\epsilon >0$ (but not for $\epsilon = 0$). Now let $\phi_t \in D(\bR)$ be given by $\phi_t(x) = \phi(x+t)$, then clearly $\lim_{j \to \infty} \phi_{1/j} = \phi$ in $D(\bR)$ but the sequence $\phi_1,\phi_2,\ldots$ does not converge because the union of the supports is unbounded, hence not contained in any compact set.
+	\begin{eg} Let $h:\bR \to \bC$ be the map $h(x) = \mathds{1}_{(0,\infty)} \exp(-\frac{1}{x})$. This is a smooth map with support $[0, \infty)$. Thus $\phi:\bR \to \bC$ given by $\phi(x) = h(x)h(1-x)$ is a smooth map with support $[0,1]$. Thus $\phi \in D((-\epsilon, 1 + \epsilon))$ for all $\epsilon >0$ (but not for $\epsilon = 0$). Now let $\phi_t \in D(\bR)$ be given by $\phi_t(x) = \phi(x+t)$, then clearly $\lim_{j \to \infty} \phi_{1/j} = \phi$ in $D(\bR)$ but the sequence $\phi_1,\phi_2,\ldots$ does not converge because the union of the supports is unbounded, hence not contained in any compact set.
 \end{eg}
 
 Note that $D(U)$ is closed under partial differentiation, and partial differentiation is continuous (preserves limits).
